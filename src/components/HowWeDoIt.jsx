@@ -1,42 +1,48 @@
 import React, { useState, useRef } from "react";
 import { motion, AnimatePresence, useMotionValue, useTransform } from "framer-motion";
 import { cn } from "../lib/utils";
+import onlineConsultionImg from "../assets/howwedo/online-consulting.jpg";
+import explorationDesignImg from "../assets/howwedo/exploration-design.jpg";
+import siteFeasibilityImg from "../assets/howwedo/site_feasibility.png";
+import quotationScopeImg from "../assets/howwedo/quotation_and_scope.jpg";
+import executionImg from "../assets/howwedo/Execution.png";
+import postDeliveryImg from "../assets/howwedo/post_delivery.jpg";
 
 const items = [
     {
         title: "Online Consultation",
         description: "Understanding lifestyle, budget, space constraints, and expectations.",
-        image: "/howwedo/online-consulting.jpg",
+        image: onlineConsultionImg,
         tag: "Phase 01 // Inception",
     },
     {
         title: "Design & Layout Exploration",
         description: "We provide two unique layout options that focus on functionality, storage, and flow—before commitment.",
-        image: "/howwedo/exploration-design.jpg",
+        image: explorationDesignImg,
         tag: "Phase 02 // Drafting",
     },
     {
         title: "Site Visit",
         description: "Detailed measurements, feasibility checks, and technical alignment.",
-        image: "/howwedo/site_feasibility.png",
+        image: siteFeasibilityImg,
         tag: "Phase 03 // Validation",
     },
     {
         title: "Quotation & Scope Finalisation",
         description: "Clear pricing, defined timelines, no vague promises.",
-        image: "/howwedo/quotation_and_scope.jpg",
+        image: quotationScopeImg,
         tag: "Phase 04 // Protocol",
     },
     {
         title: "Execution & Project Management",
         description: "Design, coordination, execution—all handled seamlessly.",
-        image: "/howwedo/Execution.png",
+        image: executionImg,
         tag: "Phase 05 // Action",
     },
     {
         title: "Post-Delivery Care",
         description: "Support even after handover. Because good design doesn’t end at delivery.",
-        image: "/howwedo/post_delivery.jpg",
+        image: postDeliveryImg,
         tag: "Phase 06 // Heritage",
     },
 ];

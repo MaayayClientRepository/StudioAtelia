@@ -1,14 +1,20 @@
 import React, { useRef } from "react";
 import { motion, useTransform, useSpring } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
+import mkImg from "../assets/whatwedo/mk.jpg";
+import resImg from "../assets/whatwedo/res.jpg";
+import spaceImg from "../assets/whatwedo/space.png";
+import turkeyImg from "../assets/whatwedo/turkey.jpg";
+import projectManagementImg from "../assets/whatwedo/project-management.jpg";
+import materialImg from "../assets/whatwedo/material.jpg";
 
 const services = [
-    { title: "MODULAR KITCHENS", code: "MK-01", image: "/whatwedo/mk.jpg" },
-    { title: "RESIDENTIAL INTERIORS", code: "RI-02", image: "/whatwedo/res.jpg" },
-    { title: "SPACE OPTIMISATION", code: "SO-03", image: "/whatwedo/space.png" },
-    { title: "TURNKEY EXECUTION", code: "TE-04", image: "/whatwedo/turkey.jpg" },
-    { title: "PROJECT MANAGEMENT", code: "PM-05", image: "/whatwedo/project-management.jpg" },
-    { title: "MATERIAL SOURCING", code: "MS-06", image: "/whatwedo/material.jpg" },
+    { title: "MODULAR KITCHENS", code: "MK-01", image: mkImg },
+    { title: "RESIDENTIAL INTERIORS", code: "RI-02", image: resImg },
+    { title: "SPACE OPTIMISATION", code: "SO-03", image: spaceImg },
+    { title: "TURNKEY EXECUTION", code: "TE-04", image: turkeyImg },
+    { title: "PROJECT MANAGEMENT", code: "PM-05", image: projectManagementImg },
+    { title: "MATERIAL SOURCING", code: "MS-06", image: materialImg },
 ];
 
 const FloatingSketches = ({ progress }) => {

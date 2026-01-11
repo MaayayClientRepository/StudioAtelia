@@ -1,5 +1,7 @@
 import React from 'react';
 import { motion, useTransform } from 'framer-motion';
+import bwIntImg from '../assets/b&w_int.png';
+import colorIntImg from '../assets/color_int.jpg';
 
 const IntroSequence = ({ progress }) => {
     // 1. THE TRANSFORMATION ENGINE (Sequential Background Reveal)
@@ -92,7 +94,7 @@ const IntroSequence = ({ progress }) => {
                     className="absolute inset-0 w-full h-full pointer-events-none"
                 >
                     <img
-                        src="/b&w_int.png"
+                        src={bwIntImg}
                         alt="Foundational Space"
                         loading="eager"
                         decoding="sync"
@@ -109,7 +111,7 @@ const IntroSequence = ({ progress }) => {
                     className="absolute inset-0 w-full h-full z-10 pointer-events-none"
                 >
                     <img
-                        src="/color_int.jpg"
+                        src={colorIntImg}
                         alt="Evolved Luxury Space"
                         loading="eager"
                         decoding="sync"
