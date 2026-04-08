@@ -77,7 +77,7 @@ const HomeHero = ({ progress }) => {
     const activeProgress = progress || defaultProgress;
 
     return (
-        <section className="relative h-screen w-full bg-[#050505] overflow-hidden flex flex-col items-center justify-center font-sans">
+        <section className="relative h-screen w-full bg-base overflow-hidden flex flex-col items-center justify-center font-sans tracking-tight">
 
             <FloatingSketches progress={activeProgress} />
 
@@ -103,14 +103,14 @@ const HomeHero = ({ progress }) => {
 
             {/* Background Decorative Element */}
             <div className="absolute inset-0 select-none pointer-events-none opacity-[0.02] flex items-center justify-center">
-                <h2 className="text-[60vw] md:text-[40vw] font-black text-white tracking-widest uppercase">
-                    ATÉLIA
+                <h2 className="text-[50vw] md:text-[25vw] font-black text-white/5 tracking-[0.1em] uppercase leading-none text-center">
+                    NICHE <br className="md:hidden" /> & FORM
                 </h2>
             </div>
 
             <style>{`
                 ::selection {
-                    background: #D2B68A;
+                    background: var(--color-accent);
                     color: #000;
                 }
             `}</style>

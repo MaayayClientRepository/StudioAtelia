@@ -33,7 +33,7 @@ export const StickyScroll = ({ content, progress }) => {
                 - Desktop: Sticky right half, takes full height.
             */}
             <div className="absolute top-0 left-0 right-0 h-[40vh] md:relative md:w-1/2 md:h-screen md:sticky md:top-0 flex items-center justify-end overflow-hidden z-0 md:order-2">
-                <div className="relative w-full h-full md:w-[95%] md:aspect-[16/8] md:rounded-[1.5rem] md:h-auto overflow-hidden md:shadow-[0_0_80px_rgba(0,0,0,0.5)] md:border md:border-white/5 bg-neutral-900 md:border-[#D2B68A]/10">
+                <div className="relative w-full h-full md:w-[95%] md:aspect-[16/8] md:rounded-[1.5rem] md:h-auto overflow-hidden md:shadow-[0_0_80px_rgba(0,0,0,0.5)] md:border md:border-white/5 bg-neutral-900 md:border-accent/10">
                     <AnimatePresence mode="wait">
                         <motion.div
                             key={activeCard}
@@ -56,8 +56,8 @@ export const StickyScroll = ({ content, progress }) => {
                         transition={{ delay: 0.4 }}
                         className="absolute bottom-4 left-6 md:bottom-6 md:left-8 z-20"
                     >
-                        <p className="text-[10px] uppercase tracking-[0.5em] text-[#D2B68A] mb-1 font-black italic">Sequence 0{activeCard + 1}</p>
-                        <h3 className="hidden md:block text-sm font-serif italic text-white/90 leading-none">Studio Atélia</h3>
+                        <p className="text-[10px] uppercase tracking-[0.5em] text-accent mb-1 font-black italic">Sequence 0{activeCard + 1}</p>
+                        <h3 className="hidden md:block text-sm font-serif italic text-white/90 leading-none">Niche & Form</h3>
                     </motion.div>
                 </div>
             </div>
@@ -123,7 +123,7 @@ const StickyScrollItem = ({ item, index, cardLength, activeProgress }) => {
                 }}
                 className="max-w-xl md:pr-12 pointer-events-auto bg-black/50 md:bg-transparent p-6 md:p-0 rounded-2xl md:rounded-none backdrop-blur-md md:backdrop-blur-none border border-white/10 md:border-none shadow-2xl md:shadow-none"
             >
-                <span className="text-[10px] md:text-xs uppercase tracking-[0.4em] text-[#D2B68A] font-black italic">
+                <span className="text-[10px] md:text-xs uppercase tracking-[0.4em] text-accent font-black italic">
                     {item.tag || `Step 0${index + 1}`}
                 </span>
                 <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-[3.5rem] font-serif font-bold text-white leading-[1.1] tracking-tighter mt-2 mb-3 md:mt-4 md:mb-6">
@@ -136,8 +136,8 @@ const StickyScrollItem = ({ item, index, cardLength, activeProgress }) => {
                 {item.details && (
                     <ul className="mt-8 flex flex-col gap-3">
                         {item.details.map((detail, di) => (
-                            <li key={di} className="text-[10px] uppercase tracking-[0.4em] text-[#D2B68A]/60 flex items-center gap-2">
-                                <div className="w-1.5 h-1.5 rounded-full bg-[#D2B68A]/40" />
+                            <li key={di} className="text-[10px] uppercase tracking-[0.4em] text-accent/60 flex items-center gap-2">
+                                <div className="w-1.5 h-1.5 rounded-full bg-accent/40" />
                                 {detail}
                             </li>
                         ))}

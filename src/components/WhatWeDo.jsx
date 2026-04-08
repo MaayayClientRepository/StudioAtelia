@@ -1,6 +1,6 @@
-import React, { useRef } from "react";
-import { motion, useTransform, useSpring } from "framer-motion";
-import { ArrowUpRight } from "lucide-react";
+import React, { useRef, useState } from "react";
+import { motion, useTransform, useSpring, useMotionValue } from "framer-motion";
+import { ArrowUpRight, ChevronLeft, ChevronRight } from "lucide-react";
 import mkImg from "../assets/whatwedo/mk.jpg";
 import resImg from "../assets/whatwedo/res.jpg";
 import spaceImg from "../assets/whatwedo/space.png";
@@ -87,7 +87,8 @@ const FloatingSketches = ({ progress }) => {
 
 const WhatWeDo = ({ progress }) => {
     const scrollRef = useRef(null);
-    const [constraints, setConstraints] = React.useState({ start: 0, end: 0 });
+    const [constraints, setConstraints] = useState({ start: 0, end: 0 });
+    const [currentIndex, setCurrentIndex] = useState(0);
 
     React.useEffect(() => {
         const calculateScroll = () => {
@@ -95,25 +96,19 @@ const WhatWeDo = ({ progress }) => {
                 const container = scrollRef.current;
                 const fullWidth = container.scrollWidth;
                 const viewportW = window.innerWidth;
-
-                // Container Padding Info
                 const style = window.getComputedStyle(container);
                 const paddingLeft = parseFloat(style.paddingLeft);
                 const paddingRight = parseFloat(style.paddingRight);
 
-                // 1. Calculate START position (Title Centered - "Default Place")
                 const introBlock = container.firstElementChild;
                 const introWidth = introBlock.offsetWidth;
                 const titlePos = (viewportW / 2) - (paddingLeft + (introWidth / 2));
 
-                // 2. Calculate END position (Last Card Centered)
                 const lastCard = container.lastElementChild;
                 if (lastCard) {
                     const lastCardWidth = lastCard.offsetWidth;
                     const distanceToCenterOfLastCard = fullWidth - paddingRight - (lastCardWidth / 2);
                     const lastCardPos = -(distanceToCenterOfLastCard - (viewportW / 2));
-
-                    // First to Last: Start = Title, End = Last Card
                     setConstraints({ start: titlePos, end: lastCardPos });
                 }
             }
@@ -124,19 +119,94 @@ const WhatWeDo = ({ progress }) => {
         return () => window.removeEventListener("resize", calculateScroll);
     }, []);
 
-    // 4. MOTION: Start at Title (Default) and move to Last Card
-    const x = useTransform(progress, [0, 1], [`${constraints.start}px`, `${constraints.end}px`]);
+    const [lastProgress, setLastProgress] = useState(0);
+    const [direction, setDirection] = useState("down");
+
+    // Tracks current index and direction based on progress
+    React.useEffect(() => {
+        const unsubscribe = progress.on("change", (v) => {
+            // Direction Detection
+            if (v > lastProgress) setDirection("down");
+            else if (v < lastProgress) setDirection("up");
+            setLastProgress(v);
+
+            const index = Math.round(v * services.length);
+            setCurrentIndex(Math.min(index, services.length));
+        });
+        return () => unsubscribe();
+    }, [progress, lastProgress]);
+
+    // Asymmetric Movement Logic:
+    // When going down (forward), we use the standard mapping.
+    // When going up (backward), we "telescope" the progress to reset the cards significantly faster.
+    const forwardX = useTransform(progress, [0, 1], [`${constraints.start}px`, `${constraints.end}px`]);
+    const backwardX = useTransform(progress, [0.4, 1], [`${constraints.start}px`, `${constraints.end}px`]);
+    
+    // Choose the target X based on scroll direction
+    // If going UP, we want to hit the 'Initial Position' (start) much sooner.
+    const targetX = useTransform(progress, (v) => {
+        if (direction === "down" || v === 0) {
+            // Normal forward travel
+            return constraints.start + (v * (constraints.end - constraints.start));
+        } else {
+            // REWIND LOGIC:
+            // We want to reach constraints.start (the title) much faster when scrolling up.
+            // Map 0.7 -> 1.0 (downwards progress) to 0 -> 1.0 (actual visual movement)
+            // This means if we are scrolling up from 1.0, we hit 0 after only 30% of the reverse scroll.
+            const rewindThreshold = 0.75; 
+            const fastProgress = Math.max(0, (v - rewindThreshold) / (1 - rewindThreshold));
+            return constraints.start + (fastProgress * (constraints.end - constraints.start));
+        }
+    });
+
+    const springX = useSpring(targetX, { 
+        damping: direction === "up" ? 45 : 25, 
+        stiffness: direction === "up" ? 240 : 120,
+        mass: direction === "up" ? 0.4 : 1
+    });
+
+    const handleNav = (direction) => {
+        const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+        // Range 0.24 -> 0.34 of 2500vh (Updated for new architecture)
+        const start = 0.24;
+        const end = 0.34;
+        const currentP = progress.get();
+        const step = 1 / services.length;
+        
+        let nextP;
+        if (direction === "next") {
+            if (currentIndex >= services.length) {
+                // If at last item, skip to NEXT section (How We Do It)
+                window.scrollTo({ top: 0.38 * totalHeight, behavior: "smooth" });
+                return;
+            }
+            nextP = Math.min(1, currentP + step);
+        } else {
+            if (currentIndex <= 0) {
+                // If at first item, skip to PREVIOUS section (Home Hero)
+                window.scrollTo({ top: 0.18 * totalHeight, behavior: "smooth" });
+                return;
+            }
+            nextP = Math.max(0, currentP - step);
+        }
+
+        const targetGlobal = start + (nextP * (end - start));
+        window.scrollTo({
+            top: targetGlobal * totalHeight,
+            behavior: "smooth"
+        });
+    };
 
     return (
-        <div className="relative h-screen bg-[#FBF2C0] flex items-center overflow-hidden font-serif">
+        <div className="relative h-screen bg-secondary flex items-center overflow-hidden font-serif">
             {/* Background Large Text */}
-            <div className="absolute inset-0 flex items-center justify-center opacity-[0.02] select-none pointer-events-none">
-                <h2 className="text-[40vw] font-black text-black uppercase">Atélia</h2>
+            <div className="absolute inset-0 flex items-center justify-center opacity-[0.03] select-none pointer-events-none">
+                <h2 className="text-[30vw] md:text-[15vw] font-black text-black uppercase leading-none whitespace-nowrap">Niche & Form</h2>
             </div>
 
             <FloatingSketches progress={progress} />
 
-            <motion.div ref={scrollRef} style={{ x, willChange: "transform" }} className="flex gap-6 md:gap-20 px-4 md:px-[10vw] relative z-10 w-max">
+            <motion.div ref={scrollRef} style={{ x: springX, willChange: "transform" }} className="flex gap-6 md:gap-20 px-4 md:px-[10vw] relative z-10 w-max">
                 {/* Intro Block */}
                 <div className="flex-shrink-0 w-[260px] md:w-[400px] flex flex-col justify-center">
                     <h2 className="text-4xl md:text-8xl font-black text-black leading-[0.8] tracking-tighter uppercase mb-6 md:mb-12">
@@ -158,7 +228,6 @@ const WhatWeDo = ({ progress }) => {
                         className="flex-shrink-0 w-[70vw] md:w-[320px] group will-change-transform"
                     >
                         <div className="relative h-[320px] md:h-[420px] w-full rounded-[1.2rem] md:rounded-[2.5rem] overflow-hidden bg-black shadow-[0_20px_40px_-10px_rgba(0,0,0,0.3)] transition-all duration-700 group-hover:shadow-[0_40px_80px_-20px_rgba(0,0,0,0.5)]">
-                            {/* Image */}
                             <img
                                 src={service.image}
                                 decoding="async"
@@ -168,17 +237,16 @@ const WhatWeDo = ({ progress }) => {
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-90" />
 
-                            {/* Content */}
                             <div className="absolute inset-x-0 bottom-0 p-5 md:p-8">
-                                <span className="text-[10px] md:text-xs text-[#FFEA00] font-black tracking-[0.2em] mb-2 block">
+                                <span className="text-[10px] md:text-xs text-accent font-black tracking-[0.2em] mb-2 block">
                                     {service.code.replace("-", " - ")}
                                 </span>
-                                <h3 className="text-xl md:text-3xl font-serif font-medium text-white leading-[1.05] mb-4 md:mb-6 group-hover:text-[#FFEA00] transition-colors">
+                                <h3 className="text-xl md:text-3xl font-serif font-medium text-white leading-[1.05] mb-4 md:mb-6 group-hover:text-accent transition-colors">
                                     {service.title}
                                 </h3>
 
                                 <div className="flex items-center gap-3 group/btn cursor-pointer">
-                                    <div className="w-8 h-8 md:w-12 md:h-12 rounded-full bg-white/10 backdrop-blur-sm hover:bg-[#FFEA00] transition-all duration-500 flex items-center justify-center group-hover:border-[#FFEA00] border border-white/20">
+                                    <div className="w-8 h-8 md:w-12 md:h-12 rounded-full bg-white/10 backdrop-blur-sm hover:bg-accent transition-all duration-500 flex items-center justify-center group-hover:border-accent border border-white/20">
                                         <ArrowUpRight className="w-3 h-3 md:w-5 md:h-5 text-white group-hover/btn:text-black transition-transform duration-500 group-hover/btn:rotate-45" />
                                     </div>
                                 </div>
@@ -186,23 +254,39 @@ const WhatWeDo = ({ progress }) => {
                         </div>
                     </motion.div>
                 ))}
-
-                {/* Closing Block Removed */}
             </motion.div>
+
+            {/* Navigation Overlay */}
+            <div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-30 flex items-center gap-8">
+                <button 
+                    onClick={() => handleNav("prev")}
+                    className="p-3 bg-black/10 border border-black/10 rounded-full hover:bg-black hover:text-secondary transition-all disabled:opacity-0"
+                    disabled={currentIndex === 0}
+                >
+                    <ChevronLeft className="w-5 h-5" />
+                </button>
+                
+                {/* Progress Indicators */}
+                <div className="flex gap-2">
+                    {[...Array(services.length + 1)].map((_, i) => (
+                        <div 
+                            key={i} 
+                            className={`h-[2px] w-6 transition-all duration-500 rounded-full ${i === currentIndex ? "bg-black w-10" : "bg-black/10"}`} 
+                        />
+                    ))}
+                </div>
+
+                <button 
+                    onClick={() => handleNav("next")}
+                    className="p-3 bg-black/10 border border-black/10 rounded-full hover:bg-black hover:text-secondary transition-all disabled:opacity-0"
+                    disabled={currentIndex === services.length}
+                >
+                    <ChevronRight className="w-5 h-5" />
+                </button>
+            </div>
 
             {/* Performance Grain Overlay */}
             <div className="absolute inset-0 opacity-[0.04] pointer-events-none mix-blend-multiply bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
-
-            <style>{`
-                .outline-text {
-                    -webkit-text-stroke: 2px black;
-                }
-                @media (min-width: 1024px) {
-                    .outline-text {
-                        -webkit-text-stroke: 3px black;
-                    }
-                }
-            `}</style>
         </div>
     );
 };

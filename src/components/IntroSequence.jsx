@@ -17,15 +17,16 @@ const IntroSequence = ({ progress }) => {
     // Brand name and tagline now fade in simultaneously with the color transition
     const taglineOpacity = useTransform(progress, [0.1, 0.4], [0, 1]);
 
-    // Once scrolling continues AFTER text appears, it centers and turns yellow
-    const textColor = useTransform(progress, [0.7, 0.95], ["#FFFFFF", "#FACC15"]);
+    // Once scrolling continues AFTER text appears, it centers and turns to custom accent palette
+    // Smoothed tonal progression: White -> Cream (#FBF2C0) -> Gold-Tan (#D2B68A) -> Muted Brass (#C5A059)
+    const textColor = useTransform(progress, [0.7, 0.8, 0.9, 1], ["#FFFFFF", "#FBF2C0", "#D2B68A", "#C5A059"]);
     const brandY = useTransform(progress, [0.7, 0.95], [-120, 0]); // From tagline position up to center
     const scale = 1;
 
     return (
         <div className="relative h-screen w-full overflow-hidden bg-transparent font-sans flex items-center justify-center">
 
-            {/* --- CORE BRAND IDENTITY: Studio Atélia & Tagline --- */}
+            {/* --- CORE BRAND IDENTITY: Niche & Form & Tagline --- */}
             <div className="absolute inset-0 z-50 flex flex-col items-center justify-center pointer-events-none">
                 <motion.div
                     style={{
@@ -52,22 +53,22 @@ const IntroSequence = ({ progress }) => {
                     <motion.h1
                         style={{
                             color: textColor,
-                            fontSize: "clamp(3rem, 12vw, 15vw)"
+                            fontSize: "clamp(2.5rem, 10vw, 15vw)"
                         }}
-                        className="font-light text-white leading-none tracking-[-0.02em] mb-6 whitespace-nowrap"
+                        className="font-light text-white leading-none tracking-[-0.02em] mb-4 sm:mb-6 whitespace-nowrap"
                     >
-                        Studio <span className="font-serif italic font-normal">Atélia</span>
+                        Niche & <span className="font-serif italic font-normal">Form</span>
                     </motion.h1>
 
                     {/* Unified Tagline in Single Line */}
                     <div className="flex items-center gap-4 md:gap-8 justify-center w-full">
                         <motion.div
-                            style={{ backgroundColor: useTransform(progress, [0.7, 0.95], ["#FFFFFF", "#FACC15"]) }}
+                            style={{ backgroundColor: useTransform(progress, [0.7, 0.95], ["#FFFFFF", "#C5A059"]) }}
                             className="h-[1px] flex-1 max-w-[40px] md:max-w-[100px] opacity-40"
                         />
                         <motion.p
                             style={{
-                                color: useTransform(progress, [0.7, 0.95], ["#FFFFFF", "#FACC15"]),
+                                color: useTransform(progress, [0.7, 0.95], ["#FFFFFF", "#C5A059"]),
                                 fontSize: "clamp(0.7rem, 2vw, 1.5rem)"
                             }}
                             className="font-['Fira_Sans_Condensed',_sans-serif] font-light italic tracking-[0.2em] md:tracking-[0.4em] uppercase whitespace-nowrap"
@@ -75,7 +76,7 @@ const IntroSequence = ({ progress }) => {
                             Thoughtful design Transforms living
                         </motion.p>
                         <motion.div
-                            style={{ backgroundColor: useTransform(progress, [0.7, 0.95], ["#FFFFFF", "#FACC15"]) }}
+                            style={{ backgroundColor: useTransform(progress, [0.7, 0.95], ["#FFFFFF", "#C5A059"]) }}
                             className="h-[1px] flex-1 max-w-[40px] md:max-w-[100px] opacity-40"
                         />
                     </div>
