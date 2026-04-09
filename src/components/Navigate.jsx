@@ -15,20 +15,23 @@ const Navigate = ({ progress }) => {
     const navScale = useTransform(progress, [0.18, 0.24], [0.8, 1]);
 
     const menuItems = [
-        { title: "HOME", sub: "The Sanctuary", target: 0.25 },
-        { title: "WHAT WE DO", sub: "Services Matrix", target: 0.45 },
-        { title: "THE PROCESS", sub: "Design Methodology", target: 0.65 },
-        { title: "PHILOSOPHY", sub: "Built to Last", target: 0.88 },
-        { title: "CONTACT", sub: "Get in Touch", target: 1.0 },
+        { title: "HOME", sub: "The Sanctuary", target: 0.05 },          // Intro brand reveal (0.01-0.12)
+        { title: "WHAT WE DO", sub: "Services Matrix", target: 0.27 },   // Content center (0.24-0.34)
+        { title: "THE PROCESS", sub: "Design Methodology", target: 0.42 }, // Content center (0.38-0.52)
+        { title: "PHILOSOPHY", sub: "Built to Last", target: 0.62 },     // WhyUs text reveal (0.50-0.88)
+        { title: "CONTACT", sub: "Get in Touch", target: 0.96 },         // Contact form (internal ~1.5)
     ];
 
     const handleScroll = (target) => {
         setIsOpen(false);
-        const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
-        window.scrollTo({
-            top: target * totalHeight,
-            behavior: "smooth"
-        });
+        // Small delay so sidebar animation finishes before scroll
+        setTimeout(() => {
+            const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+            window.scrollTo({
+                top: target * totalHeight,
+                behavior: "smooth"
+            });
+        }, 350);
     };
 
     return (
@@ -44,7 +47,7 @@ const Navigate = ({ progress }) => {
                 onClick={() => setIsOpen(true)}
                 whileHover={{ x: 2, y: 2, boxShadow: "2px 2px 0px #000" }}
                 whileTap={{ x: 6, y: 6, boxShadow: "0px 0px 0px #000" }}
-                className="fixed top-4 left-4 sm:top-8 sm:left-8 z-[100] p-3 sm:p-4 bg-accent border-2 border-black shadow-[4px_4px_0px_#000] rounded-lg sm:rounded-xl transition-all group overflow-hidden"
+                className="fixed top-4 left-4 sm:top-8 sm:left-8 z-[100] p-3 sm:p-4 bg-[#F8D149] border-2 border-black shadow-[4px_4px_0px_#000] rounded-lg sm:rounded-xl transition-all group overflow-hidden"
             >
                 <div className="absolute inset-0 bg-black translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-500 ease-out" />
                 <Menu className="w-4 h-4 sm:w-5 sm:h-5 text-black group-hover:text-accent relative z-10 transition-colors" />
@@ -85,7 +88,7 @@ const Navigate = ({ progress }) => {
                                             animate={{ opacity: 1, x: 0 }}
                                             transition={{ delay: 0.1 * i + 0.2 }}
                                             onClick={() => handleScroll(item.target)}
-                                            className="group cursor-pointer block"
+                                            className="group cursor-pointer block active:opacity-70 transition-opacity"
                                         >
                                             <div className="flex items-center gap-6 md:gap-8 translate-x-0 group-hover:translate-x-4 transition-transform duration-500">
                                                 <span className="text-[9px] md:text-[10px] font-black tracking-[0.5em] text-accent opacity-40 group-hover:opacity-100 transition-opacity">

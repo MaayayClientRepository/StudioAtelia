@@ -128,16 +128,15 @@ const WhyUs = ({ progress }) => {
 
     // philosophyOpacity: Focus on the text area
     // Now holds until progress 1.0 (CTA centering)
-    const philosophyOpacity = useTransform(progress, [0.1, 0.2, 1.0, 1.3], [0, 1, 1, 0]);
+    const philosophyOpacity = useTransform(progress, [0.1, 0.2, 1.0, 1.1], [0, 1, 1, 0]);
 
     // formOpacity: Fades in ONLY AFTER philosophy and CTA are settled
-    const formOpacity = useTransform(progress, [1.3, 1.6], [0, 1]);
+    const formOpacity = useTransform(progress, [1.1, 1.4], [0, 1]);
     
     // TWO PHASE TRANSFORM:
-    // 1. Entrance: Zoom out and Settle (1.3 -> 1.6)
-    // 2. Final Fit: Shrink and Move Up as Footer rises (1.6 -> 2.0)
-    const formY = useTransform(progress, [1.3, 1.6, 2.0], [60, 0, -150]);
-    const formScale = useTransform(progress, [1.3, 1.6, 2.0], [1.15, 1, 0.75]); 
+    // 1. Entrance: Zoom out and Settle (1.1 -> 1.4)
+    const formY = useTransform(progress, [1.1, 1.4], [80, -80]); // Slightly lower settle point for better balance
+    const formScale = useTransform(progress, [1.1, 1.4], [1.15, 1]); 
 
     const sketchOpacity = useTransform(progress, [1.2, 1.4], [0.1, 0]);
 
@@ -191,109 +190,116 @@ const WhyUs = ({ progress }) => {
                 </div>
             </motion.div>
 
-            {/* CONTACT FORM WRAPPER - IMPECCABLE DESIGN STUDIO OVERHAUL */}
+            {/* CONTACT FORM — Mobile-first, full viewport on small screens */}
             <motion.div
                 style={{
                     opacity: formOpacity,
-                    pointerEvents: useTransform(progress, (v) => v > 1.5 ? "auto" : "none"),
+                    pointerEvents: useTransform(progress, (v) => v > 1.1 ? "auto" : "none"),
                     willChange: "opacity"
                 }}
-                className="absolute inset-0 z-20 flex items-center justify-center font-sans px-3 sm:px-4 py-6 sm:pb-12 overflow-y-auto"
+                className="absolute inset-0 z-20 flex items-start md:items-center justify-center font-sans overflow-y-auto"
             >
                 <motion.div 
                     style={{ y: formY, scale: formScale }}
-                    className="w-full max-w-5xl h-auto max-h-[90vh] flex flex-col md:flex-row bg-secondary/80 backdrop-blur-3xl rounded-2xl sm:rounded-[2rem] md:rounded-[3rem] overflow-hidden border border-black/10 shadow-[0_60px_100px_-30px_rgba(0,0,0,0.15)]"
+                    className="w-full md:max-w-4xl min-h-screen md:min-h-0 md:h-auto flex flex-col md:flex-row bg-secondary/90 md:bg-secondary/80 backdrop-blur-3xl md:rounded-[2.5rem] overflow-hidden md:border md:border-black/10 md:shadow-[0_40px_80px_-20px_rgba(0,0,0,0.1)] md:mx-4"
                 >
                     
-                    {/* LEFT PANEL: The Brand Mark & Info */}
-                    <div className="md:w-2/5 p-6 sm:p-8 md:p-14 bg-black flex flex-col justify-between text-secondary relative overflow-hidden min-h-[180px] sm:min-h-[220px]">
+                    {/* LEFT PANEL — Compact header on mobile, tall side panel on desktop */}
+                    <div className="md:w-2/5 px-6 py-8 sm:px-8 sm:py-10 md:p-14 bg-black flex flex-row md:flex-col items-center md:items-start justify-between md:justify-between text-secondary relative overflow-hidden">
                         {/* Huge Watermark */}
-                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[40vw] md:text-[25vw] font-black opacity-[0.03] select-none pointer-events-none tracking-tighter">N&F</div>
+                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[50vw] md:text-[25vw] font-black opacity-[0.03] select-none pointer-events-none tracking-tighter">N&F</div>
                         
                         <div className="relative z-10">
-                            <span className="text-[8px] sm:text-[9px] font-black tracking-[0.4em] sm:tracking-[0.5em] text-accent uppercase mb-2 sm:mb-3 block">Crafting Sanctuaries</span>
-                            <h3 className="text-2xl sm:text-3xl md:text-6xl font-serif font-black leading-[0.9] tracking-tighter mb-4 sm:mb-6 italic">Start <br className="hidden sm:block" />Your <br className="hidden sm:block" />Project.</h3>
+                            <span className="text-[8px] sm:text-[9px] font-black tracking-[0.4em] sm:tracking-[0.5em] text-accent uppercase mb-1 sm:mb-3 block">Crafting Sanctuaries</span>
+                            <h3 className="text-xl sm:text-2xl md:text-6xl font-serif font-black leading-[0.9] tracking-tighter italic">Start Your Project.</h3>
                         </div>
 
-                        <div className="relative z-10 space-y-4 sm:space-y-6">
-                            <div className="flex border-t border-secondary/10 pt-4 sm:pt-8 gap-6 sm:gap-12">
-                                <div className="space-y-1">
-                                    <p className="text-[8px] font-black tracking-widest text-[#D2B68A] uppercase">Office</p>
-                                    <p className="text-[10px] font-light text-secondary/60">Bangalore, Ind.</p>
+                        <div className="relative z-10 flex md:flex-col gap-6 sm:gap-8 md:gap-0 md:space-y-6">
+                            <div className="hidden md:block border-t border-secondary/10 pt-8">
+                                <div className="flex gap-12">
+                                    <div className="space-y-1">
+                                        <p className="text-[8px] font-black tracking-widest text-[#D2B68A] uppercase">Office</p>
+                                        <p className="text-[10px] font-light text-secondary/60">Bangalore, Ind.</p>
+                                    </div>
+                                    <div className="space-y-1">
+                                        <p className="text-[8px] font-black tracking-widest text-[#D2B68A] uppercase">Email</p>
+                                        <p className="text-[10px] font-light text-secondary/60">hello@nicheandform.com</p>
+                                    </div>
                                 </div>
-                                <div className="space-y-1">
-                                    <p className="text-[8px] font-black tracking-widest text-[#D2B68A] uppercase">Email</p>
-                                    <p className="text-[10px] font-light text-secondary/60">hello@nicheandform.com</p>
-                                </div>
+                            </div>
+                            {/* Mobile-only compact info */}
+                            <div className="md:hidden flex items-center gap-1">
+                                <span className="text-[8px] text-accent/60 font-black tracking-wider uppercase">Bangalore</span>
                             </div>
                         </div>
                     </div>
 
-                    {/* RIGHT PANEL: The Inquisitive Form */}
-                    <div className="md:w-3/5 p-6 pt-10 sm:p-8 sm:pt-12 md:p-14 flex flex-col justify-center relative bg-white/10 overflow-y-auto">
-                        <form className="space-y-6 sm:space-y-8 md:space-y-14">
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 md:gap-x-16 md:gap-y-12">
+                    {/* RIGHT PANEL — Full scrollable form */}
+                    <div className="md:w-3/5 flex-1 px-6 py-8 sm:px-8 sm:py-8 md:p-10 flex flex-col justify-center relative bg-white/10">
+                        <form className="space-y-6 sm:space-y-6 md:space-y-8">
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-6 md:gap-x-12 md:gap-y-8">
                                 {/* Name Input */}
-                                <div className="group relative">
+                                <div className="group">
+                                    <label className="text-[9px] sm:text-[10px] font-black tracking-[0.3em] sm:tracking-[0.4em] text-black/30 uppercase group-focus-within:text-accent transition-colors block mb-2">Client</label>
                                     <input
                                         type="text"
                                         placeholder="Full Name"
-                                        className="w-full bg-transparent border-b border-black/10 py-2 text-base sm:text-lg md:text-xl font-serif text-black focus:outline-none focus:border-accent transition-colors placeholder:text-black/40 italic"
+                                        className="w-full bg-transparent border-b border-black/15 py-1.5 text-[15px] sm:text-lg md:text-lg font-serif text-black focus:outline-none focus:border-accent transition-colors placeholder:text-black/35 italic"
                                     />
-                                    <span className="absolute -top-5 sm:-top-6 left-0 text-[9px] sm:text-[10px] font-black tracking-[0.3em] sm:tracking-[0.4em] text-black/30 uppercase group-focus-within:text-accent transition-colors">Client</span>
                                 </div>
 
                                 {/* Contact Input */}
-                                <div className="group relative">
+                                <div className="group">
+                                    <label className="text-[9px] sm:text-[10px] font-black tracking-[0.3em] sm:tracking-[0.4em] text-black/30 uppercase group-focus-within:text-accent transition-colors block mb-2">Contact</label>
                                     <input
                                         type="tel"
                                         placeholder="WhatsApp / Phone"
-                                        className="w-full bg-transparent border-b border-black/10 py-2 text-base sm:text-lg md:text-xl font-serif text-black focus:outline-none focus:border-accent transition-colors placeholder:text-black/40 italic"
+                                        className="w-full bg-transparent border-b border-black/15 py-1.5 text-[15px] sm:text-lg md:text-lg font-serif text-black focus:outline-none focus:border-accent transition-colors placeholder:text-black/35 italic"
                                     />
-                                    <span className="absolute -top-5 sm:-top-6 left-0 text-[9px] sm:text-[10px] font-black tracking-[0.3em] sm:tracking-[0.4em] text-black/30 uppercase group-focus-within:text-accent transition-colors">Contact</span>
                                 </div>
 
                                 {/* Project Type */}
-                                <div className="group relative">
-                                    <select className="w-full bg-transparent border-b border-black/10 py-2 text-base sm:text-lg md:text-xl font-serif text-black focus:outline-none focus:border-accent transition-colors appearance-none cursor-pointer italic">
+                                <div className="group">
+                                    <label className="text-[9px] sm:text-[10px] font-black tracking-[0.3em] sm:tracking-[0.4em] text-black/30 uppercase group-focus-within:text-accent transition-colors block mb-2">Service</label>
+                                    <select className="w-full bg-transparent border-b border-black/15 py-1.5 text-[15px] sm:text-lg md:text-lg font-serif text-black focus:outline-none focus:border-accent transition-colors appearance-none cursor-pointer italic">
                                         <option className="bg-secondary" disabled selected>Nature of Project</option>
                                         <option className="bg-secondary">Luxury Apartment</option>
                                         <option className="bg-secondary">Modern Villa</option>
                                         <option className="bg-secondary">Bespoke Commercial</option>
                                         <option className="bg-secondary">Hospitality</option>
                                     </select>
-                                    <span className="absolute -top-5 sm:-top-6 left-0 text-[9px] sm:text-[10px] font-black tracking-[0.3em] sm:tracking-[0.4em] text-black/30 uppercase group-focus-within:text-accent transition-colors">Service</span>
                                 </div>
 
                                 {/* Timeline */}
-                                <div className="group relative">
+                                <div className="group">
+                                    <label className="text-[9px] sm:text-[10px] font-black tracking-[0.3em] sm:tracking-[0.4em] text-black/30 uppercase group-focus-within:text-accent transition-colors block mb-2">Timeline</label>
                                     <input
                                         type="text"
                                         placeholder="Looking to start in?"
-                                        className="w-full bg-transparent border-b border-black/10 py-2 text-base sm:text-lg md:text-xl font-serif text-black focus:outline-none focus:border-accent transition-colors placeholder:text-black/40 italic"
+                                        className="w-full bg-transparent border-b border-black/15 py-1.5 text-[15px] sm:text-lg md:text-lg font-serif text-black focus:outline-none focus:border-accent transition-colors placeholder:text-black/35 italic"
                                     />
-                                    <span className="absolute -top-5 sm:-top-6 left-0 text-[9px] sm:text-[10px] font-black tracking-[0.3em] sm:tracking-[0.4em] text-black/30 uppercase group-focus-within:text-accent transition-colors">Timeline</span>
                                 </div>
                             </div>
 
                             {/* Brief Textarea */}
-                            <div className="group relative">
+                            <div className="group">
+                                <label className="text-[9px] sm:text-[10px] font-black tracking-[0.3em] sm:tracking-[0.4em] text-black/30 uppercase group-focus-within:text-accent transition-colors block mb-2">The Brief</label>
                                 <textarea
-                                    rows="2"
+                                    rows="1"
                                     placeholder="Tell us about your space..."
-                                    className="w-full bg-transparent border-b border-black/10 py-2 text-base sm:text-lg md:text-xl font-serif text-black focus:outline-none focus:border-accent transition-colors resize-none placeholder:text-black/40 italic min-h-[50px] sm:min-h-[60px]"
+                                    className="w-full bg-transparent border-b border-black/15 py-1.5 text-[15px] sm:text-lg md:text-lg font-serif text-black focus:outline-none focus:border-accent transition-colors resize-none placeholder:text-black/35 italic min-h-[40px] sm:min-h-[50px]"
                                 ></textarea>
-                                <span className="absolute -top-5 sm:-top-6 left-0 text-[9px] sm:text-[10px] font-black tracking-[0.3em] sm:tracking-[0.4em] text-black/30 uppercase group-focus-within:text-accent transition-colors">The Brief</span>
                             </div>
 
-                            <div className="flex justify-end">
+                            <div className="flex justify-end pt-2">
                                 <motion.button
                                     whileHover={{ x: 10 }}
-                                    className="flex items-center gap-6 group/btn"
+                                    whileTap={{ scale: 0.95 }}
+                                    className="flex items-center gap-4 sm:gap-6 group/btn"
                                 >
-                                    <span className="text-[10px] sm:text-xs font-black uppercase tracking-[0.5em] sm:tracking-[0.8em] text-black group-hover/btn:text-accent transition-colors">Send Inquiry</span>
-                                    <div className="w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 rounded-full bg-black flex items-center justify-center text-accent group-hover/btn:scale-110 transition-transform shadow-2xl">
-                                        <ArrowUpRight className="w-6 h-6 md:w-8 md:h-8" />
+                                    <span className="text-[10px] sm:text-xs font-black uppercase tracking-[0.4em] sm:tracking-[0.8em] text-black group-hover/btn:text-accent transition-colors">Send Inquiry</span>
+                                    <div className="w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 rounded-full bg-black flex items-center justify-center text-accent group-hover/btn:scale-110 transition-transform shadow-2xl">
+                                        <ArrowUpRight className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6" />
                                     </div>
                                 </motion.button>
                             </div>

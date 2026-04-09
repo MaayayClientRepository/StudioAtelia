@@ -48,10 +48,11 @@ function App() {
     const whyInternalProgress = useTransform(scrollYProgress, [0.50, 0.88, 0.94, 1.0], [0, 1, 1, 2]);
 
     useEffect(() => {
+        const isMobile = window.innerWidth < 768;
         const lenis = new Lenis({
-            duration: 1.2, // Slightly faster for responsiveness
+            duration: isMobile ? 1.0 : 1.2,
             easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-            touchMultiplier: 1.5,
+            touchMultiplier: isMobile ? 2.0 : 1.5,
             smoothWheel: true,
             infinite: false,
         });
@@ -162,7 +163,7 @@ function App() {
             {/* LAYER 6: FOOTER */}
             <motion.div
                 style={{
-                    y: useTransform(scrollYProgress, [0.94, 1], ["100vh", "50vh"]),
+                    y: useTransform(scrollYProgress, [0.94, 1], ["100vh", "32vh"]),
                     zIndex: 100,
                     display: useTransform(scrollYProgress, [0.93, 1], ["none", "block"]),
                     willChange: "transform"
