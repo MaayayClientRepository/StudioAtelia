@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { motion, useTransform, useSpring, useMotionValue } from "framer-motion";
+import { motion, useTransform, useSpring, useMotionValue, useMotionValueEvent } from "framer-motion";
 import { ArrowUpRight, ChevronLeft, ChevronRight } from "lucide-react";
 import mkImg from "../assets/whatwedo/mk.jpg";
 import resImg from "../assets/whatwedo/res.jpg";
@@ -149,29 +149,46 @@ const WhatWeDo = ({ progress }) => {
     // ─── ONE-WAY FORWARD SCROLL ───
     // Scroll DOWN advances cards one-by-one (step-based).
     // Scroll UP does NOT move cards backward — only buttons can go back.
+    useMotionValueEvent(progress, "change", (v) => {
+        // Calculate which step index we'd be at
+        const rawIndex = Math.round(v * services.length);
+        const clampedIndex = Math.min(rawIndex, services.length);
+
+        // Auto-advance only if NOT currently navigating via dots/buttons
+        if (!isNavigating.current && clampedIndex > highWaterMark.current) {
+            // Moving forward — update high-water-mark and card position
+            highWaterMark.current = clampedIndex;
+            setCurrentIndex(clampedIndex);
+
+            // Calculate target pixel position
+            const fraction = clampedIndex / services.length;
+            const targetPx = constraints.start + fraction * (constraints.end - constraints.start);
+            xTarget.set(targetPx);
+        }
+
+        // RESET LOGIC: 
+        // 1. Reset when completely exiting the section from ABOVE (scrolling back up to hero)
+        if (v <= 0) {
+            highWaterMark.current = 0;
+            setCurrentIndex(0);
+            xTarget.set(constraints.start);
+        }
+
+        // 2. Reset when completely exiting the section from BELOW (so it's fresh when scrolling back up)
+        if (v >= 1.0) {
+            // We set it to 0 so when they scroll back UP, it starts fresh
+            // BUT wait, if we reset it at 1.0, and they are AT 1.0, it will loop?
+            // Usually we only want to reset when they've TRULY left.
+        }
+    });
+
+    // Handle resets when completely outside the section
     React.useEffect(() => {
         const unsubscribe = progress.on("change", (v) => {
-            // Calculate which step index we'd be at
-            const rawIndex = Math.round(v * services.length);
-            const clampedIndex = Math.min(rawIndex, services.length);
-
-            // Auto-advance only if NOT currently navigating via buttons
-            if (!isNavigating.current && clampedIndex > highWaterMark.current) {
-                // Moving forward — update high-water-mark and card position
-                highWaterMark.current = clampedIndex;
-                setCurrentIndex(clampedIndex);
-
-                // Calculate target pixel position
-                const fraction = clampedIndex / services.length;
-                const targetPx = constraints.start + fraction * (constraints.end - constraints.start);
-                xTarget.set(targetPx);
-            }
-
-            // Reset when completely exiting the section from above
-            if (v < 0.01 && highWaterMark.current !== 0) {
-                highWaterMark.current = 0;
-                setCurrentIndex(0);
-                xTarget.set(constraints.start);
+            if (v < -0.1 || v > 1.1) {
+               highWaterMark.current = 0;
+               setCurrentIndex(0);
+               xTarget.set(constraints.start);
             }
         });
         return () => unsubscribe();
