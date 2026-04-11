@@ -128,17 +128,18 @@ const WhyUs = ({ progress }) => {
 
     // philosophyOpacity: Focus on the text area
     // Now holds until progress 1.0 (CTA centering)
-    const philosophyOpacity = useTransform(progress, [0.1, 0.2, 1.0, 1.1], [0, 1, 1, 0]);
+    const philosophyOpacity = useTransform(progress, [0.1, 0.2, 1.0, 1.2], [0, 1, 1, 0]);
 
     // formOpacity: Fades in ONLY AFTER philosophy and CTA are settled
-    const formOpacity = useTransform(progress, [1.1, 1.4], [0, 1]);
+    // Speed up slightly from 1.8 to 1.5 range
+    const formOpacity = useTransform(progress, [1.2, 1.5], [0, 1]);
     
     // TWO PHASE TRANSFORM:
-    // 1. Entrance: Zoom out and Settle (1.1 -> 1.4)
-    const formY = useTransform(progress, [1.1, 1.4], [80, -80]); // Slightly lower settle point for better balance
-    const formScale = useTransform(progress, [1.1, 1.4], [1.15, 1]); 
+    // 1. Entrance: Zoom out and Settle (1.2 -> 1.5)
+    const formY = useTransform(progress, [1.2, 1.5], [100, -60]); 
+    const formScale = useTransform(progress, [1.2, 1.5], [1.1, 1]); 
 
-    const sketchOpacity = useTransform(progress, [1.2, 1.4], [0.1, 0]);
+    const sketchOpacity = useTransform(progress, [1.1, 1.25], [0.1, 0]);
 
     const phrase1 = "At Niche & Form Design Studio, we believe good design starts long before colours and finishes come into play. We take the time to understand how you live, move, and use your space—because a home should work beautifully.";
     const phrase2 = "Our approach is rooted in thoughtful planning, smart layouts, and practical storage, paired with a refined, modern aesthetic that feels elegant without being excessive.";

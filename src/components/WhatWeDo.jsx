@@ -101,6 +101,9 @@ const WhatWeDo = ({ progress }) => {
         return () => window.removeEventListener("resize", onResize);
     }, []);
 
+    // MotionValue that drives the spring — initialized at a safe start
+    const xTarget = useMotionValue(0);
+
     // Calculate scroll constraints
     React.useEffect(() => {
         const calculateScroll = () => {
@@ -121,25 +124,34 @@ const WhatWeDo = ({ progress }) => {
                     const lastCardWidth = lastCard.offsetWidth;
                     const distanceToCenterOfLastCard = fullWidth - paddingRight - (lastCardWidth / 2);
                     const lastCardPos = -(distanceToCenterOfLastCard - (viewportW / 2));
+                    
                     setConstraints({ start: titlePos, end: lastCardPos });
+                    
+                    // CRITICAL: Initialize xTarget once we have the constraints
+                    if (progress.get() < 0.01) {
+                        xTarget.set(titlePos);
+                    }
                 }
             }
         };
 
         calculateScroll();
+        // Give it a tiny beat for DOM to settle
+        const timer = setTimeout(calculateScroll, 100);
+
         window.addEventListener("resize", calculateScroll);
-        return () => window.removeEventListener("resize", calculateScroll);
-    }, []);
+        return () => {
+            window.removeEventListener("resize", calculateScroll);
+            clearTimeout(timer);
+        };
+    }, [xTarget, progress]);
 
-    // MotionValue that drives the spring — initialized at 0
-    const xTarget = useMotionValue(0);
-
-    // ONE-WAY FORWARD SCROLL:
-    // Only advance cards when progress exceeds our high-water-mark.
-    // Scrolling back up does NOT move cards backward.
+    // ─── ONE-WAY FORWARD SCROLL ───
+    // Scroll DOWN advances cards one-by-one (step-based).
+    // Scroll UP does NOT move cards backward — only buttons can go back.
     React.useEffect(() => {
         const unsubscribe = progress.on("change", (v) => {
-            // Calculate which step index we'd be at  
+            // Calculate which step index we'd be at
             const rawIndex = Math.round(v * services.length);
             const clampedIndex = Math.min(rawIndex, services.length);
 
@@ -154,7 +166,7 @@ const WhatWeDo = ({ progress }) => {
                 const targetPx = constraints.start + fraction * (constraints.end - constraints.start);
                 xTarget.set(targetPx);
             }
-            
+
             // Reset when completely exiting the section from above
             if (v < 0.01 && highWaterMark.current !== 0) {
                 highWaterMark.current = 0;
@@ -188,6 +200,7 @@ const WhatWeDo = ({ progress }) => {
             if (currentIndex >= services.length) {
                 // Jump to next section
                 window.scrollTo({ top: 0.42 * totalHeight, behavior: "smooth" });
+                isNavigating.current = false;
                 return;
             }
             nextIndex = Math.min(services.length, currentIndex + 1);
@@ -195,6 +208,7 @@ const WhatWeDo = ({ progress }) => {
             if (currentIndex <= 0) {
                 // Jump to previous section
                 window.scrollTo({ top: 0.05 * totalHeight, behavior: "smooth" });
+                isNavigating.current = false;
                 return;
             }
             nextIndex = Math.max(0, currentIndex - 1);

@@ -11,18 +11,18 @@ const FloatingCTA = ({ progress }) => {
     // Animation Logic:
     // Animation Logic:
     // Animation Logic:
-    // 0.88 -> 0.91: Move from Right to Center & Move Up (Immediately after reveal)
-    // 0.98 -> 1.0: Fade Out as Footer rises
+    // 0.75 -> 0.78: Move from Right to Center (Hold Phase)
+    // 0.78 -> 0.81: Fade Out (Transition to Form Phase)
 
     // Transforms
     const right = progress
-        ? useTransform(progress, [0.88, 0.91], ["2.5rem", "50%"])
+        ? useTransform(progress, [0.75, 0.78], ["2.5rem", "50%"])
         : "2.5rem";
 
     const bottom = "1.5rem";
 
     const x = progress
-        ? useTransform(progress, [0.88, 0.91], ["0%", "50%"])
+        ? useTransform(progress, [0.75, 0.78], ["0%", "50%"])
         : "0%";
 
     const ctaY = progress
@@ -34,7 +34,7 @@ const FloatingCTA = ({ progress }) => {
         : 1;
 
     const opacity = progress
-        ? useTransform(progress, [0, 0.18, 0.24, 0.98, 1.0], [0, 0, 1, 1, 0])
+        ? useTransform(progress, [0, 0.18, 0.24, 0.78, 0.81], [0, 0, 1, 1, 0])
         : 1;
 
     // Use motion template if needed, but direct style works fine.

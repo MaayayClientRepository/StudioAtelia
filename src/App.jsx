@@ -43,16 +43,16 @@ function App() {
     const howScaleOut = useTransform(scrollYProgress, [0.52, 0.56], [1, 1]);
     const howOpacity = useTransform(scrollYProgress, [0.52, 0.56], [1, 0]);
 
-    // 5. WHY US (Hold philosophy until CTA centers at 0.91)
+    // 5. WHY US (Hold philosophy until CTA centers)
     const whyScaleIn = useTransform(scrollYProgress, [0.50, 0.56], [1, 1]);
-    const whyInternalProgress = useTransform(scrollYProgress, [0.50, 0.88, 0.94, 1.0], [0, 1, 1, 2]);
+    const whyInternalProgress = useTransform(scrollYProgress, [0.50, 0.75, 0.78, 0.94], [0, 1, 1, 2]);
 
     useEffect(() => {
         const isMobile = window.innerWidth < 768;
         const lenis = new Lenis({
             duration: isMobile ? 1.0 : 1.2,
             easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-            touchMultiplier: isMobile ? 2.0 : 1.5,
+            touchMultiplier: isMobile ? 1.8 : 1.5,
             smoothWheel: true,
             infinite: false,
         });
@@ -69,7 +69,7 @@ function App() {
     const scaleRecede = useTransform(scrollYProgress, [0.30, 0.35], [1, 0.85]);
 
     return (
-        <div ref={containerRef} className="relative bg-base h-[2500vh] w-full selection:bg-accent selection:text-black text-white/90">
+        <div ref={containerRef} className="relative bg-base h-[3200vh] w-full selection:bg-accent selection:text-black text-white/90">
             <Navigate progress={scrollYProgress} />
 
             <FloatingCTA progress={scrollYProgress} />
@@ -153,9 +153,9 @@ function App() {
             >
                 {/* 
                   Sync Logic: 
-                  - Philosophy Typing: 0.50 -> 0.88
-                  - CTA Centering: 0.88 -> 0.91 (Hold Philo)
-                  - Philosophy Fade out: 0.94 -> 1.0
+                  - Philosophy Typing: 0.50 -> 0.75
+                  - CTA Centering: 0.75 -> 0.78 (Hold Philo)
+                  - Form Reveal Phase: 0.78 -> 0.94
                 */}
                 <WhyUs progress={whyInternalProgress} />
             </motion.div>
@@ -163,9 +163,9 @@ function App() {
             {/* LAYER 6: FOOTER */}
             <motion.div
                 style={{
-                    y: useTransform(scrollYProgress, [0.94, 1], ["100vh", "32vh"]),
+                    y: useTransform(scrollYProgress, [0.93, 1], ["100vh", "20vh"]),
                     zIndex: 100,
-                    display: useTransform(scrollYProgress, [0.93, 1], ["none", "block"]),
+                    display: useTransform(scrollYProgress, [0.92, 1], ["none", "block"]),
                     willChange: "transform"
                 }}
                 className="fixed inset-0 w-full h-screen rounded-t-[2rem] sm:rounded-t-[3rem] md:rounded-t-[5rem] overflow-hidden"

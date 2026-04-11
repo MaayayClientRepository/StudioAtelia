@@ -15,11 +15,11 @@ const Navigate = ({ progress }) => {
     const navScale = useTransform(progress, [0.18, 0.24], [0.8, 1]);
 
     const menuItems = [
-        { title: "HOME", sub: "The Sanctuary", target: 0.05 },          // Intro brand reveal (0.01-0.12)
-        { title: "WHAT WE DO", sub: "Services Matrix", target: 0.27 },   // Content center (0.24-0.34)
-        { title: "THE PROCESS", sub: "Design Methodology", target: 0.42 }, // Content center (0.38-0.52)
-        { title: "PHILOSOPHY", sub: "Built to Last", target: 0.62 },     // WhyUs text reveal (0.50-0.88)
-        { title: "CONTACT", sub: "Get in Touch", target: 0.96 },         // Contact form (internal ~1.5)
+        { title: "HOME", sub: "The Sanctuary", target: 0.15 },          // Home Hero entrance (0.12-0.22)
+        { title: "WHAT WE DO", sub: "Services Matrix", target: 0.29 },   // What We Do center (0.24-0.34)
+        { title: "THE PROCESS", sub: "Design Methodology", target: 0.45 }, // How We Do It center (0.38-0.52)
+        { title: "PHILOSOPHY", sub: "Built to Last", target: 0.625 },    // WhyUs typing center (0.50-0.75)
+        { title: "CONTACT", sub: "Get in Touch", target: 0.86 },         // WhyUs form center (0.78-0.94)
     ];
 
     const handleScroll = (target) => {
