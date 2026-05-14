@@ -10,14 +10,14 @@ const Navigate = ({ progress }) => {
     const [isOpen, setIsOpen] = useState(false);
 
     // Synchronized reveal with HomeHero entrance
-    const navOpacity = useTransform(progress, [0.18, 0.24], [0, 1]);
-    const navX = useTransform(progress, [0.18, 0.24], [-40, 0]);
-    const navScale = useTransform(progress, [0.18, 0.24], [0.8, 1]);
+    const navOpacity = useTransform(progress, [0.13, 0.18], [0, 1]);
+    const navX = useTransform(progress, [0.13, 0.18], [-40, 0]);
+    const navScale = useTransform(progress, [0.13, 0.18], [0.8, 1]);
 
     const menuItems = [
-        { title: "HOME", sub: "The Sanctuary", target: 0.15 },          // Home Hero entrance (0.12-0.22)
-        { title: "WHAT WE DO", sub: "Services Matrix", target: 0.29 },   // What We Do center (0.24-0.34)
-        { title: "THE PROCESS", sub: "Design Methodology", target: 0.45 }, // How We Do It center (0.38-0.52)
+        { title: "HOME", sub: "The Sanctuary", target: 0.10 },          // Home Hero entrance (0.07-0.13)
+        { title: "WHAT WE DO", sub: "Services Matrix", target: 0.21 },   // What We Do center (0.19-0.23)
+        { title: "THE PROCESS", sub: "Design Methodology", target: 0.32 }, // How We Do It center (0.25-0.40)
         { title: "PHILOSOPHY", sub: "Built to Last", target: 0.625 },    // WhyUs typing center (0.50-0.75)
         { title: "CONTACT", sub: "Get in Touch", target: 0.86 },         // WhyUs form center (0.78-0.94)
     ];
@@ -45,9 +45,9 @@ const Navigate = ({ progress }) => {
                     willChange: "opacity, transform"
                 }}
                 onClick={() => setIsOpen(true)}
-                whileHover={{ x: 2, y: 2, boxShadow: "2px 2px 0px #000" }}
+                whileHover={{ x: 2, y: 2, boxShadow: "2px 2px 0px rgba(0,0,0,0.2)" }}
                 whileTap={{ x: 6, y: 6, boxShadow: "0px 0px 0px #000" }}
-                className="fixed top-4 left-4 sm:top-8 sm:left-8 z-[100] p-3 sm:p-4 bg-[#F8D149] border-2 border-black shadow-[4px_4px_0px_#000] rounded-lg sm:rounded-xl transition-all group overflow-hidden"
+                className="fixed top-4 left-4 sm:top-8 sm:left-8 z-[100] p-3 sm:p-4 bg-[#BFA88F] border-2 border-black/60 shadow-[3px_3px_0px_rgba(0,0,0,0.4)] rounded-lg sm:rounded-xl transition-all group overflow-hidden"
             >
                 <div className="absolute inset-0 bg-black translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-500 ease-out" />
                 <Menu className="w-4 h-4 sm:w-5 sm:h-5 text-black group-hover:text-accent relative z-10 transition-colors" />

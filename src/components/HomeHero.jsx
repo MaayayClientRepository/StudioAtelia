@@ -81,7 +81,10 @@ const HomeHero = ({ progress }) => {
 
             <FloatingSketches progress={activeProgress} />
 
-            <Spotlight className="-top-40 left-0 md:left-60 md:-top-20" fill="rgba(210, 182, 138, 0.05)" />
+            {/* Premium Refined Backdrop: Subtle Radial Vignette */}
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.03)_0%,transparent_70%)] pointer-events-none" />
+
+            <Spotlight className="-top-40 left-0 md:left-60 md:-top-20" fill="rgba(191, 168, 143, 0.05)" />
 
             {/* Main Brand Name Fold */}
             <div className="relative z-10 flex flex-col items-center text-center px-6">
@@ -95,7 +98,7 @@ const HomeHero = ({ progress }) => {
                             initial={{ width: 0 }}
                             animate={{ width: "100px" }}
                             transition={{ delay: 1, duration: 1.5 }}
-                            className="h-[1px] bg-white/10"
+                            className="h-[1px] bg-white/20"
                         />
                     </div>
                 </motion.div>
@@ -107,6 +110,9 @@ const HomeHero = ({ progress }) => {
                     NICHE <br className="md:hidden" /> & FORM
                 </h2>
             </div>
+
+            {/* Grain Overlay for Texture */}
+            <div className="absolute inset-0 opacity-[0.03] pointer-events-none mix-blend-screen bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
 
             <style>{`
                 ::selection {

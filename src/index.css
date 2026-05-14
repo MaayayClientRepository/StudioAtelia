@@ -4,10 +4,11 @@
 @theme {
     --font-sans: "Plus Jakarta Sans", "Be Vietnam Pro", "Inter", sans-serif;
     --font-serif: "Cormorant Garamond", "Playfair Display", serif;
-    --color-accent: #C5A059;
-    --color-brass: #C5A059;
-    --color-secondary: #FBF2C0;
-    --color-base: #0A0A0A;
+    --color-accent: #BFA88F;
+    --color-brass: #9D8B70;
+    --color-secondary: #F7F2EB;
+    --color-base: #0D0D0D;
+    --color-muted: #4A453E;
 }
 
 @layer utilities {
@@ -33,7 +34,7 @@
 }
 
 body {
-    background: #000;
+    background: #0F0F0F;
     position: relative;
     color: #fff;
     margin: 0;

@@ -146,7 +146,7 @@ const WhyUs = ({ progress }) => {
     const phrase3 = "We focus on clarity, honesty, and end-to-end execution, right from concept and layout options to on-site coordination. The result is a space that feels intentional, personal, and built to last.";
 
     return (
-        <div className="relative h-screen bg-secondary overflow-hidden flex items-center justify-center font-serif text-[#1a1a1a]">
+        <div className="relative h-screen bg-[#FBF2C0] overflow-hidden flex items-center justify-center font-serif text-[#121212]">
 
             {/* BACKGROUND: Drawing Texture & Elements */}
             <div className="absolute inset-0 opacity-10 pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/handmade-paper.png')]" />
@@ -158,40 +158,81 @@ const WhyUs = ({ progress }) => {
             {/* PHILOSOPHY TEXT WRAPPER */}
             <motion.div
                 style={{ opacity: philosophyOpacity }}
-                className="absolute inset-0 z-10 flex flex-col items-center justify-center pointer-events-none px-4 sm:px-6 pt-16 sm:pt-12 pb-24 sm:pb-32"
+                className="absolute inset-0 z-10 flex flex-col items-center justify-start pointer-events-none px-6 pt-[5vh] sm:pt-[7vh] pb-24"
             >
-                <div className="max-w-4xl w-full flex flex-col items-center gap-4 md:gap-10">
-                    <motion.div style={{ opacity: titleOpacity, filter: titleFilter, y: titleY }} className="text-center">
-                        <span className="text-[10px] sm:text-[12px] font-sans font-black tracking-[0.4em] sm:tracking-[0.6em] text-black/30 uppercase mb-2 sm:mb-4 block">Our Philosophy</span>
-                        <h2 className="text-5xl sm:text-6xl md:text-[7rem] font-serif text-black leading-[0.9] font-bold tracking-tighter">
-                            Why <span className="italic font-black">Us?</span>
+                <div className="max-w-6xl w-full flex flex-col items-center">
+                    
+                    {/* Persistent Heading - Stays at top */}
+                    <motion.div 
+                        style={{ 
+                            opacity: useTransform(progress, [0, 0.1, 1.0, 1.15], [0, 1, 1, 0]),
+                            filter: titleFilter, 
+                            y: titleY 
+                        }} 
+                        className="text-center space-y-2 sm:space-y-4 mb-[4vh] md:mb-[6vh]"
+                    >
+                        <span className="text-[10px] sm:text-[14px] font-sans font-extrabold tracking-[0.5em] sm:tracking-[0.8em] text-black/40 uppercase block">Our Philosophy</span>
+                        <h2 className="text-4xl sm:text-7xl md:text-[9.5rem] font-serif text-black leading-[0.85] font-black tracking-tighter">
+                            Why <span className="italic font-light text-black">Us?</span>
                         </h2>
                     </motion.div>
 
-                    <div className="space-y-3 md:space-y-6 flex flex-col items-center">
-                        <WordReveal
-                            text={phrase1}
-                            progress={progress}
-                            range={[0.3, 0.5]}
-                            className="text-xs sm:text-sm md:text-2xl leading-[1.6] md:leading-[1.7] max-w-3xl text-black/90 text-center font-serif italic"
-                        />
-                        <WordReveal
-                            text={phrase2}
-                            progress={progress}
-                            range={[0.55, 0.75]}
-                            className="text-xs sm:text-sm md:text-2xl leading-[1.6] md:leading-[1.7] max-w-3xl text-black/90 text-center font-serif italic"
-                        />
-                        <WordReveal
-                            text={phrase3}
-                            progress={progress}
-                            range={[0.8, 1.0]}
-                            className="text-xs sm:text-sm md:text-2xl leading-[1.6] md:leading-[1.7] max-w-3xl text-black/90 text-center font-serif italic"
-                        />
+                    {/* Sequential Content Blocks - Moved up slightly */}
+                    <div className="relative w-full h-[45vh] flex items-center justify-center">
+                        
+                        {/* Phrase 1 */}
+                        <motion.div 
+                            style={{ 
+                                opacity: useTransform(progress, [0.12, 0.18, 0.38, 0.44], [0, 1, 1, 0]),
+                                y: useTransform(progress, [0.12, 0.18, 0.38, 0.44], [30, 0, 0, -30])
+                            }}
+                            className="absolute inset-0 flex flex-col items-center justify-center"
+                        >
+                            <WordReveal
+                                text={phrase1}
+                                progress={progress}
+                                range={[0.15, 0.38]}
+                                className="text-base sm:text-xl md:text-[2rem] lg:text-[2.25rem] leading-[1.3] md:leading-[1.4] text-black font-sans font-medium text-center tracking-tight max-w-4xl"
+                            />
+                        </motion.div>
+
+                        {/* Phrase 2 */}
+                        <motion.div 
+                            style={{ 
+                                opacity: useTransform(progress, [0.44, 0.5, 0.68, 0.74], [0, 1, 1, 0]),
+                                y: useTransform(progress, [0.44, 0.5, 0.68, 0.74], [30, 0, 0, -30])
+                            }}
+                            className="absolute inset-0 flex flex-col items-center justify-center"
+                        >
+                            <WordReveal
+                                text={phrase2}
+                                progress={progress}
+                                range={[0.46, 0.68]}
+                                className="text-base sm:text-xl md:text-[2rem] lg:text-[2.25rem] leading-[1.3] md:leading-[1.4] text-black font-sans font-medium text-center tracking-tight max-w-4xl"
+                            />
+                        </motion.div>
+
+                        {/* Phrase 3 - Fades in and STOPS for breathing room */}
+                        <motion.div 
+                            style={{ 
+                                opacity: useTransform(progress, [0.74, 0.8, 1.0, 1.15], [0, 1, 1, 0]),
+                                y: useTransform(progress, [0.74, 0.8, 1.0, 1.15], [30, 0, 0, -30])
+                            }}
+                            className="absolute inset-0 flex flex-col items-center justify-center"
+                        >
+                            <WordReveal
+                                text={phrase3}
+                                progress={progress}
+                                range={[0.76, 0.98]}
+                                className="text-base sm:text-xl md:text-[2rem] lg:text-[2.25rem] leading-[1.3] md:leading-[1.4] text-black font-sans font-medium text-center tracking-tight max-w-4xl"
+                            />
+                        </motion.div>
+
                     </div>
                 </div>
             </motion.div>
 
-            {/* CONTACT FORM — Mobile-first, full viewport on small screens */}
+            {/* CONTACT FORM — Redesigned for High-End Impact */}
             <motion.div
                 style={{
                     opacity: formOpacity,
@@ -202,105 +243,116 @@ const WhyUs = ({ progress }) => {
             >
                 <motion.div 
                     style={{ y: formY, scale: formScale }}
-                    className="w-full md:max-w-4xl min-h-screen md:min-h-0 md:h-auto flex flex-col md:flex-row bg-secondary/90 md:bg-secondary/80 backdrop-blur-3xl md:rounded-[2.5rem] overflow-hidden md:border md:border-black/10 md:shadow-[0_40px_80px_-20px_rgba(0,0,0,0.1)] md:mx-4"
+                    className="w-full md:max-w-4xl min-h-screen md:min-h-0 md:h-[500px] flex flex-col md:flex-row bg-[#FBF2C0] md:rounded-[2.5rem] overflow-hidden md:border md:border-black/5 md:shadow-[0_60px_100px_-20px_rgba(0,0,0,0.15)] md:mx-6"
                 >
                     
-                    {/* LEFT PANEL — Compact header on mobile, tall side panel on desktop */}
-                    <div className="md:w-2/5 px-6 py-8 sm:px-8 sm:py-10 md:p-14 bg-black flex flex-row md:flex-col items-center md:items-start justify-between md:justify-between text-secondary relative overflow-hidden">
+                    {/* LEFT PANEL — Architectural Branding */}
+                    <div className="md:w-2/5 px-8 py-10 md:p-12 bg-black flex flex-col justify-between text-secondary relative overflow-hidden group/panel">
                         {/* Huge Watermark */}
-                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[50vw] md:text-[25vw] font-black opacity-[0.03] select-none pointer-events-none tracking-tighter">N&F</div>
+                        <div className="absolute -top-10 -left-10 text-[60vw] md:text-[25vw] font-black opacity-[0.04] select-none pointer-events-none tracking-tighter leading-none font-serif">N</div>
+                        <div className="absolute -bottom-10 -right-10 text-[60vw] md:text-[25vw] font-black opacity-[0.04] select-none pointer-events-none tracking-tighter leading-none font-serif italic">F</div>
                         
-                        <div className="relative z-10">
-                            <span className="text-[8px] sm:text-[9px] font-black tracking-[0.4em] sm:tracking-[0.5em] text-accent uppercase mb-1 sm:mb-3 block">Crafting Sanctuaries</span>
-                            <h3 className="text-xl sm:text-2xl md:text-6xl font-serif font-black leading-[0.9] tracking-tighter italic">Start Your Project.</h3>
+                        <div className="relative z-10 space-y-4 md:space-y-8">
+                            <div className="flex items-center gap-4">
+                                <div className="h-[1px] w-8 bg-accent" />
+                                <span className="text-[10px] font-black tracking-[0.6em] text-accent uppercase">Let's Connect</span>
+                            </div>
+                            <h3 className="text-3xl md:text-7xl font-serif font-black leading-[0.85] tracking-tighter italic">
+                                Ready to <br />
+                                <span className="text-accent not-italic">Build?</span>
+                            </h3>
+                            <p className="text-secondary/40 text-[10px] md:text-xs font-medium uppercase tracking-widest leading-relaxed max-w-[180px] md:max-w-none">
+                                Transforming your vision into architectural reality.
+                            </p>
                         </div>
 
-                        <div className="relative z-10 flex md:flex-col gap-6 sm:gap-8 md:gap-0 md:space-y-6">
-                            <div className="hidden md:block border-t border-secondary/10 pt-8">
-                                <div className="flex gap-12">
-                                    <div className="space-y-1">
-                                        <p className="text-[8px] font-black tracking-widest text-[#D2B68A] uppercase">Office</p>
-                                        <p className="text-[10px] font-light text-secondary/60">Bangalore, Ind.</p>
+                        <div className="relative z-10 pt-10 md:pt-0">
+                            <div className="space-y-6 md:space-y-8 border-t border-white/10 pt-10">
+                                <div className="grid grid-cols-2 md:grid-cols-1 gap-8 md:gap-8">
+                                    <div className="space-y-2 group/info cursor-pointer">
+                                        <p className="text-[9px] font-black tracking-[0.3em] text-accent uppercase group-hover/info:translate-x-1 transition-transform">Location</p>
+                                        <p className="text-xs md:text-sm font-serif italic text-secondary/70">Bangalore HQ — Karnataka, India.</p>
                                     </div>
-                                    <div className="space-y-1">
-                                        <p className="text-[8px] font-black tracking-widest text-[#D2B68A] uppercase">Email</p>
-                                        <p className="text-[10px] font-light text-secondary/60">hello@nicheandform.com</p>
+                                    <div className="space-y-2 group/info cursor-pointer">
+                                        <p className="text-[9px] font-black tracking-[0.3em] text-accent uppercase group-hover/info:translate-x-1 transition-transform">Digital</p>
+                                        <p className="text-xs md:text-sm font-serif italic text-secondary/70 underline underline-offset-4 decoration-accent/30">hello@nicheandform.com</p>
                                     </div>
                                 </div>
-                            </div>
-                            {/* Mobile-only compact info */}
-                            <div className="md:hidden flex items-center gap-1">
-                                <span className="text-[8px] text-accent/60 font-black tracking-wider uppercase">Bangalore</span>
                             </div>
                         </div>
                     </div>
 
-                    {/* RIGHT PANEL — Full scrollable form */}
-                    <div className="md:w-3/5 flex-1 px-6 py-8 sm:px-8 sm:py-8 md:p-10 flex flex-col justify-center relative bg-white/10">
-                        <form className="space-y-6 sm:space-y-6 md:space-y-8">
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-6 md:gap-x-12 md:gap-y-8">
+                    {/* RIGHT PANEL — Refined Form Grid */}
+                    <div className="md:w-3/5 flex-1 px-8 py-10 md:p-12 flex flex-col justify-center relative bg-white/[0.02]">
+                        <form className="space-y-10 md:space-y-12">
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-10 md:gap-y-14">
                                 {/* Name Input */}
-                                <div className="group">
-                                    <label className="text-[9px] sm:text-[10px] font-black tracking-[0.3em] sm:tracking-[0.4em] text-black/30 uppercase group-focus-within:text-accent transition-colors block mb-2">Client</label>
+                                <div className="group relative">
+                                    <label className="text-[10px] font-black tracking-[0.4em] text-black/40 uppercase group-focus-within:text-accent transition-all block mb-4">Your Name</label>
                                     <input
                                         type="text"
-                                        placeholder="Full Name"
-                                        className="w-full bg-transparent border-b border-black/15 py-1.5 text-[15px] sm:text-lg md:text-lg font-serif text-black focus:outline-none focus:border-accent transition-colors placeholder:text-black/35 italic"
+                                        placeholder="Name / Organization"
+                                        className="w-full bg-transparent border-b border-black/10 py-3 text-lg md:text-xl font-serif text-black focus:outline-none focus:border-accent transition-all placeholder:text-black/20 italic"
                                     />
+                                    <div className="absolute bottom-0 left-0 h-[2px] w-0 bg-accent transition-all duration-700 group-focus-within:w-full" />
                                 </div>
 
                                 {/* Contact Input */}
-                                <div className="group">
-                                    <label className="text-[9px] sm:text-[10px] font-black tracking-[0.3em] sm:tracking-[0.4em] text-black/30 uppercase group-focus-within:text-accent transition-colors block mb-2">Contact</label>
+                                <div className="group relative">
+                                    <label className="text-[10px] font-black tracking-[0.4em] text-black/40 uppercase group-focus-within:text-accent transition-all block mb-4">Communication</label>
                                     <input
                                         type="tel"
-                                        placeholder="WhatsApp / Phone"
-                                        className="w-full bg-transparent border-b border-black/15 py-1.5 text-[15px] sm:text-lg md:text-lg font-serif text-black focus:outline-none focus:border-accent transition-colors placeholder:text-black/35 italic"
+                                        placeholder="Email / WhatsApp"
+                                        className="w-full bg-transparent border-b border-black/10 py-3 text-lg md:text-xl font-serif text-black focus:outline-none focus:border-accent transition-all placeholder:text-black/20 italic"
                                     />
+                                    <div className="absolute bottom-0 left-0 h-[2px] w-0 bg-accent transition-all duration-700 group-focus-within:w-full" />
                                 </div>
 
                                 {/* Project Type */}
-                                <div className="group">
-                                    <label className="text-[9px] sm:text-[10px] font-black tracking-[0.3em] sm:tracking-[0.4em] text-black/30 uppercase group-focus-within:text-accent transition-colors block mb-2">Service</label>
-                                    <select className="w-full bg-transparent border-b border-black/15 py-1.5 text-[15px] sm:text-lg md:text-lg font-serif text-black focus:outline-none focus:border-accent transition-colors appearance-none cursor-pointer italic">
-                                        <option className="bg-secondary" disabled selected>Nature of Project</option>
-                                        <option className="bg-secondary">Luxury Apartment</option>
-                                        <option className="bg-secondary">Modern Villa</option>
-                                        <option className="bg-secondary">Bespoke Commercial</option>
-                                        <option className="bg-secondary">Hospitality</option>
+                                <div className="group relative">
+                                    <label className="text-[10px] font-black tracking-[0.4em] text-black/40 uppercase group-focus-within:text-accent transition-all block mb-4">Space Type</label>
+                                    <select className="w-full bg-transparent border-b border-black/10 py-3 text-lg md:text-xl font-serif text-black focus:outline-none focus:border-accent transition-all appearance-none cursor-pointer italic text-black/40 focus:text-black">
+                                        <option className="bg-secondary" disabled selected>Nature of Inquiry</option>
+                                        <option className="bg-secondary">High-End Residential</option>
+                                        <option className="bg-secondary">Boutique Commercial</option>
+                                        <option className="bg-secondary">Hospitality & Leisure</option>
+                                        <option className="bg-secondary">Bespoke Interior</option>
                                     </select>
+                                    <div className="absolute bottom-0 left-0 h-[2px] w-0 bg-accent transition-all duration-700 group-focus-within:w-full" />
                                 </div>
 
                                 {/* Timeline */}
-                                <div className="group">
-                                    <label className="text-[9px] sm:text-[10px] font-black tracking-[0.3em] sm:tracking-[0.4em] text-black/30 uppercase group-focus-within:text-accent transition-colors block mb-2">Timeline</label>
+                                <div className="group relative">
+                                    <label className="text-[10px] font-black tracking-[0.4em] text-black/40 uppercase group-focus-within:text-accent transition-all block mb-4">Timeframe</label>
                                     <input
                                         type="text"
-                                        placeholder="Looking to start in?"
-                                        className="w-full bg-transparent border-b border-black/15 py-1.5 text-[15px] sm:text-lg md:text-lg font-serif text-black focus:outline-none focus:border-accent transition-colors placeholder:text-black/35 italic"
+                                        placeholder="Estimated Start Date"
+                                        className="w-full bg-transparent border-b border-black/10 py-3 text-lg md:text-xl font-serif text-black focus:outline-none focus:border-accent transition-all placeholder:text-black/20 italic"
                                     />
+                                    <div className="absolute bottom-0 left-0 h-[2px] w-0 bg-accent transition-all duration-700 group-focus-within:w-full" />
                                 </div>
                             </div>
 
                             {/* Brief Textarea */}
-                            <div className="group">
-                                <label className="text-[9px] sm:text-[10px] font-black tracking-[0.3em] sm:tracking-[0.4em] text-black/30 uppercase group-focus-within:text-accent transition-colors block mb-2">The Brief</label>
+                            <div className="group relative">
+                                <label className="text-[10px] font-black tracking-[0.4em] text-black/40 uppercase group-focus-within:text-accent transition-all block mb-4">Initial Thoughts</label>
                                 <textarea
                                     rows="1"
-                                    placeholder="Tell us about your space..."
-                                    className="w-full bg-transparent border-b border-black/15 py-1.5 text-[15px] sm:text-lg md:text-lg font-serif text-black focus:outline-none focus:border-accent transition-colors resize-none placeholder:text-black/35 italic min-h-[40px] sm:min-h-[50px]"
+                                    placeholder="Briefly describe your dream space..."
+                                    className="w-full bg-transparent border-b border-black/10 py-3 text-lg md:text-xl font-serif text-black focus:outline-none focus:border-accent transition-all resize-none placeholder:text-black/20 italic min-h-[60px]"
                                 ></textarea>
+                                <div className="absolute bottom-0 left-0 h-[2px] w-0 bg-accent transition-all duration-700 group-focus-within:w-full" />
                             </div>
 
-                            <div className="flex justify-end pt-2">
+                            <div className="flex justify-end pt-4">
                                 <motion.button
-                                    whileHover={{ x: 10 }}
-                                    whileTap={{ scale: 0.95 }}
-                                    className="flex items-center gap-4 sm:gap-6 group/btn"
+                                    whileHover={{ gap: "2rem" }}
+                                    whileTap={{ scale: 0.98 }}
+                                    className="flex items-center gap-6 group/btn"
                                 >
-                                    <span className="text-[10px] sm:text-xs font-black uppercase tracking-[0.4em] sm:tracking-[0.8em] text-black group-hover/btn:text-accent transition-colors">Send Inquiry</span>
-                                    <div className="w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 rounded-full bg-black flex items-center justify-center text-accent group-hover/btn:scale-110 transition-transform shadow-2xl">
-                                        <ArrowUpRight className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6" />
+                                    <span className="text-xs font-black uppercase tracking-[0.8em] text-black group-hover/btn:text-accent transition-all">Submit Brief</span>
+                                    <div className="w-16 h-16 rounded-full bg-black flex items-center justify-center text-accent group-hover/btn:scale-110 transition-all shadow-2xl border border-white/5">
+                                        <ArrowUpRight className="w-6 h-6" />
                                     </div>
                                 </motion.button>
                             </div>

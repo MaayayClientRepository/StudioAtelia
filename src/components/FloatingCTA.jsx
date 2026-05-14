@@ -11,30 +11,30 @@ const FloatingCTA = ({ progress }) => {
     // Animation Logic:
     // Animation Logic:
     // Animation Logic:
-    // 0.75 -> 0.78: Move from Right to Center (Hold Phase)
-    // 0.78 -> 0.81: Fade Out (Transition to Form Phase)
+    // 0.75 -> 0.80: Move from Right to Center (Hold Phase)
+    // 0.80 -> 0.83: Fade Out (Transition to Form Phase)
 
     // Transforms
     const right = progress
-        ? useTransform(progress, [0.75, 0.78], ["2.5rem", "50%"])
+        ? useTransform(progress, [0.75, 0.80], ["2.5rem", "50%"])
         : "2.5rem";
 
     const bottom = "1.5rem";
 
     const x = progress
-        ? useTransform(progress, [0.75, 0.78], ["0%", "50%"])
+        ? useTransform(progress, [0.75, 0.80], ["0%", "50%"])
         : "0%";
 
     const ctaY = progress
-        ? useTransform(progress, [0.18, 0.24], [40, 0])
+        ? useTransform(progress, [0.13, 0.18], [40, 0])
         : 0;
 
     const ctaScale = progress
-        ? useTransform(progress, [0.18, 0.24], [0.8, 1])
+        ? useTransform(progress, [0.13, 0.18, 0.75, 0.80], [0.8, 1, 1, 1.2])
         : 1;
 
     const opacity = progress
-        ? useTransform(progress, [0, 0.18, 0.24, 0.78, 0.81], [0, 0, 1, 1, 0])
+        ? useTransform(progress, [0, 0.13, 0.18, 0.80, 0.83], [0, 0, 1, 1, 0])
         : 1;
 
     // Use motion template if needed, but direct style works fine.
@@ -57,14 +57,14 @@ const FloatingCTA = ({ progress }) => {
                 whileHover={{
                     x: -2,
                     y: -2,
-                    boxShadow: "6px 6px 0px #000"
+                    boxShadow: "4px 4px 0px rgba(0,0,0,0.3)"
                 }}
                 whileTap={{
                     x: 4,
                     y: 4,
                     boxShadow: "0px 0px 0px #000"
                 }}
-                className="flex items-center gap-2 sm:gap-3 bg-[#F8D149] text-black px-5 sm:px-8 py-3 sm:py-4 rounded-xl border-2 border-black shadow-[4px_4px_0px_#000] transition-shadow duration-200 group"
+                className="flex items-center gap-2 sm:gap-3 bg-[#BFA88F] text-black px-5 sm:px-8 py-3 sm:py-4 rounded-xl border-2 border-black/60 shadow-[3px_3px_0px_rgba(0,0,0,0.4)] transition-shadow duration-200 group"
             >
                 <Calendar className="w-4 h-4 sm:w-5 sm:h-5 stroke-[2.5px]" />
                 <span className="text-xs sm:text-sm font-black uppercase tracking-wider">Book an Appointment</span>

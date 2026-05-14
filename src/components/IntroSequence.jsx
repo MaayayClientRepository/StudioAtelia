@@ -7,20 +7,19 @@ const IntroSequence = ({ progress }) => {
     // 1. THE TRANSFORMATION ENGINE (Sequential Background Reveal)
     // Black and White remains the base (constant opacity 1 until global fade out)
     const ruinOpacity = 1;
-    // Color fades in later
-    const modernOpacity = useTransform(progress, [0.1, 0.4], [0, 1]);
+    // Color fades in MUCH earlier and more gradually for a "growing" effect
+    const modernOpacity = useTransform(progress, [0.05, 0.7], [0, 1]);
 
     // Global image fade out (happens after text completes its first phase)
-    const imageOpacity = useTransform(progress, [0.7, 0.9], [1, 0]);
+    const imageOpacity = useTransform(progress, [0.75, 0.95], [1, 0]);
 
     // 2. TEXT EVOLUTION & CENTERING
     // Brand name and tagline now fade in simultaneously with the color transition
     const taglineOpacity = useTransform(progress, [0.1, 0.4], [0, 1]);
 
-    // Once scrolling continues AFTER text appears, it centers and turns to custom accent palette
-    // Smoothed tonal progression: White -> Cream (#FBF2C0) -> Gold-Tan (#D2B68A) -> Muted Brass (#C5A059)
-    const textColor = useTransform(progress, [0.7, 0.8, 0.9, 1], ["#FFFFFF", "#FBF2C0", "#D2B68A", "#C5A059"]);
-    const brandY = useTransform(progress, [0.7, 0.95], [-120, 0]); // From tagline position up to center
+    // Refined tonal progression: White -> Warm Stone (#F7F2EB) -> Champagne (#BFA88F)
+    const textColor = useTransform(progress, [0.7, 0.85, 1], ["#FFFFFF", "#F7F2EB", "#BFA88F"]);
+    const brandY = useTransform(progress, [0.7, 0.95], [-100, 0]); // Reduced travel for snappier feel
     const scale = 1;
 
     return (
@@ -55,20 +54,20 @@ const IntroSequence = ({ progress }) => {
                             color: textColor,
                             fontSize: "clamp(2.5rem, 10vw, 15vw)"
                         }}
-                        className="font-light text-white leading-none tracking-[-0.02em] mb-4 sm:mb-6 whitespace-nowrap"
+                        className="font-serif font-light italic leading-none tracking-[-0.02em] mb-4 sm:mb-6 whitespace-nowrap"
                     >
-                        Niche & <span className="font-serif italic font-normal">Form</span>
+                        Niche & Form
                     </motion.h1>
 
                     {/* Unified Tagline in Single Line */}
                     <div className="flex items-center gap-4 md:gap-8 justify-center w-full">
                         <motion.div
-                            style={{ backgroundColor: useTransform(progress, [0.7, 0.95], ["#FFFFFF", "#C5A059"]) }}
+                            style={{ backgroundColor: useTransform(progress, [0.7, 0.95], ["#FFFFFF", "#BFA88F"]) }}
                             className="h-[1px] flex-1 max-w-[40px] md:max-w-[100px] opacity-40"
                         />
                         <motion.p
                             style={{
-                                color: useTransform(progress, [0.7, 0.95], ["#FFFFFF", "#C5A059"]),
+                                color: useTransform(progress, [0.7, 0.95], ["#FFFFFF", "#BFA88F"]),
                                 fontSize: "clamp(0.7rem, 2vw, 1.5rem)"
                             }}
                             className="font-['Fira_Sans_Condensed',_sans-serif] font-light italic tracking-[0.2em] md:tracking-[0.4em] uppercase whitespace-nowrap"
@@ -76,7 +75,7 @@ const IntroSequence = ({ progress }) => {
                             Thoughtful design Transforms living
                         </motion.p>
                         <motion.div
-                            style={{ backgroundColor: useTransform(progress, [0.7, 0.95], ["#FFFFFF", "#C5A059"]) }}
+                            style={{ backgroundColor: useTransform(progress, [0.7, 0.95], ["#FFFFFF", "#BFA88F"]) }}
                             className="h-[1px] flex-1 max-w-[40px] md:max-w-[100px] opacity-40"
                         />
                     </div>
@@ -86,7 +85,6 @@ const IntroSequence = ({ progress }) => {
             {/* --- THE TRANSFORMATION ENGINE --- */}
             <div className="absolute inset-0 z-10 w-full h-full">
                 {/* 1. THE FOUNDATION (B&W) */}
-                {/* Stays visible until the final image section fadeout */}
                 <motion.div
                     style={{
                         opacity: imageOpacity,
@@ -107,7 +105,8 @@ const IntroSequence = ({ progress }) => {
                 <motion.div
                     style={{
                         opacity: useTransform([modernOpacity, imageOpacity], ([m, i]) => m * i),
-                        willChange: "opacity"
+                        filter: useTransform(modernOpacity, [0, 1], ["saturate(0.5) brightness(0.8)", "saturate(1) brightness(1)"]),
+                        willChange: "opacity, filter"
                     }}
                     className="absolute inset-0 w-full h-full z-10 pointer-events-none"
                 >
@@ -135,6 +134,9 @@ const IntroSequence = ({ progress }) => {
                 </div>
                 <span className="text-[10px] uppercase tracking-[0.4em] font-light text-white/40">Scroll</span>
             </motion.div>
+
+            {/* Grain Overlay */}
+            <div className="absolute inset-0 opacity-[0.03] pointer-events-none mix-blend-overlay bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
         </div>
     );
 };

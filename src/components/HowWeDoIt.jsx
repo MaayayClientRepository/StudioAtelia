@@ -77,14 +77,14 @@ const HowWeDoIt = ({ progress }) => {
 
     return (
         <motion.div
-            className="relative w-full h-full bg-[#2E2E2E] overflow-hidden"
+            className="relative w-full h-full bg-[#121212] overflow-hidden"
         >
             {/* Header Section: Adjusted to clear fixed menu button on mobile */}
             <motion.div
                 style={{ y: headerY, opacity: headerOpacity }}
                 className="absolute top-20 left-4 sm:top-24 sm:left-6 md:top-12 md:left-24 z-50 pointer-events-none"
             >
-                <span className="text-[9px] md:text-[10px] font-black tracking-[0.6em] text-[#D2B68A] uppercase italic mb-1 md:mb-2 block opacity-40">The Methodology</span>
+                <span className="text-[9px] md:text-[10px] font-black tracking-[0.6em] text-[#BFA88F] uppercase italic mb-1 md:mb-2 block opacity-40">The Methodology</span>
                 <h2 className="text-xl sm:text-2xl md:text-5xl font-black text-white tracking-tighter uppercase leading-[0.8]">
                     THE <span className="text-transparent outline-text">PATH.</span>
                 </h2>
@@ -106,7 +106,7 @@ const HowWeDoIt = ({ progress }) => {
                             className="space-y-3 md:space-y-8"
                         >
                             <div className="flex items-center gap-3">
-                                <span className="text-[9px] md:text-xs font-black tracking-[0.2em] md:tracking-[0.4em] text-[#D2B68A] uppercase italic bg-black/20 px-3 md:px-4 py-1 md:py-1.5 rounded-full border border-white/5">
+                                <span className="text-[9px] md:text-xs font-black tracking-[0.2em] md:tracking-[0.4em] text-[#BFA88F] uppercase italic bg-black/20 px-3 md:px-4 py-1 md:py-1.5 rounded-full border border-white/5">
                                     {cards[0].tag}
                                 </span>
                             </div>
@@ -120,7 +120,7 @@ const HowWeDoIt = ({ progress }) => {
                                 ))}
                             </h2>
 
-                            <p className="text-[12px] sm:text-[13px] md:text-3xl text-white/50 font-serif italic leading-[1.3] max-w-xl border-l-2 border-[#D2B68A]/30 pl-3 sm:pl-4 md:pl-10">
+                            <p className="text-[12px] sm:text-[13px] md:text-3xl text-white/50 font-serif italic leading-[1.3] max-w-xl border-l-2 border-[#BFA88F]/30 pl-3 sm:pl-4 md:pl-10">
                                 {cards[0].description}
                             </p>
                         </motion.div>
@@ -138,7 +138,7 @@ const HowWeDoIt = ({ progress }) => {
                                     key={i}
                                     animate={{
                                         height: isActive ? 24 : 6,
-                                        backgroundColor: isActive ? "#D2B68A" : "rgba(255,255,255,0.1)"
+                                        backgroundColor: isActive ? "#BFA88F" : "rgba(255,255,255,0.1)"
                                     }}
                                     className="w-1.5 rounded-full transition-colors duration-500"
                                 />
@@ -155,9 +155,9 @@ const HowWeDoIt = ({ progress }) => {
                                     opacity: [0, 1, 0]
                                 }}
                                 transition={{ repeat: Infinity, duration: 2.5, ease: "easeInOut" }}
-                                className="w-10 h-10 rounded-full border border-[#D2B68A]/30 flex items-center justify-center"
+                                className="w-10 h-10 rounded-full border border-[#BFA88F]/30 flex items-center justify-center"
                             >
-                                <div className="w-1 h-1 rounded-full bg-[#D2B68A]" />
+                                <div className="w-1 h-1 rounded-full bg-[#BFA88F]" />
                             </motion.div>
                         </div>
 
@@ -257,8 +257,8 @@ const Card = ({ card, index, total, items, topCardTitle, handleCardReveal, isFir
                 transition: { duration: 0.4 }
             }}
             className={cn(
-                "absolute inset-0 bg-[#1a1a1a] p-2.5 md:p-3 rounded-[1.5rem] shadow-[0_30px_60px_rgba(0,0,0,0.6)] border border-white/5 cursor-grab active:cursor-grabbing transform-gpu overflow-hidden",
-                isTop ? "pointer-events-auto border-[#D2B68A]/30" : "pointer-events-none"
+                "absolute inset-0 bg-[#161616] p-2.5 md:p-3 rounded-[1.5rem] shadow-[0_30px_60px_rgba(0,0,0,0.6)] border border-white/5 cursor-grab active:cursor-grabbing transform-gpu overflow-hidden",
+                isTop ? "pointer-events-auto border-[#BFA88F]/30" : "pointer-events-none"
             )}
         >
             <div className="relative h-[80%] w-full overflow-hidden rounded-[1rem]">
@@ -283,11 +283,11 @@ const Card = ({ card, index, total, items, topCardTitle, handleCardReveal, isFir
                             transition={{ repeat: Infinity, duration: 2 }}
                             className="flex flex-col items-center gap-3 px-6 text-center"
                         >
-                            <div className="w-12 h-12 rounded-full border-2 border-[#D2B68A] flex items-center justify-center">
+                            <div className="w-12 h-12 rounded-full border-2 border-[#BFA88F] flex items-center justify-center">
                                 <motion.div
                                     animate={{ x: [-10, 10, -10] }}
                                     transition={{ repeat: Infinity, duration: 1.5 }}
-                                    className="w-2 h-2 rounded-full bg-[#D2B68A]"
+                                    className="w-2 h-2 rounded-full bg-[#BFA88F]"
                                 />
                             </div>
                             <p className="text-[10px] md:text-[11px] text-white font-black uppercase tracking-[0.2em] leading-tight">

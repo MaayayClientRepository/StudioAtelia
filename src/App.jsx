@@ -17,35 +17,38 @@ function App() {
         offset: ["start start", "end end"]
     });
 
-    // --- ELITE SEQUENTIAL SCROLL ARCHITECTURE (3500vh for snappier response) ---
-    // Rule: We use distinct "Animation Blocks" with "Hold Zones" and "Travel Zones".
+    // --- OPTIMIZED SEQUENTIAL SCROLL ARCHITECTURE (2400vh for concise experience) ---
+    // Compressed ranges to reduce vertical scrolling as requested.
 
-    // 1. INTRO (0.0 -> 0.12 Centering complete)
-    const introProgress = useTransform(scrollYProgress, [0.01, 0.12], [0, 1]);
-    const introOpacity = useTransform(scrollYProgress, [0.18, 0.24], [1, 0]);
+    // 1. INTRO (0.0 -> 0.07)
+    const introProgress = useTransform(scrollYProgress, [0.01, 0.07], [0, 1]);
+    const introOpacity = useTransform(scrollYProgress, [0.10, 0.15], [1, 0]);
 
-    // 2. HOME HERO (Entrance Fade: 0.10 -> 0.15, Content: 0.15 -> 0.22, Exit: 0.22 -> 0.28)
-    const homeInternalProgress = useTransform(scrollYProgress, [0.12, 0.22], [0, 1]);
-    const homeScaleOut = useTransform(scrollYProgress, [0.22, 0.28], [1, 1]);
-    const homeExitOpacity = useTransform(scrollYProgress, [0.22, 0.28], [1, 0]);
+    // 2. HOME HERO (Entrance: 0.07, Content: 0.07 -> 0.13, Exit: 0.13 -> 0.18)
+    const homeInternalProgress = useTransform(scrollYProgress, [0.07, 0.13], [0, 1]);
+    const homeScaleOut = useTransform(scrollYProgress, [0.13, 0.18], [1, 1]);
+    const homeExitOpacity = useTransform(scrollYProgress, [0.13, 0.18], [1, 0]);
 
-    // 3. WHAT WE DO (Travel: 0.22 -> 0.24, Content: 0.24 -> 0.34, Exit: 0.34 -> 0.38)
-    const serviceY = useTransform(scrollYProgress, [0.22, 0.24], ["100vh", "0vh"]);
-    const serviceScaleIn = useTransform(scrollYProgress, [0.22, 0.24], [1, 1]);
-    const serviceInternalProgress = useTransform(scrollYProgress, [0.24, 0.34], [0, 1]);
-    const serviceScaleOut = useTransform(scrollYProgress, [0.34, 0.38], [1, 1]);
-    const serviceOpacity = useTransform(scrollYProgress, [0.34, 0.38], [1, 0]);
+    // 3. WHAT WE DO (Travel: 0.18 -> 0.19, Content: 0.19 -> 0.23, Exit: 0.23 -> 0.24)
+    const serviceY = useTransform(scrollYProgress, [0.18, 0.19], ["100vh", "0vh"]);
+    const serviceScaleIn = useTransform(scrollYProgress, [0.18, 0.19], [1, 1]);
+    const serviceInternalProgress = useTransform(scrollYProgress, [0.19, 0.23], [0, 1]);
+    const serviceScaleOut = useTransform(scrollYProgress, [0.23, 0.24], [1, 1]);
+    const serviceOpacity = useTransform(scrollYProgress, [0.23, 0.24], [1, 0]);
 
-    // 4. HOW WE DO IT (Travel: 0.34 -> 0.38, Content: 0.38 -> 0.52, Exit: 0.52 -> 0.56)
-    const howY = useTransform(scrollYProgress, [0.34, 0.38], ["100vh", "0vh"]);
-    const howScaleIn = useTransform(scrollYProgress, [0.34, 0.38], [1, 1]);
-    const howInternalProgress = useTransform(scrollYProgress, [0.38, 0.52], [0, 1]);
-    const howScaleOut = useTransform(scrollYProgress, [0.52, 0.56], [1, 1]);
-    const howOpacity = useTransform(scrollYProgress, [0.52, 0.56], [1, 0]);
+    // 4. HOW WE DO IT (Travel: 0.24 -> 0.25, Content: 0.25 -> 0.40, Exit: 0.40 -> 0.45)
+    const howY = useTransform(scrollYProgress, [0.24, 0.25], ["100vh", "0vh"]);
+    const howScaleIn = useTransform(scrollYProgress, [0.24, 0.25], [1, 1]);
+    const howInternalProgress = useTransform(scrollYProgress, [0.25, 0.40], [0, 1]);
+    const howScaleOut = useTransform(scrollYProgress, [0.40, 0.45], [1, 1]);
+    const howOpacity = useTransform(scrollYProgress, [0.40, 0.45], [1, 0]);
 
-    // 5. WHY US (Hold philosophy until CTA centers)
-    const whyScaleIn = useTransform(scrollYProgress, [0.50, 0.56], [1, 1]);
-    const whyInternalProgress = useTransform(scrollYProgress, [0.50, 0.75, 0.78, 0.94], [0, 1, 1, 2]);
+    // 5. WHY US (Philosophy -> Button Center -> Form)
+    const whyScaleIn = useTransform(scrollYProgress, [0.45, 0.50], [1, 1]);
+    // 0.45 to 0.75: Philosophy Phrases
+    // 0.75 to 0.80: Button Centering (Hold)
+    // 0.80 to 0.95: Form Reveal
+    const whyInternalProgress = useTransform(scrollYProgress, [0.45, 0.75, 0.80, 0.95], [0, 1, 1, 2]);
 
     useEffect(() => {
         const isMobile = window.innerWidth < 768;
@@ -66,10 +69,10 @@ function App() {
     }, []);
 
     // Receding effect
-    const scaleRecede = useTransform(scrollYProgress, [0.30, 0.35], [1, 0.85]);
+    const scaleRecede = useTransform(scrollYProgress, [0.25, 0.30], [1, 0.85]);
 
     return (
-        <div ref={containerRef} className="relative bg-base h-[3200vh] w-full selection:bg-accent selection:text-black text-white/90">
+        <div ref={containerRef} className="relative bg-base h-[1800vh] w-full selection:bg-accent selection:text-black text-white/90">
             <Navigate progress={scrollYProgress} />
 
             <FloatingCTA progress={scrollYProgress} />
@@ -80,7 +83,7 @@ function App() {
                     opacity: introOpacity,
                     scale: scaleRecede,
                     zIndex: 5,
-                    display: useTransform(scrollYProgress, [0, 0.28], ["block", "none"]),
+                    display: useTransform(scrollYProgress, [0, 0.18], ["block", "none"]),
                     willChange: "opacity, transform"
                 }}
                 className="sticky top-0 h-screen w-full overflow-hidden bg-transparent pointer-events-none"
@@ -91,10 +94,10 @@ function App() {
             {/* LAYER 2: HOME HERO */}
             <motion.div
                 style={{
-                    opacity: useTransform(scrollYProgress, [0.15, 0.22, 0.32, 0.38], [0, 1, 1, 0]),
+                    opacity: useTransform(scrollYProgress, [0.07, 0.13, 0.20, 0.25], [0, 1, 1, 0]),
                     scale: homeScaleOut,
                     zIndex: 1,
-                    display: useTransform(scrollYProgress, [0.08, 0.30], ["block", "none"]),
+                    display: useTransform(scrollYProgress, [0.05, 0.25], ["block", "none"]),
                     willChange: "opacity, transform"
                 }}
                 className="sticky top-0 h-screen w-full overflow-hidden bg-base"
@@ -111,7 +114,7 @@ function App() {
                     scale: serviceScaleOut,
                     opacity: serviceOpacity,
                     zIndex: 20,
-                    display: useTransform(scrollYProgress, [0.22, 0.45], ["block", "none"]),
+                    display: useTransform(scrollYProgress, [0.18, 0.24], ["block", "none"]),
                     willChange: "transform, opacity"
                 }}
                 className="sticky top-0 h-screen w-full shadow-[0_-20px_40px_rgba(0,0,0,0.2)] overflow-hidden rounded-t-[1.5rem] sm:rounded-t-[2.5rem] md:rounded-t-[4rem] bg-secondary"
@@ -129,10 +132,10 @@ function App() {
                     scale: howScaleOut,
                     opacity: howOpacity,
                     zIndex: 30,
-                    display: useTransform(scrollYProgress, [0.36, 0.62], ["block", "none"]),
+                    display: useTransform(scrollYProgress, [0.24, 0.45], ["block", "none"]),
                     willChange: "transform, opacity"
                 }}
-                className="sticky top-0 h-screen w-full shadow-[0_-20px_40px_rgba(0,0,0,0.2)] overflow-hidden rounded-t-[1.5rem] sm:rounded-t-[2.5rem] md:rounded-t-[4rem] bg-[#2E2E2E]"
+                className="sticky top-0 h-screen w-full shadow-[0_-20px_40px_rgba(0,0,0,0.2)] overflow-hidden rounded-t-[1.5rem] sm:rounded-t-[2.5rem] md:rounded-t-[4rem] bg-[#121212]"
             >
                 <motion.div style={{ scale: howScaleIn }} className="h-full w-full">
                     <HowWeDoIt progress={howInternalProgress} />
@@ -143,27 +146,21 @@ function App() {
             {/* LAYER 5: WHY US */}
             <motion.div
                 style={{
-                    y: useTransform(scrollYProgress, [0.50, 0.56, 1], ["100vh", "0vh", "0vh"]),
+                    y: useTransform(scrollYProgress, [0.45, 0.50, 1], ["100vh", "0vh", "0vh"]),
                     scale: whyScaleIn,
                     zIndex: 40,
-                    display: useTransform(scrollYProgress, [0.50, 1], ["block", "block"]),
+                    display: useTransform(scrollYProgress, [0.45, 1], ["block", "block"]),
                     willChange: "transform"
                 }}
-                className="fixed inset-0 w-full h-screen shadow-[0_-40px_60px_rgba(0,0,0,0.1)] rounded-t-[1.5rem] sm:rounded-t-[2.5rem] md:rounded-t-[5rem] overflow-hidden bg-secondary"
+                className="fixed inset-0 w-full h-screen shadow-[0_-40px_60px_rgba(0,0,0,0.1)] rounded-t-[1.5rem] sm:rounded-t-[2.5rem] md:rounded-t-[5rem] overflow-hidden bg-[#FBF2C0]"
             >
-                {/* 
-                  Sync Logic: 
-                  - Philosophy Typing: 0.50 -> 0.75
-                  - CTA Centering: 0.75 -> 0.78 (Hold Philo)
-                  - Form Reveal Phase: 0.78 -> 0.94
-                */}
                 <WhyUs progress={whyInternalProgress} />
             </motion.div>
 
             {/* LAYER 6: FOOTER */}
             <motion.div
                 style={{
-                    y: useTransform(scrollYProgress, [0.93, 1], ["100vh", "20vh"]),
+                    y: useTransform(scrollYProgress, [0.93, 1], ["100vh", "0vh"]),
                     zIndex: 100,
                     display: useTransform(scrollYProgress, [0.92, 1], ["none", "block"]),
                     willChange: "transform"
