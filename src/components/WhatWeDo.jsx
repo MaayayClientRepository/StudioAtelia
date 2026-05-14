@@ -147,10 +147,10 @@ const WhatWeDo = ({ progress }) => {
     const maxProgressReached = useRef(0);
 
     const springX = useSpring(xTarget, {
-        damping: isMobile.current ? 35 : 28,
-        stiffness: isMobile.current ? 300 : 220,
-        mass: 0.4,
-        restDelta: 0.5,
+        damping: isMobile.current ? 40 : 28,
+        stiffness: isMobile.current ? 400 : 220,
+        mass: 0.3,
+        restDelta: 0.1,
     });
 
     useMotionValueEvent(progress, "change", (v) => {
@@ -301,22 +301,24 @@ const WhatWeDo = ({ progress }) => {
             {/* MOBILE NAV ARROWS */}
             <button 
                 onClick={() => handleNav("prev")}
-                className={`absolute left-2.5 sm:left-5 top-1/2 -translate-y-1/2 md:hidden z-30 
-                    w-10 h-10 rounded-full bg-black/80 backdrop-blur-md flex items-center justify-center 
+                className={`absolute left-4 top-1/2 -translate-y-1/2 md:hidden z-30 
+                    w-12 h-12 rounded-full bg-black/80 backdrop-blur-md flex items-center justify-center 
                     text-white shadow-2xl active:scale-90 transition-all duration-300 border border-white/10
                     ${currentIndex === 0 ? "opacity-0 pointer-events-none" : "opacity-100"}`}
+                aria-label="Previous service"
             >
-                <ChevronLeft className="w-5 h-5" />
+                <ChevronLeft className="w-6 h-6" />
             </button>
 
             <button 
                 onClick={() => handleNav("next")}
-                className={`absolute right-2.5 sm:right-5 top-1/2 -translate-y-1/2 md:hidden z-30 
-                    w-10 h-10 rounded-full bg-black/80 backdrop-blur-md flex items-center justify-center 
+                className={`absolute right-4 top-1/2 -translate-y-1/2 md:hidden z-30 
+                    w-12 h-12 rounded-full bg-black/80 backdrop-blur-md flex items-center justify-center 
                     text-white shadow-2xl active:scale-90 transition-all duration-300 border border-white/10
                     ${currentIndex >= services.length ? "opacity-0 pointer-events-none" : "opacity-100"}`}
+                aria-label="Next service"
             >
-                <ChevronRight className="w-5 h-5" />
+                <ChevronRight className="w-6 h-6" />
             </button>
 
             {/* DESKTOP NAV - Clickable and Interactive */}

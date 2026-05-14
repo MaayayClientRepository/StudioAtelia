@@ -34,12 +34,12 @@
 }
 
 body {
-    background: #0F0F0F;
-    position: relative;
-    color: #fff;
+    background-color: var(--color-base);
+    color: var(--color-secondary);
+    font-family: var(--font-sans);
     margin: 0;
     overflow-x: hidden;
-    font-family: var(--font-sans);
+    overscroll-behavior-y: none;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;

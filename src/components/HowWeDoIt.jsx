@@ -257,7 +257,7 @@ const Card = ({ card, index, total, items, topCardTitle, handleCardReveal, isFir
                 transition: { duration: 0.4 }
             }}
             className={cn(
-                "absolute inset-0 bg-[#161616] p-2.5 md:p-3 rounded-[1.5rem] shadow-[0_30px_60px_rgba(0,0,0,0.6)] border border-white/5 cursor-grab active:cursor-grabbing transform-gpu overflow-hidden",
+                "absolute inset-0 bg-[#161616] p-2.5 md:p-3 rounded-[1.5rem] shadow-[0_30px_60px_rgba(0,0,0,0.6)] border border-white/5 cursor-grab active:cursor-grabbing transform-gpu overflow-hidden touch-none",
                 isTop ? "pointer-events-auto border-[#BFA88F]/30" : "pointer-events-none"
             )}
         >
@@ -265,7 +265,7 @@ const Card = ({ card, index, total, items, topCardTitle, handleCardReveal, isFir
                 <img
                     src={card.image}
                     alt={card.title}
-                    className="pointer-events-none h-full w-full object-cover"
+                    className="pointer-events-none h-full w-full object-cover will-change-transform"
                 />
 
                 {/* TUTORIAL OVERLAY: Only on the first card, at the very top */}

@@ -192,7 +192,7 @@ const WhyUs = ({ progress }) => {
                                 text={phrase1}
                                 progress={progress}
                                 range={[0.15, 0.38]}
-                                className="text-base sm:text-xl md:text-[2rem] lg:text-[2.25rem] leading-[1.3] md:leading-[1.4] text-black font-sans font-medium text-center tracking-tight max-w-4xl"
+                                className="text-base sm:text-xl md:text-[2rem] lg:text-[2.25rem] leading-[1.45] md:leading-[1.6] text-black font-sans font-medium text-center tracking-tight max-w-4xl"
                             />
                         </motion.div>
 
@@ -208,7 +208,7 @@ const WhyUs = ({ progress }) => {
                                 text={phrase2}
                                 progress={progress}
                                 range={[0.46, 0.68]}
-                                className="text-base sm:text-xl md:text-[2rem] lg:text-[2.25rem] leading-[1.3] md:leading-[1.4] text-black font-sans font-medium text-center tracking-tight max-w-4xl"
+                                className="text-base sm:text-xl md:text-[2rem] lg:text-[2.25rem] leading-[1.45] md:leading-[1.6] text-black font-sans font-medium text-center tracking-tight max-w-4xl"
                             />
                         </motion.div>
 
@@ -224,7 +224,7 @@ const WhyUs = ({ progress }) => {
                                 text={phrase3}
                                 progress={progress}
                                 range={[0.76, 0.98]}
-                                className="text-base sm:text-xl md:text-[2rem] lg:text-[2.25rem] leading-[1.3] md:leading-[1.4] text-black font-sans font-medium text-center tracking-tight max-w-4xl"
+                                className="text-base sm:text-xl md:text-[2rem] lg:text-[2.25rem] leading-[1.45] md:leading-[1.6] text-black font-sans font-medium text-center tracking-tight max-w-4xl"
                             />
                         </motion.div>
 
