@@ -82,17 +82,17 @@ const HowWeDoIt = ({ progress }) => {
             {/* Header Section: Adjusted to clear fixed menu button on mobile */}
             <motion.div
                 style={{ y: headerY, opacity: headerOpacity }}
-                className="absolute top-20 left-4 sm:top-24 sm:left-6 md:top-12 md:left-24 z-50 pointer-events-none"
+                className="absolute top-16 left-6 md:top-12 md:left-24 z-50 pointer-events-none"
             >
-                <span className="text-[9px] md:text-[10px] font-black tracking-[0.6em] text-[#BFA88F] uppercase italic mb-1 md:mb-2 block opacity-40">The Methodology</span>
-                <h2 className="text-xl sm:text-2xl md:text-5xl font-black text-white tracking-tighter uppercase leading-[0.8]">
+                <span className="text-[8px] md:text-[10px] font-black tracking-[0.5em] md:tracking-[0.6em] text-[#BFA88F] uppercase italic mb-1 md:mb-2 block opacity-40">The Methodology</span>
+                <h2 className="text-xl md:text-5xl font-black text-white tracking-tighter uppercase leading-[0.8]">
                     THE <span className="text-transparent outline-text">PATH.</span>
                 </h2>
             </motion.div>
 
             <motion.div
                 style={{ y: contentY, opacity: contentOpacity, scale: contentScale }}
-                className="flex flex-col md:flex-row items-center justify-center md:justify-between w-full h-full px-4 sm:px-6 md:px-24 gap-4 md:gap-12 pt-28 sm:pt-32 md:pt-0 pb-16 sm:pb-20 md:pb-0"
+                className="flex flex-col md:flex-row items-center justify-center md:justify-between w-full h-full px-6 md:px-24 gap-6 md:gap-12 pt-24 md:pt-0 pb-12 md:pb-0"
             >
                 {/* Information Content: Moved UP on mobile to avoid CTA collision */}
                 <div className="w-full md:w-3/5 flex flex-col justify-center min-h-[160px] md:h-auto order-1 md:order-1 mb-4 md:mb-0">
@@ -146,7 +146,7 @@ const HowWeDoIt = ({ progress }) => {
                         })}
                     </div>
 
-                    <div className="relative w-52 h-72 sm:w-60 sm:h-80 md:w-72 md:h-96 flex items-center justify-center">
+                    <div className="relative w-48 h-64 sm:w-60 sm:h-80 md:w-72 md:h-96 flex items-center justify-center">
                         {/* Visual Haptic */}
                         <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-0 opacity-40">
                             <motion.div

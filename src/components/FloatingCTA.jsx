@@ -42,14 +42,14 @@ const FloatingCTA = ({ progress }) => {
     return (
         <motion.div
             style={{
-                right,
-                bottom,
-                x,
+                right: useTransform(progress, [0.75, 0.80], ["1.5rem", "50%"]),
+                bottom: "1.5rem",
+                x: useTransform(progress, [0.75, 0.80], ["0%", "50%"]),
                 y: ctaY,
                 scale: ctaScale,
                 opacity,
                 zIndex: 100,
-                willChange: "transform, opacity, right, bottom"
+                willChange: "transform, opacity, right"
             }}
             className="fixed z-[100]"
         >
@@ -64,10 +64,10 @@ const FloatingCTA = ({ progress }) => {
                     y: 4,
                     boxShadow: "0px 0px 0px #000"
                 }}
-                className="flex items-center gap-2 sm:gap-3 bg-[#F8D149] text-black px-5 sm:px-8 py-3 sm:py-4 rounded-xl border-2 border-black/60 shadow-[3px_3px_0px_rgba(0,0,0,0.4)] transition-shadow duration-200 group"
+                className="flex items-center gap-2 sm:gap-3 bg-accent text-black px-6 sm:px-8 py-3.5 sm:py-4 rounded-xl border-2 border-black/60 shadow-[3px_3px_0px_rgba(0,0,0,0.4)] transition-shadow duration-200 group"
             >
                 <Calendar className="w-4 h-4 sm:w-5 sm:h-5 stroke-[2.5px]" />
-                <span className="text-xs sm:text-sm font-black uppercase tracking-wider">Book an Appointment</span>
+                <span className="text-[10px] sm:text-sm font-black uppercase tracking-wider whitespace-nowrap">Book an Appointment</span>
 
                 {/* Subtle reflection effect for premium feel */}
                 <div className="absolute top-0 left-0 w-full h-1/2 bg-white/10 pointer-events-none" />

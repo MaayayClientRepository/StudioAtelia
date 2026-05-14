@@ -52,9 +52,9 @@ const IntroSequence = ({ progress }) => {
                     <motion.h1
                         style={{
                             color: textColor,
-                            fontSize: "clamp(2.5rem, 10vw, 15vw)"
+                            fontSize: "clamp(2rem, 12vw, 15vw)"
                         }}
-                        className="font-serif font-light italic leading-none tracking-[-0.02em] mb-4 sm:mb-6 whitespace-nowrap"
+                        className="font-serif font-light italic leading-none tracking-[-0.02em] mb-4 sm:mb-6 text-center"
                     >
                         Niche & Form
                     </motion.h1>
@@ -68,11 +68,11 @@ const IntroSequence = ({ progress }) => {
                         <motion.p
                             style={{
                                 color: useTransform(progress, [0.7, 0.95], ["#FFFFFF", "#BFA88F"]),
-                                fontSize: "clamp(0.7rem, 2vw, 1.5rem)"
+                                fontSize: "clamp(0.6rem, 2.5vw, 1.5rem)"
                             }}
-                            className="font-['Fira_Sans_Condensed',_sans-serif] font-light italic tracking-[0.2em] md:tracking-[0.4em] uppercase whitespace-nowrap"
+                            className="font-['Fira_Sans_Condensed',_sans-serif] font-light italic tracking-[0.15em] md:tracking-[0.4em] uppercase text-center"
                         >
-                            Thoughtful design Transforms living
+                            Thoughtful design <br className="sm:hidden" /> Transforms living
                         </motion.p>
                         <motion.div
                             style={{ backgroundColor: useTransform(progress, [0.7, 0.95], ["#FFFFFF", "#BFA88F"]) }}

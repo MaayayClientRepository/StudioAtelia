@@ -152,7 +152,7 @@ function App() {
                     display: useTransform(scrollYProgress, [0.45, 1], ["block", "block"]),
                     willChange: "transform"
                 }}
-                className="fixed inset-0 w-full h-screen shadow-[0_-40px_60px_rgba(0,0,0,0.1)] rounded-t-[1.5rem] sm:rounded-t-[2.5rem] md:rounded-t-[5rem] overflow-hidden bg-[#FBF2C0]"
+                className="fixed inset-0 w-full h-screen shadow-[0_-40px_60px_rgba(0,0,0,0.1)] rounded-t-[1.5rem] sm:rounded-t-[2.5rem] md:rounded-t-[5rem] overflow-hidden bg-secondary"
             >
                 <WhyUs progress={whyInternalProgress} />
             </motion.div>
@@ -160,9 +160,9 @@ function App() {
             {/* LAYER 6: FOOTER */}
             <motion.div
                 style={{
-                    y: useTransform(scrollYProgress, [0.93, 1], ["100vh", "0vh"]),
+                    y: useTransform(scrollYProgress, [0.96, 1], ["100vh", "0vh"]),
                     zIndex: 100,
-                    display: useTransform(scrollYProgress, [0.92, 1], ["none", "block"]),
+                    display: useTransform(scrollYProgress, [0.95, 1], ["none", "block"]),
                     willChange: "transform"
                 }}
                 className="fixed inset-0 w-full h-screen rounded-t-[2rem] sm:rounded-t-[3rem] md:rounded-t-[5rem] overflow-hidden"

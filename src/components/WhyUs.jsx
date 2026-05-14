@@ -249,15 +249,15 @@ const WhyUs = ({ progress }) => {
                     {/* LEFT PANEL — Architectural Branding */}
                     <div className="md:w-2/5 px-8 py-10 md:p-12 bg-black flex flex-col justify-between text-secondary relative overflow-hidden group/panel">
                         {/* Huge Watermark */}
-                        <div className="absolute -top-10 -left-10 text-[60vw] md:text-[25vw] font-black opacity-[0.04] select-none pointer-events-none tracking-tighter leading-none font-serif">N</div>
-                        <div className="absolute -bottom-10 -right-10 text-[60vw] md:text-[25vw] font-black opacity-[0.04] select-none pointer-events-none tracking-tighter leading-none font-serif italic">F</div>
+                        <div className="absolute -top-6 -left-6 text-[40vw] md:text-[25vw] font-black opacity-[0.04] select-none pointer-events-none tracking-tighter leading-none font-serif">N</div>
+                        <div className="absolute -bottom-6 -right-6 text-[40vw] md:text-[25vw] font-black opacity-[0.04] select-none pointer-events-none tracking-tighter leading-none font-serif italic">F</div>
                         
-                        <div className="relative z-10 space-y-4 md:space-y-8">
+                        <div className="relative z-10 space-y-3 md:space-y-8">
                             <div className="flex items-center gap-4">
                                 <div className="h-[1px] w-8 bg-accent" />
-                                <span className="text-[10px] font-black tracking-[0.6em] text-accent uppercase">Let's Connect</span>
+                                <span className="text-[9px] font-black tracking-[0.5em] text-accent uppercase">Let's Connect</span>
                             </div>
-                            <h3 className="text-3xl md:text-7xl font-serif font-black leading-[0.85] tracking-tighter italic">
+                            <h3 className="text-2xl md:text-7xl font-serif font-black leading-[0.85] tracking-tighter italic">
                                 Ready to <br />
                                 <span className="text-accent not-italic">Build?</span>
                             </h3>
