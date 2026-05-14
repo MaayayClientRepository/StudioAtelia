@@ -64,7 +64,7 @@ const FloatingCTA = ({ progress }) => {
                     y: 4,
                     boxShadow: "0px 0px 0px #000"
                 }}
-                className="flex items-center gap-2 sm:gap-3 bg-accent text-black px-6 sm:px-8 py-3.5 sm:py-4 rounded-xl border-2 border-black/60 shadow-[3px_3px_0px_rgba(0,0,0,0.4)] transition-shadow duration-200 group"
+                className="flex items-center gap-2 sm:gap-3 bg-[#F8D149] text-black px-6 sm:px-8 py-3.5 sm:py-4 rounded-xl border-2 border-black/60 shadow-[3px_3px_0px_rgba(0,0,0,0.4)] transition-shadow duration-200 group"
             >
                 <Calendar className="w-4 h-4 sm:w-5 sm:h-5 stroke-[2.5px]" />
                 <span className="text-[10px] sm:text-sm font-black uppercase tracking-wider whitespace-nowrap">Book an Appointment</span>

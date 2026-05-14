@@ -47,7 +47,7 @@ const Navigate = ({ progress }) => {
                 onClick={() => setIsOpen(true)}
                 whileHover={{ x: 2, y: 2, boxShadow: "2px 2px 0px rgba(0,0,0,0.2)" }}
                 whileTap={{ x: 6, y: 6, boxShadow: "0px 0px 0px #000" }}
-                className="fixed top-4 left-4 sm:top-8 sm:left-8 z-[100] p-3 sm:p-4 bg-accent border-2 border-black/60 shadow-[3px_3px_0px_rgba(0,0,0,0.4)] rounded-lg sm:rounded-xl transition-all group overflow-hidden"
+                className="fixed top-4 left-4 sm:top-8 sm:left-8 z-[100] p-3 sm:p-4 bg-[#F8D149] border-2 border-black/60 shadow-[3px_3px_0px_rgba(0,0,0,0.4)] rounded-lg sm:rounded-xl transition-all group overflow-hidden"
             >
                 <div className="absolute inset-0 bg-black translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-500 ease-out" />
                 <Menu className="w-4 h-4 sm:w-5 sm:h-5 text-black group-hover:text-accent relative z-10 transition-colors" />

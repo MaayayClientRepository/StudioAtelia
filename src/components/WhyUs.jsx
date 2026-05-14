@@ -74,18 +74,15 @@ const FloatingSketches = ({ progress }) => {
 
 const IndividualWord = ({ word, progress, wordStart, wordEnd }) => {
     const opacity = useTransform(progress, [wordStart, wordEnd], [0, 1], { clamp: true });
-    const blurValue = useTransform(progress, [wordStart, wordEnd], [8, 0], { clamp: true });
-    const filter = useTransform(blurValue, (v) => `blur(${v}px)`);
     const y = useTransform(progress, [wordStart, wordEnd], [10, 0], { clamp: true });
 
     return (
         <motion.span
             style={{
                 opacity,
-                filter,
                 y,
                 display: "inline-block",
-                willChange: "transform, opacity, filter"
+                willChange: "transform, opacity"
             }}
             className="mr-[0.3em]"
         >
@@ -122,8 +119,6 @@ const WordReveal = ({ text, progress, range, className }) => {
 const WhyUs = ({ progress }) => {
     // 7. SLOW FADE Logic: Start fading earlier to make it feel expensive
     const titleOpacity = useTransform(progress, [0, 0.1], [0, 1]); // Fast title reveal on entrance
-    const titleBlurValue = useTransform(progress, [0, 0.1], [8, 0]);
-    const titleFilter = useTransform(titleBlurValue, (v) => `blur(${v}px)`);
     const titleY = useTransform(progress, [0, 0.1], [30, 0]);
 
     // philosophyOpacity: Focus on the text area
@@ -146,7 +141,7 @@ const WhyUs = ({ progress }) => {
     const phrase3 = "We focus on clarity, honesty, and end-to-end execution, right from concept and layout options to on-site coordination. The result is a space that feels intentional, personal, and built to last.";
 
     return (
-        <div className="relative h-screen bg-[#FBF2C0] overflow-hidden flex items-center justify-center font-serif text-[#121212]">
+        <div className="relative h-screen bg-[#FBF2C0] overflow-hidden flex items-center justify-center font-serif text-black">
 
             {/* BACKGROUND: Drawing Texture & Elements */}
             <div className="absolute inset-0 opacity-10 pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/handmade-paper.png')]" />
@@ -166,7 +161,6 @@ const WhyUs = ({ progress }) => {
                     <motion.div 
                         style={{ 
                             opacity: useTransform(progress, [0, 0.1, 1.0, 1.15], [0, 1, 1, 0]),
-                            filter: titleFilter, 
                             y: titleY 
                         }} 
                         className="text-center space-y-2 sm:space-y-4 mb-[4vh] md:mb-[6vh]"

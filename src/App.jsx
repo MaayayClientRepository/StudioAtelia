@@ -29,22 +29,22 @@ function App() {
     const homeScaleOut = useTransform(scrollYProgress, [0.13, 0.18], [1, 1]);
     const homeExitOpacity = useTransform(scrollYProgress, [0.13, 0.18], [1, 0]);
 
-    // 3. WHAT WE DO (Travel: 0.18 -> 0.19, Content: 0.19 -> 0.23, Exit: 0.23 -> 0.24)
-    const serviceY = useTransform(scrollYProgress, [0.18, 0.19], ["100vh", "0vh"]);
-    const serviceScaleIn = useTransform(scrollYProgress, [0.18, 0.19], [1, 1]);
+    // 3. WHAT WE DO (Travel: 0.16 -> 0.19, Content: 0.19 -> 0.23, Exit: 0.23 -> 0.25)
+    const serviceY = useTransform(scrollYProgress, [0.16, 0.19], ["100vh", "0vh"]);
+    const serviceScaleIn = useTransform(scrollYProgress, [0.16, 0.19], [1, 1]);
     const serviceInternalProgress = useTransform(scrollYProgress, [0.19, 0.23], [0, 1]);
-    const serviceScaleOut = useTransform(scrollYProgress, [0.23, 0.24], [1, 1]);
-    const serviceOpacity = useTransform(scrollYProgress, [0.23, 0.24], [1, 0]);
+    const serviceScaleOut = useTransform(scrollYProgress, [0.23, 0.25], [1, 1]);
+    const serviceOpacity = useTransform(scrollYProgress, [0.23, 0.25], [1, 0]);
 
-    // 4. HOW WE DO IT (Travel: 0.24 -> 0.25, Content: 0.25 -> 0.40, Exit: 0.40 -> 0.45)
-    const howY = useTransform(scrollYProgress, [0.24, 0.25], ["100vh", "0vh"]);
-    const howScaleIn = useTransform(scrollYProgress, [0.24, 0.25], [1, 1]);
-    const howInternalProgress = useTransform(scrollYProgress, [0.25, 0.40], [0, 1]);
-    const howScaleOut = useTransform(scrollYProgress, [0.40, 0.45], [1, 1]);
-    const howOpacity = useTransform(scrollYProgress, [0.40, 0.45], [1, 0]);
+    // 4. HOW WE DO IT (Travel: 0.23 -> 0.26, Content: 0.26 -> 0.42, Exit: 0.42 -> 0.46)
+    const howY = useTransform(scrollYProgress, [0.23, 0.26], ["100vh", "0vh"]);
+    const howScaleIn = useTransform(scrollYProgress, [0.23, 0.26], [1, 1]);
+    const howInternalProgress = useTransform(scrollYProgress, [0.26, 0.42], [0, 1]);
+    const howScaleOut = useTransform(scrollYProgress, [0.42, 0.46], [1, 1]);
+    const howOpacity = useTransform(scrollYProgress, [0.42, 0.46], [1, 0]);
 
     // 5. WHY US (Philosophy -> Button Center -> Form)
-    const whyScaleIn = useTransform(scrollYProgress, [0.45, 0.50], [1, 1]);
+    const whyScaleIn = useTransform(scrollYProgress, [0.45, 0.52], [1, 1]);
     // 0.45 to 0.75: Philosophy Phrases
     // 0.75 to 0.80: Button Centering (Hold)
     // 0.80 to 0.95: Form Reveal
@@ -53,9 +53,10 @@ function App() {
     useEffect(() => {
         const isMobile = window.innerWidth < 768;
         const lenis = new Lenis({
-            duration: isMobile ? 1.0 : 1.2,
+            duration: isMobile ? 1.2 : 1.5,
             easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-            touchMultiplier: isMobile ? 1.8 : 1.5,
+            touchMultiplier: isMobile ? 2.0 : 1.2,
+            wheelMultiplier: 1.0,
             smoothWheel: true,
             infinite: false,
         });
@@ -94,10 +95,10 @@ function App() {
             {/* LAYER 2: HOME HERO */}
             <motion.div
                 style={{
-                    opacity: useTransform(scrollYProgress, [0.07, 0.13, 0.20, 0.25], [0, 1, 1, 0]),
+                    opacity: useTransform(scrollYProgress, [0.07, 0.13, 0.20, 0.26], [0, 1, 1, 0]),
                     scale: homeScaleOut,
                     zIndex: 1,
-                    display: useTransform(scrollYProgress, [0.05, 0.25], ["block", "none"]),
+                    display: useTransform(scrollYProgress, [0.05, 0.26], ["block", "none"]),
                     willChange: "opacity, transform"
                 }}
                 className="sticky top-0 h-screen w-full overflow-hidden bg-base"
@@ -114,7 +115,7 @@ function App() {
                     scale: serviceScaleOut,
                     opacity: serviceOpacity,
                     zIndex: 20,
-                    display: useTransform(scrollYProgress, [0.18, 0.24], ["block", "none"]),
+                    display: useTransform(scrollYProgress, [0.15, 0.26], ["block", "none"]),
                     willChange: "transform, opacity"
                 }}
                 className="sticky top-0 h-screen w-full shadow-[0_-20px_40px_rgba(0,0,0,0.2)] overflow-hidden rounded-t-[1.5rem] sm:rounded-t-[2.5rem] md:rounded-t-[4rem] bg-secondary"
@@ -132,7 +133,7 @@ function App() {
                     scale: howScaleOut,
                     opacity: howOpacity,
                     zIndex: 30,
-                    display: useTransform(scrollYProgress, [0.24, 0.45], ["block", "none"]),
+                    display: useTransform(scrollYProgress, [0.22, 0.47], ["block", "none"]),
                     willChange: "transform, opacity"
                 }}
                 className="sticky top-0 h-screen w-full shadow-[0_-20px_40px_rgba(0,0,0,0.2)] overflow-hidden rounded-t-[1.5rem] sm:rounded-t-[2.5rem] md:rounded-t-[4rem] bg-[#121212]"
@@ -146,13 +147,13 @@ function App() {
             {/* LAYER 5: WHY US */}
             <motion.div
                 style={{
-                    y: useTransform(scrollYProgress, [0.45, 0.50, 1], ["100vh", "0vh", "0vh"]),
+                    y: useTransform(scrollYProgress, [0.44, 0.52, 1], ["100vh", "0vh", "0vh"]),
                     scale: whyScaleIn,
                     zIndex: 40,
-                    display: useTransform(scrollYProgress, [0.45, 1], ["block", "block"]),
+                    display: useTransform(scrollYProgress, [0.44, 1], ["block", "block"]),
                     willChange: "transform"
                 }}
-                className="fixed inset-0 w-full h-screen shadow-[0_-40px_60px_rgba(0,0,0,0.1)] rounded-t-[1.5rem] sm:rounded-t-[2.5rem] md:rounded-t-[5rem] overflow-hidden bg-secondary"
+                className="fixed inset-0 w-full h-screen shadow-[0_-40px_60px_rgba(0,0,0,0.1)] rounded-t-[1.5rem] sm:rounded-t-[2.5rem] md:rounded-t-[5rem] overflow-hidden bg-[#FBF2C0]"
             >
                 <WhyUs progress={whyInternalProgress} />
             </motion.div>

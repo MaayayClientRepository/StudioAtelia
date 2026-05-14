@@ -105,8 +105,7 @@ const IntroSequence = ({ progress }) => {
                 <motion.div
                     style={{
                         opacity: useTransform([modernOpacity, imageOpacity], ([m, i]) => m * i),
-                        filter: useTransform(modernOpacity, [0, 1], ["saturate(0.5) brightness(0.8)", "saturate(1) brightness(1)"]),
-                        willChange: "opacity, filter"
+                        willChange: "opacity"
                     }}
                     className="absolute inset-0 w-full h-full z-10 pointer-events-none"
                 >

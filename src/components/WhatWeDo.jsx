@@ -354,7 +354,7 @@ const WhatWeDo = ({ progress }) => {
                     {[...Array(services.length + 1)].map((_, i) => (
                         <div 
                             key={i} 
-                            className={`h-[2px] transition-all duration-500 ease-out rounded-full ${i === currentIndex ? "bg-black w-10" : "bg-black/15 w-6"}`} 
+                            className={`h-[2px] transition-all duration-500 ease-out rounded-full ${i === currentIndex ? "bg-accent w-10" : "bg-black/15 w-6"}`} 
                         />
                     ))}
                 </div>
@@ -374,7 +374,7 @@ const WhatWeDo = ({ progress }) => {
                 {[...Array(services.length + 1)].map((_, i) => (
                     <div 
                         key={i} 
-                        className={`h-1.5 rounded-full transition-all duration-500 ease-out ${i === currentIndex ? "bg-black w-5" : "bg-black/20 w-1.5"}`} 
+                        className={`h-1.5 rounded-full transition-all duration-500 ease-out ${i === currentIndex ? "bg-accent w-5" : "bg-black/20 w-1.5"}`} 
                     />
                 ))}
             </div>
