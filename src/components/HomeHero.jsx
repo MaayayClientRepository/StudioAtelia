@@ -6,6 +6,12 @@ import { Spotlight } from "./ui/Spotlight";
 
 
 const FloatingSketches = ({ progress }) => {
+    // Dynamic opacities mapped to scrolling progress for smooth simultaneous fade out
+    const chairOpacity = useTransform(progress, [0.3, 0.8], [0.45, 0]);
+    const sofaOpacity = useTransform(progress, [0.3, 0.8], [0.4, 0]);
+    const cupboardOpacity = useTransform(progress, [0.3, 0.8], [0.35, 0]);
+    const scribbleOpacity = useTransform(progress, [0.3, 0.8], [0.3, 0]);
+
     return (
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
             {/* Chair Sketch - Pure White */}
@@ -13,7 +19,7 @@ const FloatingSketches = ({ progress }) => {
                 style={{
                     y: useTransform(progress, [0, 1], [200, -200]),
                     rotate: useTransform(progress, [0, 1], [-15, 25]),
-                    opacity: 0.45,
+                    opacity: chairOpacity,
                     willChange: "transform, opacity"
                 }}
                 className="absolute top-[12%] left-[2%] md:top-[15%] md:left-[5%] w-32 h-32 md:w-64 md:h-64 text-white"
@@ -28,7 +34,7 @@ const FloatingSketches = ({ progress }) => {
                 style={{
                     y: useTransform(progress, [0, 1], [300, -100]),
                     rotate: useTransform(progress, [0, 1], [10, -10]),
-                    opacity: 0.4,
+                    opacity: sofaOpacity,
                     willChange: "transform, opacity"
                 }}
                 className="absolute top-[65%] right-[2%] md:top-[60%] md:right-[10%] w-[18rem] md:w-[28rem] h-32 md:h-56 text-white"
@@ -43,7 +49,7 @@ const FloatingSketches = ({ progress }) => {
                 style={{
                     y: useTransform(progress, [0, 1], [-100, 300]),
                     rotate: useTransform(progress, [0, 1], [5, -15]),
-                    opacity: 0.35,
+                    opacity: cupboardOpacity,
                     willChange: "transform, opacity"
                 }}
                 className="absolute top-[5%] right-[15%] md:right-[25%] w-32 h-[15rem] md:w-64 md:h-[35rem] text-white"
@@ -60,7 +66,7 @@ const FloatingSketches = ({ progress }) => {
                 style={{
                     y: useTransform(progress, [0, 1], [0, -400]),
                     rotate: useTransform(progress, [0, 1], [0, 360]),
-                    opacity: 0.3,
+                    opacity: scribbleOpacity,
                     willChange: "transform, opacity"
                 }}
                 className="absolute top-[40%] left-[10%] md:top-[35%] md:left-[25%] w-40 h-40 md:w-80 md:h-80 text-white"
@@ -75,6 +81,10 @@ const FloatingSketches = ({ progress }) => {
 const HomeHero = ({ progress }) => {
     const defaultProgress = useMotionValue(0);
     const activeProgress = progress || defaultProgress;
+
+    // Dynamic scroll-dependent animations for the decorative elements
+    const lineOpacity = useTransform(activeProgress, [0.3, 0.8], [1, 0]);
+    const watermarkOpacity = useTransform(activeProgress, [0.3, 0.8], [0.02, 0]);
 
     return (
         <section className="relative h-screen w-full bg-base overflow-hidden flex flex-col items-center justify-center font-sans tracking-tight">
@@ -98,6 +108,7 @@ const HomeHero = ({ progress }) => {
                             initial={{ width: 0 }}
                             animate={{ width: "100px" }}
                             transition={{ delay: 1, duration: 1.5 }}
+                            style={{ opacity: lineOpacity }}
                             className="h-[1px] bg-white/20"
                         />
                     </div>
@@ -105,11 +116,14 @@ const HomeHero = ({ progress }) => {
             </div>
 
             {/* Background Decorative Element */}
-            <div className="absolute inset-0 select-none pointer-events-none opacity-[0.02] flex items-center justify-center">
+            <motion.div
+                style={{ opacity: watermarkOpacity }}
+                className="absolute inset-0 select-none pointer-events-none flex items-center justify-center"
+            >
                 <h2 className="text-[50vw] md:text-[25vw] font-black text-white/5 tracking-[0.1em] uppercase leading-none text-center">
                     NICHE <br className="md:hidden" /> & FORM
                 </h2>
-            </div>
+            </motion.div>
 
             {/* Grain Overlay for Texture */}
             <div className="absolute inset-0 opacity-[0.03] pointer-events-none mix-blend-screen bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />

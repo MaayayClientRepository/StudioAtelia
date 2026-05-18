@@ -3,25 +3,20 @@ import { motion, useTransform, useMotionTemplate } from "framer-motion";
 import { Calendar } from "lucide-react";
 
 const FloatingCTA = ({ progress }) => {
-    // Default fallback if no progress provided (acts as constant 0)
-    // We use a safe opacity transform that defaults to 1 if progress is missing/null
+    const [isMobile, setIsMobile] = React.useState(false);
+    React.useEffect(() => {
+        setIsMobile(window.innerWidth < 768);
+        const handleResize = () => setIsMobile(window.innerWidth < 768);
+        window.addEventListener("resize", handleResize);
+        return () => window.removeEventListener("resize", handleResize);
+    }, []);
 
-    // Animation Logic:
-    // Animation Logic:
-    // Animation Logic:
-    // Animation Logic:
-    // Animation Logic:
-    // 0.75 -> 0.80: Move from Right to Center (Hold Phase)
-    // 0.80 -> 0.83: Fade Out (Transition to Form Phase)
+    // Unconditional Hook Calls to adhere strictly to the Rules of Hooks
+    const desktopRight = progress
+        ? useTransform(progress, [0.75, 0.80], ["1.5rem", "50%"])
+        : "1.5rem";
 
-    // Transforms
-    const right = progress
-        ? useTransform(progress, [0.75, 0.80], ["2.5rem", "50%"])
-        : "2.5rem";
-
-    const bottom = "1.5rem";
-
-    const x = progress
+    const desktopX = progress
         ? useTransform(progress, [0.75, 0.80], ["0%", "50%"])
         : "0%";
 
@@ -37,14 +32,12 @@ const FloatingCTA = ({ progress }) => {
         ? useTransform(progress, [0, 0.13, 0.18, 0.80, 0.83], [0, 0, 1, 1, 0])
         : 1;
 
-    // Use motion template if needed, but direct style works fine.
-
     return (
         <motion.div
             style={{
-                right: useTransform(progress, [0.75, 0.80], ["1.5rem", "50%"]),
+                right: isMobile ? "50%" : desktopRight,
                 bottom: "1.5rem",
-                x: useTransform(progress, [0.75, 0.80], ["0%", "50%"]),
+                x: isMobile ? "50%" : desktopX,
                 y: ctaY,
                 scale: ctaScale,
                 opacity,

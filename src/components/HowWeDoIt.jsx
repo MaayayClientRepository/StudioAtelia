@@ -92,10 +92,10 @@ const HowWeDoIt = ({ progress }) => {
 
             <motion.div
                 style={{ y: contentY, opacity: contentOpacity, scale: contentScale }}
-                className="flex flex-col md:flex-row items-center justify-center md:justify-between w-full h-full px-6 md:px-24 gap-6 md:gap-12 pt-24 md:pt-0 pb-12 md:pb-0"
+                className="flex flex-col md:flex-row items-center justify-center md:justify-between w-full h-full px-6 md:px-24 gap-8 md:gap-12 pt-32 pb-24 md:pt-0 md:pb-0"
             >
                 {/* Information Content: Moved UP on mobile to avoid CTA collision */}
-                <div className="w-full md:w-3/5 flex flex-col justify-center min-h-[160px] md:h-auto order-1 md:order-1 mb-4 md:mb-0">
+                <div className="w-full md:w-3/5 flex flex-col justify-center min-h-0 md:h-auto order-1 md:order-1 mb-2 md:mb-0">
                     <AnimatePresence mode="wait">
                         <motion.div
                             key={cards[0].title}
@@ -120,7 +120,7 @@ const HowWeDoIt = ({ progress }) => {
                                 ))}
                             </h2>
 
-                            <p className="text-[12px] sm:text-[13px] md:text-3xl text-white/50 font-serif italic leading-[1.3] max-w-xl border-l-2 border-[#BFA88F]/30 pl-3 sm:pl-4 md:pl-10">
+                             <p className="text-[14px] sm:text-[15px] md:text-2xl text-white/60 font-sans leading-relaxed max-w-xl border-l-2 border-[#BFA88F]/30 pl-3 sm:pl-4 md:pl-10">
                                 {cards[0].description}
                             </p>
                         </motion.div>
@@ -128,7 +128,7 @@ const HowWeDoIt = ({ progress }) => {
                 </div>
 
                 {/* RIGHT SIDE: Minimized Card Stack */}
-                <div className="w-full md:w-2/5 flex flex-col items-center justify-center relative mt-2 md:mt-20 md:pb-32 order-2 md:order-2">
+                <div className="w-full md:w-2/5 flex flex-col items-center justify-center relative mt-2 md:mt-20 pb-24 md:pb-32 order-2 md:order-2">
                     {/* Progress Dots: Hidden on mobile to save space */}
                     <div className="absolute top-0 right-0 md:-right-12 flex flex-col gap-2 z-50 hidden md:flex">
                         {items.map((_, i) => {
@@ -146,7 +146,7 @@ const HowWeDoIt = ({ progress }) => {
                         })}
                     </div>
 
-                    <div className="relative w-48 h-64 sm:w-60 sm:h-80 md:w-72 md:h-96 flex items-center justify-center">
+                    <div className="relative w-[240px] h-[310px] sm:w-60 sm:h-80 md:w-72 md:h-96 flex items-center justify-center">
                         {/* Visual Haptic */}
                         <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-0 opacity-40">
                             <motion.div

@@ -254,6 +254,14 @@ const WhatWeDo = ({ progress }) => {
                 <h2 className="text-[30vw] md:text-[15vw] font-black text-black uppercase leading-none whitespace-nowrap">Niche & Form</h2>
             </div>
 
+            {/* MOBILE PERSISTENT HEADER */}
+            <div className="absolute top-16 left-6 z-30 pointer-events-none md:hidden pt-4">
+                <span className="text-[8px] sm:text-[10px] font-black tracking-[0.5em] text-[#BFA88F] uppercase italic mb-1 block opacity-60">Services Matrix</span>
+                <h2 className="text-xl sm:text-2xl font-black text-black tracking-tighter uppercase leading-[0.8]">
+                    WHAT <span className="text-transparent" style={{ WebkitTextStroke: "1px #000000" }}>WE DO.</span>
+                </h2>
+            </div>
+
             <FloatingSketches progress={progress} />
 
             {/* Horizontal Carousel — driven by springX */}
@@ -284,9 +292,9 @@ const WhatWeDo = ({ progress }) => {
                         }}
                         viewport={{ once: true, margin: "-10%" }}
                         key={i}
-                        className="flex-shrink-0 w-[55vw] sm:w-[60vw] md:w-[320px] group will-change-transform"
+                        className="flex-shrink-0 w-[75vw] sm:w-[60vw] md:w-[320px] group will-change-transform"
                     >
-                        <div className="relative h-[260px] sm:h-[300px] md:h-[420px] w-full rounded-[1rem] sm:rounded-[1.2rem] md:rounded-[2.5rem] overflow-hidden bg-black shadow-[0_16px_32px_-8px_rgba(0,0,0,0.3)] transition-shadow duration-700 group-hover:shadow-[0_32px_64px_-16px_rgba(0,0,0,0.5)]">
+                        <div className="relative h-[340px] sm:h-[380px] md:h-[420px] w-full rounded-[1.5rem] sm:rounded-[1.8rem] md:rounded-[2.5rem] overflow-hidden bg-black shadow-[0_16px_32px_-8px_rgba(0,0,0,0.3)] transition-shadow duration-700 group-hover:shadow-[0_32px_64px_-16px_rgba(0,0,0,0.5)]">
                             <img
                                 src={service.image}
                                 loading="lazy"
@@ -370,7 +378,7 @@ const WhatWeDo = ({ progress }) => {
             </div>
 
             {/* ─── MOBILE PROGRESS DOTS ─── */}
-            <div className="absolute bottom-16 sm:bottom-20 left-1/2 -translate-x-1/2 z-30 md:hidden flex items-center gap-1.5 bg-black/10 backdrop-blur-sm rounded-full px-3 py-2">
+            <div className="absolute bottom-28 sm:bottom-32 left-1/2 -translate-x-1/2 z-30 md:hidden flex items-center gap-1.5 bg-black/10 backdrop-blur-sm rounded-full px-3 py-2">
                 {[...Array(services.length + 1)].map((_, i) => (
                     <div 
                         key={i} 

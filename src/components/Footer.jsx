@@ -26,126 +26,132 @@ const Footer = () => {
     };
 
     return (
-        <footer className="relative min-h-screen md:h-screen w-full bg-base text-secondary overflow-hidden flex flex-col px-6 sm:px-12 md:px-24 pt-10 md:pt-20 pb-8 sm:pb-12 border-t border-white/5 shadow-[0_-40px_80px_rgba(0,0,0,0.6)] group/footer">
+        <footer className="relative w-full bg-base text-secondary overflow-hidden flex flex-col px-6 sm:px-12 md:px-24 py-16 md:py-24 border-t border-white/5 shadow-[0_-40px_80px_rgba(0,0,0,0.6)] group/footer">
             
-            {/* 1. BRAND MONOLITH: MASSIVE IMPACT */}
-            <div className="relative z-10 w-full mb-8 md:mb-16">
+            {/* 1. BRAND MONOLITH: MASSIVE IMPACT FOR BRAND RECALL */}
+            <div className="relative z-10 w-full">
                 <motion.div
-                    initial={{ opacity: 0, y: 50 }}
+                    initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
-                    className="flex flex-col md:flex-row items-baseline justify-between gap-6"
+                    transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+                    className="flex flex-col md:flex-row md:items-end justify-between gap-6"
                 >
-                    <div className="overflow-hidden">
-                        <h2 className="text-5xl sm:text-8xl md:text-[14vw] font-serif font-black leading-[0.75] tracking-[-0.04em] text-white flex flex-col">
-                            <span className="italic">Niche &</span>
-                            <span className="text-accent ml-[0.5em] md:ml-[1em] relative">
-                                Form.
-                                <motion.div 
-                                    initial={{ scaleX: 0 }}
-                                    whileInView={{ scaleX: 1 }}
-                                    transition={{ duration: 1.5, delay: 0.5 }}
-                                    className="absolute -bottom-2 left-0 h-[2px] w-full bg-accent origin-left opacity-30" 
-                                />
-                            </span>
-                        </h2>
-                    </div>
+                    <h2 className="text-5xl sm:text-7xl md:text-[8vw] font-serif font-black leading-[0.75] tracking-[-0.04em] text-white flex flex-col sm:flex-row sm:items-baseline">
+                        <span className="italic">Niche</span>
+                        <span className="text-accent mx-2">&</span>
+                        <span>Form.</span>
+                    </h2>
                     
-                    <div className="max-w-[280px] md:max-w-md">
-                        <p className="text-white/40 text-[10px] md:text-sm font-medium uppercase tracking-[0.4em] leading-relaxed mb-6">
+                    <div className="max-w-sm">
+                        <p className="text-white/40 text-[10px] md:text-xs font-medium uppercase tracking-[0.4em] leading-relaxed mb-4">
                             Defining the intersection of <br /> utility and timeless elegance.
                         </p>
-                        <motion.button
-                            onClick={() => handleScroll(0.86)}
-                            whileHover={{ x: 10 }}
-                            className="flex items-center gap-4 text-accent group/cta"
-                        >
-                            <span className="text-[9px] md:text-[11px] font-black tracking-[0.6em] uppercase">Start a Project</span>
-                            <div className="w-8 h-8 rounded-full border border-accent/30 flex items-center justify-center group-hover/cta:bg-accent group-hover/cta:text-black transition-all">
-                                <ArrowUpRight className="w-3 h-3" />
-                            </div>
-                        </motion.button>
                     </div>
                 </motion.div>
             </div>
 
-            {/* 2. REFINED INFORMATION GRID */}
-            <div className="relative z-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-16 flex-1">
+            {/* Horizontal Line Divider */}
+            <div className="relative z-10 w-full h-[1px] bg-white/5 my-8 md:my-12" />
+
+            {/* 2. REFINED DIRECT CONTACT & LINKS GRID */}
+            <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start">
                 
-                {/* STUDIO ADDRESS */}
-                <div className="space-y-4 md:space-y-6 group/item">
-                    <div className="flex items-center gap-4">
-                        <div className="h-[1px] w-8 bg-accent/40 group-hover/item:w-12 transition-all duration-500" />
-                        <h4 className="text-[10px] font-black tracking-[0.5em] text-accent/60 uppercase">The Studio</h4>
-                    </div>
-                    <div className="space-y-3 text-white/80 text-lg md:text-2xl font-serif italic leading-snug">
-                        <p className="group-hover/item:text-white transition-colors duration-500">Suite 102, Design Quarter</p>
-                        <p className="group-hover/item:text-white transition-colors duration-500">Karnataka, Bangalore 560001</p>
-                        <div className="pt-2">
-                            <span className="inline-block px-3 py-1 bg-white/5 rounded-full text-[8px] tracking-[0.2em] font-sans uppercase text-white/40">Headquarters</span>
+                {/* COLUMN 1 — THE IMMERSIVE CONTACT HERO (5/12th Width) */}
+                <div className="lg:col-span-5 space-y-8">
+                    {/* Email Contact Block */}
+                    <div className="space-y-2 group/mail">
+                        <div className="flex items-center gap-3">
+                            <div className="w-1.5 h-1.5 rounded-full bg-accent/60" />
+                            <span className="text-[10px] font-black tracking-[0.4em] text-accent/60 uppercase">Project Enquiries</span>
                         </div>
+                        <a 
+                            href="mailto:hello@nicheandform.com" 
+                            className="block text-2xl sm:text-3xl md:text-[2.8vw] font-serif font-light italic leading-none text-white hover:text-accent transition-all duration-300 hover:translate-x-2 tracking-tight"
+                        >
+                            hello@nicheandform.com
+                        </a>
                     </div>
-                </div>
-
-                {/* CONTACT CHANNELS */}
-                <div className="space-y-4 md:space-y-6 group/item">
-                    <div className="flex items-center gap-4">
-                        <div className="h-[1px] w-8 bg-accent/40 group-hover/item:w-12 transition-all duration-500" />
-                        <h4 className="text-[10px] font-black tracking-[0.5em] text-accent/60 uppercase">Enquiries</h4>
-                    </div>
-                    <div className="space-y-4 text-white/80 text-lg md:text-2xl font-serif italic">
-                        <a href="mailto:hello@nicheandform.com" className="block hover:text-accent transition-all hover:translate-x-2 duration-300">hello@nicheandform.com</a>
-                        <a href="tel:+919876543210" className="block font-sans not-italic text-sm md:text-xl tracking-tighter group-hover/item:text-white transition-colors">+91 98765 43210</a>
-                    </div>
-                </div>
-
-                {/* EXPLORE NAVIGATION */}
-                <div className="space-y-4 md:space-y-6 group/item hidden lg:block">
-                    <div className="flex items-center gap-4">
-                        <div className="h-[1px] w-8 bg-accent/40 group-hover/item:w-12 transition-all duration-500" />
-                        <h4 className="text-[10px] font-black tracking-[0.5em] text-accent/60 uppercase">Explore</h4>
-                    </div>
-                    <nav className="grid grid-cols-1 gap-y-3">
-                        {navLinks.map((link, i) => (
-                            <button 
-                                key={i} 
-                                onClick={() => handleScroll(link.target)}
-                                className="text-[11px] font-bold tracking-[0.2em] uppercase text-white/30 hover:text-accent transition-colors duration-300 text-left w-fit"
-                            >
-                                {link.title}
-                            </button>
-                        ))}
-                    </nav>
-                </div>
-
-                {/* SOCIAL SIGNATURE */}
-                <div className="space-y-4 md:space-y-6 group/item flex flex-col justify-between items-start md:items-end lg:items-start">
-                    <div>
-                        <div className="flex items-center gap-4 mb-8">
-                            <div className="h-[1px] w-8 bg-accent/40 group-hover/item:w-12 transition-all duration-500" />
-                            <h4 className="text-[10px] font-black tracking-[0.5em] text-accent/60 uppercase">Journal</h4>
+                    
+                    {/* Phone Contact Block */}
+                    <div className="space-y-2 group/phone">
+                        <div className="flex items-center gap-3">
+                            <div className="w-1.5 h-1.5 rounded-full bg-accent/60" />
+                            <span className="text-[10px] font-black tracking-[0.4em] text-accent/60 uppercase">Direct Call & WhatsApp</span>
                         </div>
-                        <div className="flex gap-4 md:gap-6">
+                        <a 
+                            href="tel:+919876543210" 
+                            className="block text-xl sm:text-2xl md:text-[2vw] font-sans font-light leading-none text-white hover:text-accent transition-all duration-300 hover:translate-x-2 tracking-tight"
+                        >
+                            +91 98765 43210
+                        </a>
+                    </div>
+                </div>
+
+                {/* COLUMN 2 — PHYSICAL STUDIO ADDRESS (4/12th Width) */}
+                <div className="lg:col-span-4 space-y-4 group/studio">
+                    <div className="flex items-center gap-3">
+                        <MapPin className="w-3.5 h-3.5 text-accent/60 group-hover/studio:text-accent transition-colors" />
+                        <span className="text-[10px] font-black tracking-[0.4em] text-accent/60 uppercase">The Studio Address</span>
+                    </div>
+                    <div className="space-y-1 text-white/80 text-base md:text-xl font-serif italic leading-relaxed">
+                        <p className="group-hover/studio:text-white transition-colors duration-300">Suite 102, Design Quarter,</p>
+                        <p className="group-hover/studio:text-white transition-colors duration-300">Karnataka, Bangalore 560001, India.</p>
+                    </div>
+                    <div className="pt-1 flex items-center gap-6">
+                        <span className="inline-block px-3 py-1 bg-white/5 rounded-full text-[8px] tracking-[0.2em] font-sans uppercase text-white/40">Headquarters</span>
+                        <motion.a
+                            href="https://maps.google.com"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            whileHover={{ x: 5 }}
+                            className="flex items-center gap-2 text-accent text-[9px] font-black uppercase tracking-widest cursor-pointer"
+                        >
+                            <span>View on Map</span>
+                            <ArrowUpRight className="w-3 h-3" />
+                        </motion.a>
+                    </div>
+                </div>
+
+                {/* COLUMN 3 — QUICK LINKS & CONNECT (3/12th Width) */}
+                <div className="lg:col-span-3 space-y-6">
+                    <div className="space-y-2">
+                        <h4 className="text-[9px] font-black tracking-[0.4em] text-white/20 uppercase">Navigation</h4>
+                        <nav className="flex flex-wrap gap-x-4 gap-y-2">
+                            {navLinks.map((link, i) => (
+                                <button 
+                                    key={i} 
+                                    onClick={() => handleScroll(link.target)}
+                                    className="text-[10px] font-bold tracking-[0.2em] uppercase text-white/30 hover:text-accent transition-colors duration-300"
+                                >
+                                    {link.title}
+                                </button>
+                            ))}
+                        </nav>
+                    </div>
+
+                    <div className="space-y-2">
+                        <h4 className="text-[9px] font-black tracking-[0.4em] text-white/20 uppercase">Connect</h4>
+                        <div className="flex gap-3">
                             {socialLinks.map((social, i) => (
                                 <motion.a
                                     key={i}
                                     href={social.href}
-                                    whileHover={{ y: -5, scale: 1.1 }}
-                                    className="w-10 h-10 md:w-14 md:h-14 rounded-full border border-white/5 flex items-center justify-center hover:bg-white text-white/40 hover:text-black transition-all duration-500 relative group/icon"
+                                    whileHover={{ y: -3, scale: 1.05 }}
+                                    className="w-8 h-8 rounded-full border border-white/5 flex items-center justify-center hover:bg-white text-white/40 hover:text-black transition-all duration-500"
                                 >
-                                    <div className="relative z-10">{social.icon}</div>
+                                    {social.icon}
                                 </motion.a>
                             ))}
                         </div>
                     </div>
                 </div>
             </div>
-
-            {/* 3. FINAL SIGNATURE BAR */}
-            <div className="relative z-10 w-full pt-8 mt-auto border-t border-white/5 flex flex-col sm:flex-row justify-between items-center gap-6">
+            
+            {/* FINAL SIGNATURE BAR */}
+            <div className="relative z-10 w-full pt-8 mt-12 border-t border-white/5 flex flex-col sm:flex-row justify-between items-center gap-6">
                 <div className="flex flex-col sm:flex-row items-center gap-4 md:gap-12">
                     <p className="text-[9px] text-white/20 font-sans tracking-[0.3em] uppercase">
-                        © 2024 NICHE & FORM DESIGN STUDIO.
+                        © 2026 NICHE & FORM DESIGN STUDIO.
                     </p>
                     <div className="flex items-center gap-6 text-[9px] font-bold tracking-[0.2em] text-white/10 uppercase">
                         <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
@@ -165,7 +171,7 @@ const Footer = () => {
                 </motion.button>
             </div>
 
-            {/* DECORATIVE ELEMENTS */}
+            {/* DECORATIVE BACKGROUND GRADIENT */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[80%] bg-accent/5 blur-[120px] rounded-full pointer-events-none opacity-0 group-hover/footer:opacity-100 transition-opacity duration-1000" />
             
             {/* LARGE WATERMARK BACKGROUND */}
@@ -180,5 +186,3 @@ const Footer = () => {
 };
 
 export default Footer;
-
-

@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { motion, useTransform } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 
@@ -117,6 +117,7 @@ const WordReveal = ({ text, progress, range, className }) => {
 };
 
 const WhyUs = ({ progress }) => {
+    const [spaceType, setSpaceType] = useState("");
     // 7. SLOW FADE Logic: Start fading earlier to make it feel expensive
     const titleOpacity = useTransform(progress, [0, 0.1], [0, 1]); // Fast title reveal on entrance
     const titleY = useTransform(progress, [0, 0.1], [30, 0]);
@@ -141,7 +142,7 @@ const WhyUs = ({ progress }) => {
     const phrase3 = "We focus on clarity, honesty, and end-to-end execution, right from concept and layout options to on-site coordination. The result is a space that feels intentional, personal, and built to last.";
 
     return (
-        <div className="relative h-screen bg-[#FBF2C0] overflow-hidden flex items-center justify-center font-serif text-black">
+        <div className="relative h-screen bg-[#FBF2C0] overflow-hidden flex items-center justify-center font-sans text-black">
 
             {/* BACKGROUND: Drawing Texture & Elements */}
             <div className="absolute inset-0 opacity-10 pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/handmade-paper.png')]" />
@@ -237,11 +238,11 @@ const WhyUs = ({ progress }) => {
             >
                 <motion.div 
                     style={{ y: formY, scale: formScale }}
-                    className="w-full md:max-w-4xl min-h-screen md:min-h-0 md:h-[500px] flex flex-col md:flex-row bg-[#FBF2C0] md:rounded-[2.5rem] overflow-hidden md:border md:border-black/5 md:shadow-[0_60px_100px_-20px_rgba(0,0,0,0.15)] md:mx-6"
+                    className="w-full md:max-w-4xl min-h-screen md:min-h-0 md:h-[560px] flex flex-col md:flex-row bg-[#FBF2C0] md:rounded-[2.5rem] overflow-hidden md:border md:border-black/5 md:shadow-[0_60px_100px_-20px_rgba(0,0,0,0.15)] md:mx-6"
                 >
                     
                     {/* LEFT PANEL — Architectural Branding */}
-                    <div className="md:w-2/5 px-8 py-10 md:p-12 bg-black flex flex-col justify-between text-secondary relative overflow-hidden group/panel">
+                    <div className="md:w-2/5 pt-24 pb-10 px-8 md:px-12 md:py-16 bg-black flex flex-col justify-between text-secondary relative overflow-hidden group/panel">
                         {/* Huge Watermark */}
                         <div className="absolute -top-6 -left-6 text-[40vw] md:text-[25vw] font-black opacity-[0.04] select-none pointer-events-none tracking-tighter leading-none font-serif">N</div>
                         <div className="absolute -bottom-6 -right-6 text-[40vw] md:text-[25vw] font-black opacity-[0.04] select-none pointer-events-none tracking-tighter leading-none font-serif italic">F</div>
@@ -265,11 +266,11 @@ const WhyUs = ({ progress }) => {
                                 <div className="grid grid-cols-2 md:grid-cols-1 gap-8 md:gap-8">
                                     <div className="space-y-2 group/info cursor-pointer">
                                         <p className="text-[9px] font-black tracking-[0.3em] text-accent uppercase group-hover/info:translate-x-1 transition-transform">Location</p>
-                                        <p className="text-xs md:text-sm font-serif italic text-secondary/70">Bangalore HQ — Karnataka, India.</p>
+                                        <p className="text-xs md:text-sm font-sans text-secondary/80">Bangalore HQ — Karnataka, India.</p>
                                     </div>
                                     <div className="space-y-2 group/info cursor-pointer">
                                         <p className="text-[9px] font-black tracking-[0.3em] text-accent uppercase group-hover/info:translate-x-1 transition-transform">Digital</p>
-                                        <p className="text-xs md:text-sm font-serif italic text-secondary/70 underline underline-offset-4 decoration-accent/30">hello@nicheandform.com</p>
+                                        <p className="text-xs md:text-sm font-sans text-secondary/80 underline underline-offset-4 decoration-accent/30">hello@nicheandform.com</p>
                                     </div>
                                 </div>
                             </div>
@@ -277,51 +278,55 @@ const WhyUs = ({ progress }) => {
                     </div>
 
                     {/* RIGHT PANEL — Refined Form Grid */}
-                    <div className="md:w-3/5 flex-1 px-8 py-10 md:p-12 flex flex-col justify-center relative bg-white/[0.02]">
-                        <form className="space-y-10 md:space-y-12">
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-10 md:gap-y-14">
+                    <div className="md:w-3/5 flex-1 px-8 pt-12 pb-10 md:px-12 md:pt-16 md:pb-12 flex flex-col justify-start relative bg-white/[0.02]">
+                        <form className="space-y-12">
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-12">
                                 {/* Name Input */}
                                 <div className="group relative">
-                                    <label className="text-[10px] font-black tracking-[0.4em] text-black/40 uppercase group-focus-within:text-accent transition-all block mb-4">Your Name</label>
+                                    <label className="text-[10px] font-black tracking-[0.4em] text-black/65 uppercase group-focus-within:text-accent transition-all block mb-4">Your Name</label>
                                     <input
                                         type="text"
                                         placeholder="Name / Organization"
-                                        className="w-full bg-transparent border-b border-black/10 py-3 text-lg md:text-xl font-serif text-black focus:outline-none focus:border-accent transition-all placeholder:text-black/20 italic"
+                                        className="w-full bg-transparent border-b border-black/20 py-3 text-lg md:text-xl font-sans text-black/85 focus:text-black focus:outline-none focus:border-accent transition-all placeholder:text-black/25 placeholder:italic"
                                     />
                                     <div className="absolute bottom-0 left-0 h-[2px] w-0 bg-accent transition-all duration-700 group-focus-within:w-full" />
                                 </div>
 
                                 {/* Contact Input */}
                                 <div className="group relative">
-                                    <label className="text-[10px] font-black tracking-[0.4em] text-black/40 uppercase group-focus-within:text-accent transition-all block mb-4">Communication</label>
+                                    <label className="text-[10px] font-black tracking-[0.4em] text-black/65 uppercase group-focus-within:text-accent transition-all block mb-4">Communication</label>
                                     <input
                                         type="tel"
                                         placeholder="Email / WhatsApp"
-                                        className="w-full bg-transparent border-b border-black/10 py-3 text-lg md:text-xl font-serif text-black focus:outline-none focus:border-accent transition-all placeholder:text-black/20 italic"
+                                        className="w-full bg-transparent border-b border-black/20 py-3 text-lg md:text-xl font-sans text-black/85 focus:text-black focus:outline-none focus:border-accent transition-all placeholder:text-black/25 placeholder:italic"
                                     />
                                     <div className="absolute bottom-0 left-0 h-[2px] w-0 bg-accent transition-all duration-700 group-focus-within:w-full" />
                                 </div>
 
                                 {/* Project Type */}
                                 <div className="group relative">
-                                    <label className="text-[10px] font-black tracking-[0.4em] text-black/40 uppercase group-focus-within:text-accent transition-all block mb-4">Space Type</label>
-                                    <select className="w-full bg-transparent border-b border-black/10 py-3 text-lg md:text-xl font-serif text-black focus:outline-none focus:border-accent transition-all appearance-none cursor-pointer italic text-black/40 focus:text-black">
-                                        <option className="bg-secondary" disabled selected>Nature of Inquiry</option>
-                                        <option className="bg-secondary">High-End Residential</option>
-                                        <option className="bg-secondary">Boutique Commercial</option>
-                                        <option className="bg-secondary">Hospitality & Leisure</option>
-                                        <option className="bg-secondary">Bespoke Interior</option>
+                                    <label className="text-[10px] font-black tracking-[0.4em] text-black/65 uppercase group-focus-within:text-accent transition-all block mb-4">Space Type</label>
+                                    <select 
+                                        value={spaceType}
+                                        onChange={(e) => setSpaceType(e.target.value)}
+                                        className={`w-full bg-transparent border-b border-black/20 py-3 text-lg md:text-xl font-sans focus:outline-none focus:border-accent transition-all appearance-none cursor-pointer ${spaceType ? "text-black/85" : "text-black/30 italic"}`}
+                                    >
+                                        <option value="" className="bg-secondary" disabled>Nature of Inquiry</option>
+                                        <option className="bg-secondary" value="residential">High-End Residential</option>
+                                        <option className="bg-secondary" value="commercial">Boutique Commercial</option>
+                                        <option className="bg-secondary" value="hospitality">Hospitality & Leisure</option>
+                                        <option className="bg-secondary" value="interior">Bespoke Interior</option>
                                     </select>
                                     <div className="absolute bottom-0 left-0 h-[2px] w-0 bg-accent transition-all duration-700 group-focus-within:w-full" />
                                 </div>
 
                                 {/* Timeline */}
                                 <div className="group relative">
-                                    <label className="text-[10px] font-black tracking-[0.4em] text-black/40 uppercase group-focus-within:text-accent transition-all block mb-4">Timeframe</label>
+                                    <label className="text-[10px] font-black tracking-[0.4em] text-black/65 uppercase group-focus-within:text-accent transition-all block mb-4">Timeframe</label>
                                     <input
                                         type="text"
                                         placeholder="Estimated Start Date"
-                                        className="w-full bg-transparent border-b border-black/10 py-3 text-lg md:text-xl font-serif text-black focus:outline-none focus:border-accent transition-all placeholder:text-black/20 italic"
+                                        className="w-full bg-transparent border-b border-black/20 py-3 text-lg md:text-xl font-sans text-black/85 focus:text-black focus:outline-none focus:border-accent transition-all placeholder:text-black/25 placeholder:italic"
                                     />
                                     <div className="absolute bottom-0 left-0 h-[2px] w-0 bg-accent transition-all duration-700 group-focus-within:w-full" />
                                 </div>
@@ -329,11 +334,11 @@ const WhyUs = ({ progress }) => {
 
                             {/* Brief Textarea */}
                             <div className="group relative">
-                                <label className="text-[10px] font-black tracking-[0.4em] text-black/40 uppercase group-focus-within:text-accent transition-all block mb-4">Initial Thoughts</label>
+                                <label className="text-[10px] font-black tracking-[0.4em] text-black/65 uppercase group-focus-within:text-accent transition-all block mb-4">Initial Thoughts</label>
                                 <textarea
                                     rows="1"
                                     placeholder="Briefly describe your dream space..."
-                                    className="w-full bg-transparent border-b border-black/10 py-3 text-lg md:text-xl font-serif text-black focus:outline-none focus:border-accent transition-all resize-none placeholder:text-black/20 italic min-h-[60px]"
+                                    className="w-full bg-transparent border-b border-black/20 py-3 text-lg md:text-xl font-sans text-black/85 focus:text-black focus:outline-none focus:border-accent transition-all resize-none placeholder:text-black/25 placeholder:italic min-h-[60px]"
                                 ></textarea>
                                 <div className="absolute bottom-0 left-0 h-[2px] w-0 bg-accent transition-all duration-700 group-focus-within:w-full" />
                             </div>
