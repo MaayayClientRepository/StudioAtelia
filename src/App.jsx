@@ -166,7 +166,7 @@ function App() {
                     display: useTransform(scrollYProgress, [0.95, 1], ["none", "block"]),
                     willChange: "transform"
                 }}
-                className="fixed inset-0 w-full h-screen rounded-t-[2rem] sm:rounded-t-[3rem] md:rounded-t-[5rem] overflow-hidden"
+                className="fixed inset-0 w-full h-screen rounded-t-[2rem] sm:rounded-t-[3rem] md:rounded-t-[5rem] overflow-hidden bg-base"
             >
                 <Footer />
             </motion.div>

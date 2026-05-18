@@ -38,7 +38,7 @@ const Footer = () => {
                 >
                     <h2 className="text-5xl sm:text-7xl md:text-[8vw] font-serif font-black leading-[0.75] tracking-[-0.04em] text-white flex flex-col sm:flex-row sm:items-baseline">
                         <span className="italic">Niche</span>
-                        <span className="text-accent mx-2">&</span>
+                        <span className="text-white/30 italic font-light mx-2">&</span>
                         <span>Form.</span>
                     </h2>
                     
@@ -61,12 +61,12 @@ const Footer = () => {
                     {/* Email Contact Block */}
                     <div className="space-y-2 group/mail">
                         <div className="flex items-center gap-3">
-                            <div className="w-1.5 h-1.5 rounded-full bg-accent/60" />
-                            <span className="text-[10px] font-black tracking-[0.4em] text-accent/60 uppercase">Project Enquiries</span>
+                            <div className="w-1.5 h-1.5 rounded-full bg-white/20" />
+                            <span className="text-[10px] font-black tracking-[0.4em] text-white/40 uppercase">Project Enquiries</span>
                         </div>
                         <a 
                             href="mailto:hello@nicheandform.com" 
-                            className="block text-2xl sm:text-3xl md:text-[2.8vw] font-serif font-light italic leading-none text-white hover:text-accent transition-all duration-300 hover:translate-x-2 tracking-tight"
+                            className="block text-2xl sm:text-3xl md:text-[2.8vw] font-serif font-light italic leading-none text-white hover:text-white/70 transition-all duration-300 hover:translate-x-2 tracking-tight"
                         >
                             hello@nicheandform.com
                         </a>
@@ -75,12 +75,12 @@ const Footer = () => {
                     {/* Phone Contact Block */}
                     <div className="space-y-2 group/phone">
                         <div className="flex items-center gap-3">
-                            <div className="w-1.5 h-1.5 rounded-full bg-accent/60" />
-                            <span className="text-[10px] font-black tracking-[0.4em] text-accent/60 uppercase">Direct Call & WhatsApp</span>
+                            <div className="w-1.5 h-1.5 rounded-full bg-white/20" />
+                            <span className="text-[10px] font-black tracking-[0.4em] text-white/40 uppercase">Direct Call & WhatsApp</span>
                         </div>
                         <a 
                             href="tel:+919876543210" 
-                            className="block text-xl sm:text-2xl md:text-[2vw] font-sans font-light leading-none text-white hover:text-accent transition-all duration-300 hover:translate-x-2 tracking-tight"
+                            className="block text-xl sm:text-2xl md:text-[2vw] font-sans font-light leading-none text-white hover:text-white/70 transition-all duration-300 hover:translate-x-2 tracking-tight"
                         >
                             +91 98765 43210
                         </a>
@@ -90,8 +90,8 @@ const Footer = () => {
                 {/* COLUMN 2 — PHYSICAL STUDIO ADDRESS (4/12th Width) */}
                 <div className="lg:col-span-4 space-y-4 group/studio">
                     <div className="flex items-center gap-3">
-                        <MapPin className="w-3.5 h-3.5 text-accent/60 group-hover/studio:text-accent transition-colors" />
-                        <span className="text-[10px] font-black tracking-[0.4em] text-accent/60 uppercase">The Studio Address</span>
+                        <MapPin className="w-3.5 h-3.5 text-white/30 group-hover/studio:text-white/70 transition-colors" />
+                        <span className="text-[10px] font-black tracking-[0.4em] text-white/40 uppercase">The Studio Address</span>
                     </div>
                     <div className="space-y-1 text-white/80 text-base md:text-xl font-serif italic leading-relaxed">
                         <p className="group-hover/studio:text-white transition-colors duration-300">Suite 102, Design Quarter,</p>
@@ -104,7 +104,7 @@ const Footer = () => {
                             target="_blank"
                             rel="noopener noreferrer"
                             whileHover={{ x: 5 }}
-                            className="flex items-center gap-2 text-accent text-[9px] font-black uppercase tracking-widest cursor-pointer"
+                            className="flex items-center gap-2 text-white/50 hover:text-white/90 text-[9px] font-black uppercase tracking-widest cursor-pointer"
                         >
                             <span>View on Map</span>
                             <ArrowUpRight className="w-3 h-3" />
@@ -121,7 +121,7 @@ const Footer = () => {
                                 <button 
                                     key={i} 
                                     onClick={() => handleScroll(link.target)}
-                                    className="text-[10px] font-bold tracking-[0.2em] uppercase text-white/30 hover:text-accent transition-colors duration-300"
+                                    className="text-[10px] font-bold tracking-[0.2em] uppercase text-white/30 hover:text-white transition-colors duration-300"
                                 >
                                     {link.title}
                                 </button>
@@ -164,7 +164,7 @@ const Footer = () => {
                     whileHover={{ y: -5 }}
                     className="flex flex-col items-center gap-2 group cursor-pointer"
                 >
-                    <div className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-accent group-hover:bg-accent group-hover:text-black transition-all duration-500">
+                    <div className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/40 group-hover:bg-white group-hover:text-black transition-all duration-500">
                         <ArrowUp className="w-4 h-4" />
                     </div>
                     <span className="text-[8px] font-black tracking-[0.4em] text-white/20 uppercase group-hover:text-white transition-colors">Top</span>
@@ -172,7 +172,7 @@ const Footer = () => {
             </div>
 
             {/* DECORATIVE BACKGROUND GRADIENT */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[80%] bg-accent/5 blur-[120px] rounded-full pointer-events-none opacity-0 group-hover/footer:opacity-100 transition-opacity duration-1000" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[80%] bg-white/[0.02] blur-[120px] rounded-full pointer-events-none opacity-0 group-hover/footer:opacity-100 transition-opacity duration-1000" />
             
             {/* LARGE WATERMARK BACKGROUND */}
             <div className="absolute bottom-[-5%] right-[-2%] opacity-[0.03] pointer-events-none select-none z-0">
