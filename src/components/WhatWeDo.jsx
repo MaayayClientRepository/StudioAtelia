@@ -255,9 +255,9 @@ const WhatWeDo = ({ progress }) => {
             </div>
 
             {/* MOBILE PERSISTENT HEADER */}
-            <div className="absolute top-16 left-6 z-30 pointer-events-none md:hidden pt-4">
-                <span className="text-[8px] sm:text-[10px] font-black tracking-[0.5em] text-[#BFA88F] uppercase italic mb-1 block opacity-60">Services Matrix</span>
-                <h2 className="text-xl sm:text-2xl font-black text-black tracking-tighter uppercase leading-[0.8]">
+            <div className="absolute top-12 left-5 z-30 pointer-events-none md:hidden">
+                <span className="text-[8px] font-black tracking-[0.5em] text-[#BFA88F] uppercase italic mb-0.5 block opacity-60">Services Matrix</span>
+                <h2 className="text-lg font-black text-black tracking-tighter uppercase leading-[0.85]">
                     WHAT <span className="text-transparent" style={{ WebkitTextStroke: "1px #000000" }}>WE DO.</span>
                 </h2>
             </div>
@@ -271,11 +271,11 @@ const WhatWeDo = ({ progress }) => {
                 className="flex gap-4 sm:gap-6 md:gap-20 px-4 sm:px-6 md:px-[10vw] relative z-10 w-max"
             >
                 {/* Intro Block */}
-                <div className="flex-shrink-0 w-[200px] sm:w-[260px] md:w-[400px] flex flex-col justify-center">
-                    <h2 className="text-3xl sm:text-4xl md:text-8xl font-black text-black leading-[0.8] tracking-tighter uppercase mb-4 sm:mb-6 md:mb-12">
+                <div className="flex-shrink-0 w-[160px] sm:w-[220px] md:w-[400px] flex flex-col justify-center">
+                    <h2 className="text-2xl sm:text-3xl md:text-8xl font-black text-black leading-[0.85] tracking-tighter uppercase mb-3 sm:mb-5 md:mb-12">
                         What <br /> We <br /> Do?
                     </h2>
-                    <p className="text-black/60 font-medium text-[9px] md:text-sm uppercase tracking-widest border-l-2 md:border-l-4 border-black pl-3 md:pl-8 max-w-[160px] sm:max-w-[180px] md:max-w-xs font-sans">
+                    <p className="text-black/60 font-medium text-[8px] md:text-sm uppercase tracking-widest border-l-2 md:border-l-4 border-black pl-3 md:pl-8 max-w-[140px] sm:max-w-[180px] md:max-w-xs font-sans leading-snug">
                         Luxury spatial design companions. We don't just build, we curate experiences.
                     </p>
                 </div>
@@ -292,9 +292,9 @@ const WhatWeDo = ({ progress }) => {
                         }}
                         viewport={{ once: true, margin: "-10%" }}
                         key={i}
-                        className="flex-shrink-0 w-[75vw] sm:w-[60vw] md:w-[320px] group will-change-transform"
+                        className="flex-shrink-0 w-[72vw] sm:w-[58vw] md:w-[320px] group will-change-transform"
                     >
-                        <div className="relative h-[340px] sm:h-[380px] md:h-[420px] w-full rounded-[1.5rem] sm:rounded-[1.8rem] md:rounded-[2.5rem] overflow-hidden bg-black shadow-[0_16px_32px_-8px_rgba(0,0,0,0.3)] transition-shadow duration-700 group-hover:shadow-[0_32px_64px_-16px_rgba(0,0,0,0.5)]">
+                        <div className="relative h-[310px] sm:h-[360px] md:h-[420px] w-full rounded-[1.5rem] sm:rounded-[1.8rem] md:rounded-[2.5rem] overflow-hidden bg-black shadow-[0_16px_32px_-8px_rgba(0,0,0,0.3)] transition-shadow duration-700 group-hover:shadow-[0_32px_64px_-16px_rgba(0,0,0,0.5)]">
                             <img
                                 src={service.image}
                                 loading="lazy"
@@ -378,7 +378,7 @@ const WhatWeDo = ({ progress }) => {
             </div>
 
             {/* ─── MOBILE PROGRESS DOTS ─── */}
-            <div className="absolute bottom-28 sm:bottom-32 left-1/2 -translate-x-1/2 z-30 md:hidden flex items-center gap-1.5 bg-black/10 backdrop-blur-sm rounded-full px-3 py-2">
+            <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-30 md:hidden flex items-center gap-1.5 bg-black/10 backdrop-blur-sm rounded-full px-3 py-2">
                 {[...Array(services.length + 1)].map((_, i) => (
                     <div 
                         key={i} 

@@ -25,6 +25,7 @@
     "lenis": "^1.3.16",
     "lucide-react": "^0.562.0",
     "motion": "^12.23.26",
+    "playwright": "^1.60.0",
     "postprocessing": "^6.38.2",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",

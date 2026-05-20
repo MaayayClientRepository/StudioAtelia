@@ -26,7 +26,7 @@ const Footer = () => {
     };
 
     return (
-        <footer className="relative w-full bg-base text-secondary overflow-hidden flex flex-col px-6 sm:px-12 md:px-24 py-16 md:py-24 border-t border-white/5 shadow-[0_-40px_80px_rgba(0,0,0,0.6)] group/footer">
+        <footer className="relative w-full bg-base text-secondary overflow-hidden flex flex-col px-5 sm:px-12 md:px-24 py-10 md:py-24 border-t border-white/5 shadow-[0_-40px_80px_rgba(0,0,0,0.6)] group/footer">
             
             {/* 1. BRAND MONOLITH: MASSIVE IMPACT FOR BRAND RECALL */}
             <div className="relative z-10 w-full">
@@ -51,10 +51,10 @@ const Footer = () => {
             </div>
 
             {/* Horizontal Line Divider */}
-            <div className="relative z-10 w-full h-[1px] bg-white/5 my-8 md:my-12" />
+            <div className="relative z-10 w-full h-[1px] bg-white/5 my-5 md:my-12" />
 
             {/* 2. REFINED DIRECT CONTACT & LINKS GRID */}
-            <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start">
+            <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-7 lg:gap-16 items-start">
                 
                 {/* COLUMN 1 — THE IMMERSIVE CONTACT HERO (5/12th Width) */}
                 <div className="lg:col-span-5 space-y-8">
@@ -148,7 +148,7 @@ const Footer = () => {
             </div>
             
             {/* FINAL SIGNATURE BAR */}
-            <div className="relative z-10 w-full pt-8 mt-12 border-t border-white/5 flex flex-col sm:flex-row justify-between items-center gap-6">
+            <div className="relative z-10 w-full pt-5 mt-7 md:mt-12 md:pt-8 border-t border-white/5 flex flex-col sm:flex-row justify-between items-center gap-4 md:gap-6">
                 <div className="flex flex-col sm:flex-row items-center gap-4 md:gap-12">
                     <p className="text-[9px] text-white/20 font-sans tracking-[0.3em] uppercase">
                         © 2026 NICHE & FORM DESIGN STUDIO.

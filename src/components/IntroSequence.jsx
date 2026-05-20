@@ -37,7 +37,7 @@ const IntroSequence = ({ progress }) => {
                     className="px-6 text-center max-w-[95vw] flex flex-col items-center overflow-visible"
                 >
                     {/* The Art of Living - Pre-title */}
-                    <div className="flex items-center justify-center gap-4 mb-8 opacity-60">
+                    <div className="flex items-center justify-center gap-4 mb-3 md:mb-8 opacity-60">
                         <motion.div style={{ backgroundColor: textColor }} className="h-[1px] w-6 md:w-10" />
                         <motion.span
                             style={{ color: textColor }}

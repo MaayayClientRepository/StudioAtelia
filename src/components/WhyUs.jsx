@@ -7,7 +7,7 @@ import { ArrowUpRight } from "lucide-react";
  * Theme: "Moodboard Cream" - inspired by the current beige design injection.
  * Typography: Playfair Display + Reactive Word Reveal
  */
-const FloatingSketches = ({ progress }) => {
+const FloatingSketches = ({ progress, isMobile }) => {
     return (
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
             {/* Chair Sketch */}
@@ -15,7 +15,7 @@ const FloatingSketches = ({ progress }) => {
                 style={{
                     y: useTransform(progress, [0, 1], [150, -150]),
                     rotate: useTransform(progress, [0, 1], [-5, 15]),
-                    opacity: 0.1,
+                    opacity: isMobile ? 0.18 : 0.1,
                     willChange: "transform, opacity"
                 }}
                 className="absolute top-[10%] left-[8%] w-48 h-48 text-black"
@@ -30,7 +30,7 @@ const FloatingSketches = ({ progress }) => {
                 style={{
                     y: useTransform(progress, [0, 1], [100, -100]),
                     rotate: useTransform(progress, [0, 1], [20, -20]),
-                    opacity: 0.08,
+                    opacity: isMobile ? 0.15 : 0.08,
                     willChange: "transform, opacity"
                 }}
                 className="absolute top-[60%] right-[12%] w-32 h-32 text-black"
@@ -45,7 +45,7 @@ const FloatingSketches = ({ progress }) => {
                 style={{
                     y: useTransform(progress, [0, 1], [400, -200]),
                     rotate: useTransform(progress, [0, 1], [-5, 10]),
-                    opacity: 0.08,
+                    opacity: isMobile ? 0.15 : 0.08,
                     willChange: "transform, opacity"
                 }}
                 className="absolute top-[75%] left-[25%] w-64 h-32 text-black"
@@ -60,7 +60,7 @@ const FloatingSketches = ({ progress }) => {
                 style={{
                     y: useTransform(progress, [0, 1], [250, -250]),
                     rotate: useTransform(progress, [0, 1], [0, 45]),
-                    opacity: 0.12,
+                    opacity: isMobile ? 0.22 : 0.12,
                     willChange: "transform, opacity"
                 }}
                 className="absolute bottom-[15%] left-[15%] w-40 h-40 text-black"
@@ -118,6 +118,16 @@ const WordReveal = ({ text, progress, range, className }) => {
 
 const WhyUs = ({ progress }) => {
     const [spaceType, setSpaceType] = useState("");
+    const [isMobile, setIsMobile] = useState(false);
+
+    React.useEffect(() => {
+        const checkMobile = () => {
+            setIsMobile(window.innerWidth < 768);
+        };
+        checkMobile();
+        window.addEventListener("resize", checkMobile);
+        return () => window.removeEventListener("resize", checkMobile);
+    }, []);
     // 7. SLOW FADE Logic: Start fading earlier to make it feel expensive
     const titleOpacity = useTransform(progress, [0, 0.1], [0, 1]); // Fast title reveal on entrance
     const titleY = useTransform(progress, [0, 0.1], [30, 0]);
@@ -135,7 +145,9 @@ const WhyUs = ({ progress }) => {
     const formY = useTransform(progress, [1.2, 1.5], [100, -60]); 
     const formScale = useTransform(progress, [1.2, 1.5], [1.1, 1]); 
 
-    const sketchOpacity = useTransform(progress, [1.1, 1.25], [0.1, 0]);
+    const sketchOpacityMobile = useTransform(progress, [1.1, 1.25], [0.85, 0]);
+    const sketchOpacityDesktop = useTransform(progress, [1.1, 1.25], [0.1, 0]);
+    const sketchOpacity = isMobile ? sketchOpacityMobile : sketchOpacityDesktop;
 
     const phrase1 = "At Niche & Form Design Studio, we believe good design starts long before colours and finishes come into play. We take the time to understand how you live, move, and use your space—because a home should work beautifully.";
     const phrase2 = "Our approach is rooted in thoughtful planning, smart layouts, and practical storage, paired with a refined, modern aesthetic that feels elegant without being excessive.";
@@ -148,13 +160,13 @@ const WhyUs = ({ progress }) => {
             <div className="absolute inset-0 opacity-10 pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/handmade-paper.png')]" />
 
             <motion.div style={{ opacity: sketchOpacity }}>
-                <FloatingSketches progress={progress} />
+                <FloatingSketches progress={progress} isMobile={isMobile} />
             </motion.div>
 
             {/* PHILOSOPHY TEXT WRAPPER */}
             <motion.div
                 style={{ opacity: philosophyOpacity }}
-                className="absolute inset-0 z-10 flex flex-col items-center justify-start pointer-events-none px-6 pt-[5vh] sm:pt-[7vh] pb-24"
+                className="absolute inset-0 z-10 flex flex-col items-center justify-center pointer-events-none px-5 py-4 sm:py-8 md:pt-[5vh] md:pb-10 md:justify-start"
             >
                 <div className="max-w-6xl w-full flex flex-col items-center">
                     
@@ -164,16 +176,16 @@ const WhyUs = ({ progress }) => {
                             opacity: useTransform(progress, [0, 0.1, 1.0, 1.15], [0, 1, 1, 0]),
                             y: titleY 
                         }} 
-                        className="text-center space-y-2 sm:space-y-4 mb-[4vh] md:mb-[6vh]"
+                        className="text-center space-y-0.5 sm:space-y-3 mb-[3vh] md:mb-[6vh]"
                     >
-                        <span className="text-[10px] sm:text-[14px] font-sans font-extrabold tracking-[0.5em] sm:tracking-[0.8em] text-black/40 uppercase block">Our Philosophy</span>
-                        <h2 className="text-4xl sm:text-7xl md:text-[9.5rem] font-serif text-black leading-[0.85] font-black tracking-tighter">
+                        <span className="text-[9px] sm:text-[14px] font-sans font-extrabold tracking-[0.4em] sm:tracking-[0.8em] text-black/40 uppercase block">Our Philosophy</span>
+                        <h2 className="text-3xl sm:text-7xl md:text-[9.5rem] font-serif text-black leading-[0.85] font-black tracking-tighter">
                             Why <span className="italic font-light text-black">Us?</span>
                         </h2>
                     </motion.div>
 
-                    {/* Sequential Content Blocks - Moved up slightly */}
-                    <div className="relative w-full h-[45vh] flex items-center justify-center">
+                    {/* Sequential Content Blocks */}
+                    <div className="relative w-full h-[32vh] sm:h-60 md:h-[45vh] flex items-center justify-center">
                         
                         {/* Phrase 1 */}
                         <motion.div 
@@ -187,7 +199,7 @@ const WhyUs = ({ progress }) => {
                                 text={phrase1}
                                 progress={progress}
                                 range={[0.15, 0.38]}
-                                className="text-base sm:text-xl md:text-[2rem] lg:text-[2.25rem] leading-[1.45] md:leading-[1.6] text-black font-sans font-medium text-center tracking-tight max-w-4xl"
+                                className="text-[16px] sm:text-xl md:text-[2rem] lg:text-[2.25rem] leading-[1.6] text-black font-sans font-medium text-center tracking-tight max-w-4xl px-4"
                             />
                         </motion.div>
 
@@ -203,7 +215,7 @@ const WhyUs = ({ progress }) => {
                                 text={phrase2}
                                 progress={progress}
                                 range={[0.46, 0.68]}
-                                className="text-base sm:text-xl md:text-[2rem] lg:text-[2.25rem] leading-[1.45] md:leading-[1.6] text-black font-sans font-medium text-center tracking-tight max-w-4xl"
+                                className="text-[16px] sm:text-xl md:text-[2rem] lg:text-[2.25rem] leading-[1.6] text-black font-sans font-medium text-center tracking-tight max-w-4xl px-4"
                             />
                         </motion.div>
 
@@ -219,7 +231,7 @@ const WhyUs = ({ progress }) => {
                                 text={phrase3}
                                 progress={progress}
                                 range={[0.76, 0.98]}
-                                className="text-base sm:text-xl md:text-[2rem] lg:text-[2.25rem] leading-[1.45] md:leading-[1.6] text-black font-sans font-medium text-center tracking-tight max-w-4xl"
+                                className="text-[16px] sm:text-xl md:text-[2rem] lg:text-[2.25rem] leading-[1.6] text-black font-sans font-medium text-center tracking-tight max-w-4xl px-4"
                             />
                         </motion.div>
 
@@ -238,11 +250,11 @@ const WhyUs = ({ progress }) => {
             >
                 <motion.div 
                     style={{ y: formY, scale: formScale }}
-                    className="w-full md:max-w-4xl min-h-screen md:min-h-0 md:h-[560px] flex flex-col md:flex-row bg-[#FBF2C0] md:rounded-[2.5rem] overflow-hidden md:border md:border-black/5 md:shadow-[0_60px_100px_-20px_rgba(0,0,0,0.15)] md:mx-6"
+                    className="w-full md:max-w-4xl min-h-screen md:min-h-0 md:h-[560px] flex flex-col md:flex-row bg-[#FBF2C0] md:rounded-[2.5rem] overflow-hidden md:border md:border-black/5 md:shadow-[0_60px_100px_-20px_rgba(0,0,0,0.15)] md:mx-6 overflow-y-auto"
                 >
                     
                     {/* LEFT PANEL — Architectural Branding */}
-                    <div className="md:w-2/5 pt-24 pb-10 px-8 md:px-12 md:py-16 bg-black flex flex-col justify-between text-secondary relative overflow-hidden group/panel">
+                    <div className="md:w-2/5 pt-14 pb-8 px-7 md:px-12 md:py-16 bg-black flex flex-col justify-between text-secondary relative overflow-hidden group/panel">
                         {/* Huge Watermark */}
                         <div className="absolute -top-6 -left-6 text-[40vw] md:text-[25vw] font-black opacity-[0.04] select-none pointer-events-none tracking-tighter leading-none font-serif">N</div>
                         <div className="absolute -bottom-6 -right-6 text-[40vw] md:text-[25vw] font-black opacity-[0.04] select-none pointer-events-none tracking-tighter leading-none font-serif italic">F</div>
@@ -261,8 +273,8 @@ const WhyUs = ({ progress }) => {
                             </p>
                         </div>
 
-                        <div className="relative z-10 pt-10 md:pt-0">
-                            <div className="space-y-6 md:space-y-8 border-t border-white/10 pt-10">
+                        <div className="relative z-10 pt-5 md:pt-0">
+                            <div className="space-y-4 md:space-y-8 border-t border-white/10 pt-5 md:pt-10">
                                 <div className="grid grid-cols-2 md:grid-cols-1 gap-8 md:gap-8">
                                     <div className="space-y-2 group/info cursor-pointer">
                                         <p className="text-[9px] font-black tracking-[0.3em] text-accent uppercase group-hover/info:translate-x-1 transition-transform">Location</p>
@@ -278,38 +290,38 @@ const WhyUs = ({ progress }) => {
                     </div>
 
                     {/* RIGHT PANEL — Refined Form Grid */}
-                    <div className="md:w-3/5 flex-1 px-8 pt-12 pb-10 md:px-12 md:pt-16 md:pb-12 flex flex-col justify-start relative bg-white/[0.02]">
-                        <form className="space-y-12">
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-12">
+                    <div className="md:w-3/5 flex-1 px-7 pt-8 pb-8 md:px-12 md:pt-16 md:pb-12 flex flex-col justify-start relative bg-white/[0.02]">
+                        <form className="space-y-6 md:space-y-12">
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-6 md:gap-y-12">
                                 {/* Name Input */}
                                 <div className="group relative">
-                                    <label className="text-[10px] font-black tracking-[0.4em] text-black/65 uppercase group-focus-within:text-accent transition-all block mb-4">Your Name</label>
+                                    <label className="text-[10px] font-black tracking-[0.4em] text-black/65 uppercase group-focus-within:text-accent transition-all block mb-2 md:mb-4">Your Name</label>
                                     <input
                                         type="text"
                                         placeholder="Name / Organization"
-                                        className="w-full bg-transparent border-b border-black/20 py-3 text-lg md:text-xl font-sans text-black/85 focus:text-black focus:outline-none focus:border-accent transition-all placeholder:text-black/25 placeholder:italic"
+                                        className="w-full bg-transparent border-b border-black/20 py-2 md:py-3 text-base md:text-xl font-sans text-black/85 focus:text-black focus:outline-none focus:border-accent transition-all placeholder:text-black/25 placeholder:italic"
                                     />
                                     <div className="absolute bottom-0 left-0 h-[2px] w-0 bg-accent transition-all duration-700 group-focus-within:w-full" />
                                 </div>
 
                                 {/* Contact Input */}
                                 <div className="group relative">
-                                    <label className="text-[10px] font-black tracking-[0.4em] text-black/65 uppercase group-focus-within:text-accent transition-all block mb-4">Communication</label>
+                                    <label className="text-[10px] font-black tracking-[0.4em] text-black/65 uppercase group-focus-within:text-accent transition-all block mb-2 md:mb-4">Communication</label>
                                     <input
                                         type="tel"
                                         placeholder="Email / WhatsApp"
-                                        className="w-full bg-transparent border-b border-black/20 py-3 text-lg md:text-xl font-sans text-black/85 focus:text-black focus:outline-none focus:border-accent transition-all placeholder:text-black/25 placeholder:italic"
+                                        className="w-full bg-transparent border-b border-black/20 py-2 md:py-3 text-base md:text-xl font-sans text-black/85 focus:text-black focus:outline-none focus:border-accent transition-all placeholder:text-black/25 placeholder:italic"
                                     />
                                     <div className="absolute bottom-0 left-0 h-[2px] w-0 bg-accent transition-all duration-700 group-focus-within:w-full" />
                                 </div>
 
                                 {/* Project Type */}
                                 <div className="group relative">
-                                    <label className="text-[10px] font-black tracking-[0.4em] text-black/65 uppercase group-focus-within:text-accent transition-all block mb-4">Space Type</label>
+                                    <label className="text-[10px] font-black tracking-[0.4em] text-black/65 uppercase group-focus-within:text-accent transition-all block mb-2 md:mb-4">Space Type</label>
                                     <select 
                                         value={spaceType}
                                         onChange={(e) => setSpaceType(e.target.value)}
-                                        className={`w-full bg-transparent border-b border-black/20 py-3 text-lg md:text-xl font-sans focus:outline-none focus:border-accent transition-all appearance-none cursor-pointer ${spaceType ? "text-black/85" : "text-black/30 italic"}`}
+                                        className={`w-full bg-transparent border-b border-black/20 py-2 md:py-3 text-base md:text-xl font-sans focus:outline-none focus:border-accent transition-all appearance-none cursor-pointer ${spaceType ? "text-black/85" : "text-black/30 italic"}`}
                                     >
                                         <option value="" className="bg-secondary" disabled>Nature of Inquiry</option>
                                         <option className="bg-secondary" value="residential">High-End Residential</option>
@@ -322,11 +334,11 @@ const WhyUs = ({ progress }) => {
 
                                 {/* Timeline */}
                                 <div className="group relative">
-                                    <label className="text-[10px] font-black tracking-[0.4em] text-black/65 uppercase group-focus-within:text-accent transition-all block mb-4">Timeframe</label>
+                                    <label className="text-[10px] font-black tracking-[0.4em] text-black/65 uppercase group-focus-within:text-accent transition-all block mb-2 md:mb-4">Timeframe</label>
                                     <input
                                         type="text"
                                         placeholder="Estimated Start Date"
-                                        className="w-full bg-transparent border-b border-black/20 py-3 text-lg md:text-xl font-sans text-black/85 focus:text-black focus:outline-none focus:border-accent transition-all placeholder:text-black/25 placeholder:italic"
+                                        className="w-full bg-transparent border-b border-black/20 py-2 md:py-3 text-base md:text-xl font-sans text-black/85 focus:text-black focus:outline-none focus:border-accent transition-all placeholder:text-black/25 placeholder:italic"
                                     />
                                     <div className="absolute bottom-0 left-0 h-[2px] w-0 bg-accent transition-all duration-700 group-focus-within:w-full" />
                                 </div>
@@ -334,16 +346,16 @@ const WhyUs = ({ progress }) => {
 
                             {/* Brief Textarea */}
                             <div className="group relative">
-                                <label className="text-[10px] font-black tracking-[0.4em] text-black/65 uppercase group-focus-within:text-accent transition-all block mb-4">Initial Thoughts</label>
+                                <label className="text-[10px] font-black tracking-[0.4em] text-black/65 uppercase group-focus-within:text-accent transition-all block mb-2 md:mb-4">Initial Thoughts</label>
                                 <textarea
                                     rows="1"
                                     placeholder="Briefly describe your dream space..."
-                                    className="w-full bg-transparent border-b border-black/20 py-3 text-lg md:text-xl font-sans text-black/85 focus:text-black focus:outline-none focus:border-accent transition-all resize-none placeholder:text-black/25 placeholder:italic min-h-[60px]"
+                                    className="w-full bg-transparent border-b border-black/20 py-2 md:py-3 text-base md:text-xl font-sans text-black/85 focus:text-black focus:outline-none focus:border-accent transition-all resize-none placeholder:text-black/25 placeholder:italic min-h-[44px] md:min-h-[60px]"
                                 ></textarea>
                                 <div className="absolute bottom-0 left-0 h-[2px] w-0 bg-accent transition-all duration-700 group-focus-within:w-full" />
                             </div>
 
-                            <div className="flex justify-end pt-4">
+                            <div className="flex justify-end pt-2 md:pt-4">
                                 <motion.button
                                     whileHover={{ gap: "2rem" }}
                                     whileTap={{ scale: 0.98 }}
