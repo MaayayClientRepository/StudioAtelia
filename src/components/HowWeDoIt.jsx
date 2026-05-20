@@ -95,7 +95,7 @@ const HowWeDoIt = ({ progress }) => {
                 className="flex flex-col md:flex-row items-center justify-center md:justify-between w-full h-full px-5 md:px-24 gap-3 md:gap-12 pt-[4.5rem] pb-4 md:pt-0 md:pb-0"
             >
                 {/* Information Content */}
-                <div className="w-full md:w-3/5 flex flex-col justify-center min-h-0 md:h-auto order-1 md:order-1 mb-1 md:mb-0">
+                <div className="w-full md:w-3/5 flex flex-col justify-center min-h-0 md:h-auto order-2 md:order-1 mb-1 md:mb-0">
                     <AnimatePresence mode="wait">
                         <motion.div
                             key={cards[0].title}
@@ -128,7 +128,7 @@ const HowWeDoIt = ({ progress }) => {
                 </div>
 
                 {/* RIGHT SIDE: Minimized Card Stack */}
-                <div className="w-full md:w-2/5 flex flex-col items-center justify-center relative mt-0 md:mt-20 pb-2 md:pb-32 order-2 md:order-2">
+                <div className="w-full md:w-2/5 flex flex-col items-center justify-center relative mt-0 md:mt-20 pb-2 md:pb-32 order-1 md:order-2">
                     {/* Progress Dots: Hidden on mobile to save space */}
                     <div className="absolute top-0 right-0 md:-right-12 flex flex-col gap-2 z-50 hidden md:flex">
                         {items.map((_, i) => {
