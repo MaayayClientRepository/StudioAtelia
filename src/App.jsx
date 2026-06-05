@@ -34,12 +34,12 @@ function App() {
     const serviceScaleIn = useTransform(scrollYProgress, [0.16, 0.19], [1, 1]);
     const serviceInternalProgress = useTransform(scrollYProgress, [0.19, 0.23], [0, 1]);
     const serviceScaleOut = useTransform(scrollYProgress, [0.23, 0.25], [1, 1]);
-    const serviceOpacity = useTransform(scrollYProgress, [0.23, 0.25], [1, 0]);
+    const serviceOpacity = useTransform(scrollYProgress, [0.25, 0.27], [1, 0]);
 
     // 4. HOW WE DO IT (Travel: 0.23 -> 0.26, Content: 0.26 -> 0.42, Exit: 0.42 -> 0.46)
     const howY = useTransform(scrollYProgress, [0.23, 0.26], ["100vh", "0vh"]);
     const howScaleIn = useTransform(scrollYProgress, [0.23, 0.26], [1, 1]);
-    const howInternalProgress = useTransform(scrollYProgress, [0.26, 0.42], [0, 1]);
+    const howInternalProgress = useTransform(scrollYProgress, [0.23, 0.42], [0, 1]);
     const howScaleOut = useTransform(scrollYProgress, [0.42, 0.46], [1, 1]);
     const howOpacity = useTransform(scrollYProgress, [0.42, 0.46], [1, 0]);
 
@@ -121,7 +121,7 @@ function App() {
                     scale: serviceScaleOut,
                     opacity: serviceOpacity,
                     zIndex: 20,
-                    display: useTransform(scrollYProgress, [0.15, 0.26], ["block", "none"]),
+                    display: useTransform(scrollYProgress, [0.15, 0.28], ["block", "none"]),
                     willChange: "transform, opacity"
                 }}
                 className="sticky top-0 h-screen w-full shadow-[0_-20px_40px_rgba(0,0,0,0.2)] overflow-hidden rounded-t-[1.5rem] sm:rounded-t-[2.5rem] md:rounded-t-[4rem] bg-secondary"

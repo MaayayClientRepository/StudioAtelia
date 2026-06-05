@@ -103,7 +103,7 @@ const IntroSequence = ({ progress }) => {
                         alt="Foundational Space"
                         loading="eager"
                         decoding="sync"
-                        className="w-full h-full object-cover object-center grayscale"
+                        className="w-full h-full object-cover md:object-center object-[50.8%_center] grayscale"
                     />
                 </motion.div>
 
@@ -120,7 +120,7 @@ const IntroSequence = ({ progress }) => {
                         alt="Evolved Luxury Space"
                         loading="eager"
                         decoding="sync"
-                        className="w-full h-full object-cover object-center"
+                        className="w-full h-full object-cover md:object-center object-[50.8%_center]"
                     />
                 </motion.div>
             </div>
