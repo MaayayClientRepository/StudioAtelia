@@ -8,6 +8,14 @@ import quotationScopeImg from "../assets/howwedo/quotation_and_scope.jpg";
 import executionImg from "../assets/howwedo/Execution.png";
 import postDeliveryImg from "../assets/howwedo/post_delivery.jpg";
 
+const preventOrphan = (text) => {
+    if (typeof text !== "string") return text;
+    const trimmed = text.trim();
+    const lastSpaceIndex = trimmed.lastIndexOf(" ");
+    if (lastSpaceIndex === -1) return trimmed;
+    return trimmed.substring(0, lastSpaceIndex) + "\u00A0" + trimmed.substring(lastSpaceIndex + 1);
+};
+
 const items = [
     {
         title: "Online Consultation",
@@ -138,8 +146,8 @@ const HowWeDoIt = ({ progress }) => {
                                 ))}
                             </h2>
 
-                             <p className="text-[14px] sm:text-[15px] md:text-2xl text-white/60 font-sans leading-relaxed max-w-xl border-l-2 border-[#BFA88F]/30 pl-3 sm:pl-4 md:pl-10">
-                                {cards[0].description}
+                             <p className="text-[14px] sm:text-[15px] md:text-2xl text-white/60 font-sans leading-relaxed max-w-xl border-l-2 border-[#BFA88F]/30 pl-3 sm:pl-4 md:pl-10" style={{ textWrap: "pretty" }}>
+                                {preventOrphan(cards[0].description)}
                             </p>
                         </motion.div>
                     </AnimatePresence>

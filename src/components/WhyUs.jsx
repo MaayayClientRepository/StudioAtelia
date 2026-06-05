@@ -28,11 +28,17 @@ const IndividualWord = ({ word, progress, wordStart, wordEnd }) => {
 };
 
 const WordReveal = ({ text, progress, range, className }) => {
-    const words = text.split(" ");
+    const rawWords = text.split(" ");
+    const words = [...rawWords];
+    if (words.length > 1) {
+        const lastWord = words.pop();
+        const secondLastWord = words.pop();
+        words.push(`${secondLastWord}\u00A0${lastWord}`);
+    }
     const totalWords = words.length;
 
     return (
-        <div className={className}>
+        <div className={className} style={{ textWrap: "pretty" }}>
             {words.map((word, i) => {
                 const wordStep = (range[1] - range[0]) / totalWords;
                 const wordStart = range[0] + (i * wordStep);

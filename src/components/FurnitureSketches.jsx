@@ -123,6 +123,111 @@ const CredenzaSVG = ({ className }) => (
     </svg>
 );
 
+// 5. Floor Lamp (Elevation Profile)
+const FloorLampSVG = ({ className }) => (
+    <svg
+        viewBox="0 0 80 120"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        className={className}
+    >
+        {/* Base */}
+        <path d="M 25 110 h 30" />
+        <path d="M 40 110 V 30" />
+        {/* Curved arm / top stem */}
+        <path d="M 40 30 Q 40 15 50 15 h 10" />
+        {/* Lamp shade */}
+        <path d="M 54 22 L 50 35 h 20 L 66 22 Z" />
+        {/* Bulb/Light glow lines */}
+        <line x1="53" y1="42" x2="48" y2="52" strokeDasharray="2 2" />
+        <line x1="60" y1="42" x2="60" y2="54" strokeDasharray="2 2" />
+        <line x1="67" y1="42" x2="72" y2="52" strokeDasharray="2 2" />
+    </svg>
+);
+
+// 6. Coffee Table (Elevation Profile)
+const CoffeeTableSVG = ({ className }) => (
+    <svg
+        viewBox="0 0 100 80"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        className={className}
+    >
+        {/* Table top */}
+        <rect x="15" y="45" width="70" height="3" rx="1" />
+        {/* Crossed legs */}
+        <path d="M 22 48 L 35 70 M 78 48 L 65 70" />
+        <path d="M 30 48 L 70 70 M 70 48 L 30 70" />
+        <path d="M 35 70 h 30" />
+        {/* Decor on top: books and vase */}
+        <rect x="25" y="41" width="15" height="4" rx="0.5" />
+        <path d="M 60 45 L 60 38 a 2 2 0 0 1 2 -2 h 2 a 2 2 0 0 1 2 2 v 7 Z" />
+        <path d="M 63 36 Q 66 28 65 24" />
+    </svg>
+);
+
+// 7. Lounge Chair & Ottoman (Elevation Profile)
+const LoungeChairSVG = ({ className }) => (
+    <svg
+        viewBox="0 0 100 100"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        className={className}
+    >
+        {/* Backrest angled */}
+        <path d="M 25 30 L 40 65" />
+        {/* Cushions */}
+        <path d="M 38 64 L 70 55" />
+        <path d="M 38 67 L 70 58" />
+        <path d="M 70 55 V 58" />
+        {/* Legs & base frame */}
+        <path d="M 32 66 L 32 85 M 55 61 L 55 85" />
+        <path d="M 25 85 h 40" />
+        {/* Ottoman */}
+        <path d="M 74 68 h 18 v 5 H 74 Z" />
+        <path d="M 77 73 L 77 85 M 89 73 L 89 85" />
+        <path d="M 75 85 h 16" />
+    </svg>
+);
+
+// 8. Pendant Light (Triple Cluster)
+const PendantLightSVG = ({ className }) => (
+    <svg
+        viewBox="0 0 80 120"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        className={className}
+    >
+        {/* Ceiling plate */}
+        <path d="M 20 10 h 40" />
+        {/* Hanging cords */}
+        <line x1="30" y1="10" x2="30" y2="45" />
+        <line x1="40" y1="10" x2="40" y2="70" />
+        <line x1="50" y1="10" x2="50" y2="35" />
+        {/* Left Pendant */}
+        <path d="M 25 45 h 10 L 33 37 h -6 Z" />
+        <circle cx="30" cy="48" r="1.5" fill="currentColor" />
+        {/* Middle Pendant */}
+        <path d="M 35 70 h 10 L 43 62 h -6 Z" />
+        <circle cx="40" cy="73" r="1.5" fill="currentColor" />
+        {/* Right Pendant */}
+        <path d="M 45 35 h 10 L 53 27 h -6 Z" />
+        <circle cx="50" cy="38" r="1.5" fill="currentColor" />
+    </svg>
+);
+
 const FurnitureSketches = ({ progress, theme = "dark", mobileOnly = false }) => {
     // Parallel, uniform scroll parallax: shift upward by same amount
     const yOffset = useTransform(progress, [0, 1], [30, -50]);
@@ -146,32 +251,54 @@ const FurnitureSketches = ({ progress, theme = "dark", mobileOnly = false }) => 
             {!mobileOnly && (
                 <div className="hidden md:block absolute inset-0">
                     {/* Left Margin Column */}
-                    <motion.div style={{ y: yOffset }} className="absolute top-[18%] left-[6%] w-40 h-40">
+                    <motion.div style={{ y: yOffset }} className="absolute top-[5%] left-[6%] w-32 h-40">
+                        <PendantLightSVG className={colorClass} />
+                    </motion.div>
+                    <motion.div style={{ y: yOffset }} className="absolute top-[30%] left-[7%] w-36 h-36">
                         <ArmchairSVG className={colorClass} />
                     </motion.div>
-                    <motion.div style={{ y: yOffset }} className="absolute bottom-[18%] left-[6%] w-48 h-48">
+                    <motion.div style={{ y: yOffset }} className="absolute top-[52%] left-[8%] w-32 h-44">
+                        <FloorLampSVG className={colorClass} />
+                    </motion.div>
+                    <motion.div style={{ y: yOffset }} className="absolute top-[74%] left-[6%] w-44 h-44">
                         <DiningSVG className={colorClass} />
                     </motion.div>
 
                     {/* Right Margin Column */}
-                    <motion.div style={{ y: yOffset }} className="absolute top-[18%] right-[6%] w-52 h-52">
+                    <motion.div style={{ y: yOffset }} className="absolute top-[5%] right-[5%] w-48 h-48">
                         <SofaSVG className={colorClass} />
                     </motion.div>
-                    <motion.div style={{ y: yOffset }} className="absolute bottom-[18%] right-[6%] w-44 h-44">
+                    <motion.div style={{ y: yOffset }} className="absolute top-[28%] right-[8%] w-36 h-36">
+                        <CoffeeTableSVG className={colorClass} />
+                    </motion.div>
+                    <motion.div style={{ y: yOffset }} className="absolute top-[50%] right-[7%] w-36 h-36">
+                        <LoungeChairSVG className={colorClass} />
+                    </motion.div>
+                    <motion.div style={{ y: yOffset }} className="absolute top-[72%] right-[5%] w-40 h-40">
                         <CredenzaSVG className={colorClass} />
                     </motion.div>
                 </div>
             )}
 
-            {/* Mobile Layout (Fewer elements, scaled down, no clutter) */}
+            {/* Mobile Layout (Perfect corner alignment, no clutter) */}
             <div className="md:hidden absolute inset-0">
                 {/* Top Left element */}
-                <motion.div style={{ y: yOffset }} className="absolute top-[14%] left-[4%] w-24 h-24">
+                <motion.div style={{ y: yOffset }} className="absolute top-[12%] left-[4%] w-24 h-24">
                     <ArmchairSVG className={colorClass} />
                 </motion.div>
                 
+                {/* Top Right element */}
+                <motion.div style={{ y: yOffset }} className="absolute top-[12%] right-[4%] w-20 h-28">
+                    <FloorLampSVG className={colorClass} />
+                </motion.div>
+
+                {/* Bottom Left element */}
+                <motion.div style={{ y: yOffset }} className="absolute bottom-[12%] left-[4%] w-22 h-22">
+                    <LoungeChairSVG className={colorClass} />
+                </motion.div>
+
                 {/* Bottom Right element */}
-                <motion.div style={{ y: yOffset }} className="absolute bottom-[14%] right-[4%] w-28 h-28">
+                <motion.div style={{ y: yOffset }} className="absolute bottom-[12%] right-[4%] w-28 h-28">
                     <CredenzaSVG className={colorClass} />
                 </motion.div>
             </div>
