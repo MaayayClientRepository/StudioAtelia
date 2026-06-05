@@ -159,8 +159,7 @@ const WhatWeDo = ({ progress }) => {
 
             {/* MOBILE PERSISTENT HEADER */}
             <motion.div 
-                style={{ x: titleX }}
-                className="absolute top-6 left-5 z-30 pointer-events-none md:hidden text-left"
+                className="absolute top-20 left-4 z-30 pointer-events-none md:hidden text-left"
             >
                 <span className="text-[8px] font-black tracking-[0.5em] text-[#BFA88F] uppercase italic mb-0.5 block opacity-60">Services Matrix</span>
                 <h2 className="text-lg font-black text-black tracking-tighter uppercase leading-[0.85]">

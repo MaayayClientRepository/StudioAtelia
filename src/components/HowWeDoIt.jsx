@@ -107,8 +107,8 @@ const HowWeDoIt = ({ progress }) => {
         >
             {/* Header Section: Adjusted to clear fixed menu button on mobile */}
             <motion.div
-                style={{ y: headerY, opacity: headerOpacity, x: titleX }}
-                className="absolute top-10 left-5 md:top-12 md:left-24 z-50 pointer-events-none"
+                style={{ y: headerY, opacity: headerOpacity }}
+                className="absolute top-20 left-4 md:top-12 md:left-24 z-50 pointer-events-none text-left"
             >
                 <span className="text-[8px] md:text-[10px] font-black tracking-[0.5em] md:tracking-[0.6em] text-[#BFA88F] uppercase italic mb-0.5 md:mb-2 block opacity-40">The Methodology</span>
                 <h2 className="text-lg md:text-5xl font-black text-white tracking-tighter uppercase leading-[0.85]">
@@ -172,7 +172,7 @@ const HowWeDoIt = ({ progress }) => {
                         })}
                     </div>
 
-                    <div className="relative w-[210px] h-[270px] sm:w-56 sm:h-72 md:w-72 md:h-96 flex items-center justify-center">
+                    <div className="relative w-[210px] h-[270px] sm:w-56 sm:h-72 md:w-72 md:h-[420px] flex items-center justify-center">
                         {/* Visual Haptic */}
                         <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-0 opacity-40">
                             <motion.div
@@ -203,6 +203,20 @@ const HowWeDoIt = ({ progress }) => {
                             ))}
                         </AnimatePresence>
                     </div>
+
+                    {/* Tutorial Prompt (Positioned below the cards, clean and never blurs the card image) */}
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: isInteractive ? 0.6 : 0 }}
+                        className="mt-8 flex flex-col items-center gap-1.5 pointer-events-none select-none"
+                    >
+                        <span className="text-[9px] text-[#BFA88F] font-black uppercase tracking-[0.3em] animate-pulse">
+                            Interactive Phase Stack
+                        </span>
+                        <p className="text-[10px] text-white/50 font-medium tracking-[0.15em] uppercase text-center leading-tight">
+                            Swipe or click top card to reveal next phase
+                        </p>
+                    </motion.div>
                 </div>
             </motion.div>
 
@@ -288,49 +302,32 @@ const Card = ({ card, index, total, items, topCardTitle, handleCardReveal, isFir
                 (isTop && isInteractive) ? "pointer-events-auto border-[#BFA88F]/30" : "pointer-events-none"
             )}
         >
-            <div className="relative h-[80%] w-full overflow-hidden rounded-[1rem]">
+            <div className="relative h-[68%] w-full overflow-hidden rounded-[1rem]">
                 <img
                     src={card.image}
                     alt={card.title}
                     className="pointer-events-none h-full w-full object-cover will-change-transform"
                 />
 
-                {/* TUTORIAL OVERLAY: Only on the first card, at the very top */}
-                {isFirstCard && isTop && (
-                    <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        className="absolute inset-0 z-50 flex flex-col items-center justify-center bg-black/60 backdrop-blur-[2px] pointer-events-none"
-                    >
-                        <motion.div
-                            animate={{
-                                y: [0, -10, 0],
-                                scale: [1, 1.05, 1]
-                            }}
-                            transition={{ repeat: Infinity, duration: 2 }}
-                            className="flex flex-col items-center gap-3 px-6 text-center"
-                        >
-                            <div className="w-12 h-12 rounded-full border-2 border-[#BFA88F] flex items-center justify-center">
-                                <motion.div
-                                    animate={{ x: [-10, 10, -10] }}
-                                    transition={{ repeat: Infinity, duration: 1.5 }}
-                                    className="w-2 h-2 rounded-full bg-[#BFA88F]"
-                                />
-                            </div>
-                            <p className="text-[10px] md:text-[11px] text-white font-black uppercase tracking-[0.2em] leading-tight">
-                                Drag & drop or touch <br /> to reveal next phase
-                            </p>
-                        </motion.div>
-                    </motion.div>
-                )}
-
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-40" />
             </div>
 
-            <div className="mt-3 md:mt-4">
-                <h3 className="text-xs md:text-sm font-black text-white/40 uppercase tracking-widest leading-none">
-                    {card.tag.split(' // ')[1]}
+            <div className="mt-3 md:mt-4 flex flex-col gap-1 md:gap-1.5 text-left">
+                <div className="flex justify-between items-center border-b border-white/5 pb-1 mb-1 md:pb-1.5 md:mb-1.5">
+                    <span className="text-[9px] md:text-[10px] font-sans font-bold tracking-[0.2em] text-[#BFA88F] uppercase">
+                        {card.tag.split(' // ')[0]}
+                    </span>
+                    <span className="text-[9px] md:text-[10px] font-serif italic text-white/50">
+                        {card.tag.split(' // ')[1]}
+                    </span>
+                </div>
+                <h3 className="text-[13px] md:text-[16px] font-bold text-white tracking-tight leading-tight">
+                    {card.title}
                 </h3>
+                {/* A tiny descriptive summary on the card itself for extra clarity */}
+                <p className="text-[9px] md:text-[11px] text-white/60 font-sans leading-normal line-clamp-2 mt-0.5 md:mt-1 hidden md:block">
+                    {card.description}
+                </p>
             </div>
         </motion.div>
     );

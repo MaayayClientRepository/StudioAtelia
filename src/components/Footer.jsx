@@ -46,7 +46,7 @@ const Footer = () => {
                     <h2 className="text-5xl sm:text-7xl md:text-[8vw] font-serif font-black leading-[0.75] tracking-[-0.04em] text-white flex flex-col sm:flex-row sm:items-baseline">
                         <span className="italic">Niche</span>
                         <span className="text-white/30 italic font-light mx-2">&</span>
-                        <span>Form.</span>
+                        <span>Form</span>
                     </h2>
                     
                     <div className="max-w-sm">
@@ -120,15 +120,15 @@ const Footer = () => {
                 </div>
 
                 {/* COLUMN 3 — QUICK LINKS & CONNECT (3/12th Width) */}
-                <div className="lg:col-span-3 space-y-6 md:space-y-12">
-                    <div className="space-y-2 md:space-y-4">
-                        <h4 className="text-[9px] font-black tracking-[0.4em] text-white/40 uppercase">Navigation</h4>
-                        <nav className="flex flex-wrap gap-x-4 gap-y-2 md:flex-col md:gap-3">
+                <div className="lg:col-span-3 space-y-6 md:space-y-12 flex flex-col items-start text-left">
+                    <div className="space-y-2 md:space-y-4 w-full flex flex-col items-start">
+                        <h4 className="text-[9px] font-black tracking-[0.4em] text-white/40 uppercase text-left">Navigation</h4>
+                        <nav className="flex flex-wrap gap-x-4 gap-y-2 md:flex-col md:items-start md:gap-3 justify-start w-full">
                             {navLinks.map((link, i) => (
                                 <button 
                                     key={i} 
                                     onClick={() => handleScroll(link.target)}
-                                    className="text-[10px] font-bold tracking-[0.2em] uppercase text-white/50 hover:text-white transition-colors duration-300 cursor-pointer"
+                                    className="text-[10px] font-bold tracking-[0.2em] uppercase text-white/50 hover:text-white transition-colors duration-300 cursor-pointer text-left w-fit"
                                 >
                                     {link.title}
                                 </button>
@@ -136,9 +136,9 @@ const Footer = () => {
                         </nav>
                     </div>
 
-                    <div className="space-y-2 md:space-y-4">
-                        <h4 className="text-[9px] font-black tracking-[0.4em] text-white/40 uppercase">Connect</h4>
-                        <div className="flex gap-3">
+                    <div className="space-y-2 md:space-y-4 w-full flex flex-col items-start">
+                        <h4 className="text-[9px] font-black tracking-[0.4em] text-white/40 uppercase text-left">Connect</h4>
+                        <div className="flex gap-3 justify-start items-center">
                             {socialLinks.map((social, i) => (
                                 <motion.a
                                     key={i}

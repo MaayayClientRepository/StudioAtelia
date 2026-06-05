@@ -228,77 +228,75 @@ const PendantLightSVG = ({ className }) => (
     </svg>
 );
 
-const FurnitureSketches = ({ progress, theme = "dark", mobileOnly = false }) => {
+const FurnitureSketches = ({ progress, theme = "dark", mobileOnly = false, fadeOutRange = [0.85, 0.98] }) => {
     // Parallel, uniform scroll parallax: shift upward by same amount
     const yOffset = useTransform(progress, [0, 1], [30, -50]);
 
     // Fades out uniformly as the section is scrolled past
-    const sketchesOpacity = useTransform(progress, [0.85, 0.98], [1, 0]);
+    const sketchesOpacity = useTransform(progress, fadeOutRange, [1, 0]);
 
-    // Use theme-tailored class names with extremely low color/contrast
-    // Dark theme uses accent color (brass/beige) at low opacity
-    // Light theme uses muted brown/gray color at low opacity
+    // The sweet spot: visible fine-line sketches that remain clearly in the background
     const colorClass = theme === "dark" 
-        ? "text-accent/30 hover:text-accent/50 transition-colors duration-500" 
-        : "text-muted/30 hover:text-muted/50 transition-colors duration-500";
+        ? "text-accent/16 hover:text-accent/30 transition-colors duration-500" 
+        : "text-muted/22 hover:text-muted/40 transition-colors duration-500";
 
     return (
         <motion.div 
             style={{ opacity: sketchesOpacity }}
             className="absolute inset-0 pointer-events-none overflow-hidden"
         >
-            {/* Desktop Layout (Symmetric margins, perfectly aligned) */}
+            {/* Desktop Layout (Staggered, organic moodboard composition) */}
             {!mobileOnly && (
                 <div className="hidden md:block absolute inset-0">
-                    {/* Left Margin Column */}
-                    <motion.div style={{ y: yOffset }} className="absolute top-[5%] left-[6%] w-32 h-40">
+                    {/* Left Margin / Scattered Elements */}
+                    <motion.div style={{ y: yOffset }} className="absolute top-[5%] left-[18%] w-32 h-40">
                         <PendantLightSVG className={colorClass} />
                     </motion.div>
-                    <motion.div style={{ y: yOffset }} className="absolute top-[30%] left-[7%] w-36 h-36">
+                    <motion.div style={{ y: yOffset }} className="absolute top-[28%] left-[4%] w-36 h-36 -rotate-3">
                         <ArmchairSVG className={colorClass} />
                     </motion.div>
-                    <motion.div style={{ y: yOffset }} className="absolute top-[52%] left-[8%] w-32 h-44">
+                    <motion.div style={{ y: yOffset }} className="absolute top-[55%] left-[22%] w-32 h-44 rotate-2">
                         <FloorLampSVG className={colorClass} />
                     </motion.div>
-                    <motion.div style={{ y: yOffset }} className="absolute top-[74%] left-[6%] w-44 h-44">
+                    <motion.div style={{ y: yOffset }} className="absolute top-[76%] left-[6%] w-44 h-44 -rotate-1">
                         <DiningSVG className={colorClass} />
                     </motion.div>
 
-                    {/* Right Margin Column */}
-                    <motion.div style={{ y: yOffset }} className="absolute top-[5%] right-[5%] w-48 h-48">
+                    {/* Right Margin / Scattered Elements */}
+                    <motion.div style={{ y: yOffset }} className="absolute top-[6%] right-[14%] w-48 h-48 rotate-2">
                         <SofaSVG className={colorClass} />
                     </motion.div>
-                    <motion.div style={{ y: yOffset }} className="absolute top-[28%] right-[8%] w-36 h-36">
+                    <motion.div style={{ y: yOffset }} className="absolute top-[32%] right-[5%] w-36 h-36 -rotate-3">
                         <CoffeeTableSVG className={colorClass} />
                     </motion.div>
-                    <motion.div style={{ y: yOffset }} className="absolute top-[50%] right-[7%] w-36 h-36">
+                    <motion.div style={{ y: yOffset }} className="absolute top-[58%] right-[20%] w-36 h-36 rotate-3">
                         <LoungeChairSVG className={colorClass} />
                     </motion.div>
-                    <motion.div style={{ y: yOffset }} className="absolute top-[72%] right-[5%] w-40 h-40">
+                    <motion.div style={{ y: yOffset }} className="absolute top-[74%] right-[8%] w-40 h-40 -rotate-2">
                         <CredenzaSVG className={colorClass} />
                     </motion.div>
                 </div>
             )}
 
-            {/* Mobile Layout (Perfect corner alignment, no clutter) */}
+            {/* Mobile Layout (Scattered behind the text area in the center) */}
             <div className="md:hidden absolute inset-0">
-                {/* Top Left element */}
-                <motion.div style={{ y: yOffset }} className="absolute top-[12%] left-[4%] w-24 h-24">
+                {/* Armchair (Center-Left behind text) */}
+                <motion.div style={{ y: yOffset }} className="absolute top-[32%] left-[8%] w-24 h-24 rotate-[4deg]">
                     <ArmchairSVG className={colorClass} />
                 </motion.div>
                 
-                {/* Top Right element */}
-                <motion.div style={{ y: yOffset }} className="absolute top-[12%] right-[4%] w-20 h-28">
+                {/* Floor Lamp (Top-Right behind text) */}
+                <motion.div style={{ y: yOffset }} className="absolute top-[22%] right-[12%] w-20 h-28 -rotate-[5deg]">
                     <FloorLampSVG className={colorClass} />
                 </motion.div>
 
-                {/* Bottom Left element */}
-                <motion.div style={{ y: yOffset }} className="absolute bottom-[12%] left-[4%] w-22 h-22">
+                {/* Lounge Chair (Center-Left lower behind text) */}
+                <motion.div style={{ y: yOffset }} className="absolute top-[52%] left-[12%] w-22 h-22 -rotate-[3deg]">
                     <LoungeChairSVG className={colorClass} />
                 </motion.div>
 
-                {/* Bottom Right element */}
-                <motion.div style={{ y: yOffset }} className="absolute bottom-[12%] right-[4%] w-28 h-28">
+                {/* Credenza (Bottom-Right lower behind text) */}
+                <motion.div style={{ y: yOffset }} className="absolute top-[58%] right-[6%] w-26 h-26 rotate-[2deg]">
                     <CredenzaSVG className={colorClass} />
                 </motion.div>
             </div>

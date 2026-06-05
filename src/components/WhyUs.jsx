@@ -83,8 +83,9 @@ const WhyUs = ({ progress }) => {
     const formOpacity = useTransform(progress, [1.2, 1.5], [0, 1]);
     
     // TWO PHASE TRANSFORM:
-    // 1. Entrance: Zoom out and Settle (1.2 -> 1.5)
-    const formY = useTransform(progress, [1.2, 1.5], [100, -60]); 
+    const formYMobile = useTransform(progress, [1.2, 1.5], [100, 0]); 
+    const formYDesktop = useTransform(progress, [1.2, 1.5], [100, -40]); 
+    const formY = isMobile ? formYMobile : formYDesktop;
     const formScale = useTransform(progress, [1.2, 1.5], [1.1, 1]); 
 
     const sketchOpacityMobile = useTransform(progress, [1.1, 1.25], [1, 0]);
@@ -102,7 +103,12 @@ const WhyUs = ({ progress }) => {
             <div className="absolute inset-0 opacity-10 pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/handmade-paper.png')]" />
 
             <motion.div style={{ opacity: sketchOpacity }}>
-                <FurnitureSketches progress={progress} theme="light" mobileOnly={true} />
+                <FurnitureSketches 
+                    progress={progress} 
+                    theme="light" 
+                    mobileOnly={true} 
+                    fadeOutRange={[1.0, 1.25]}
+                />
             </motion.div>
 
             {/* PHILOSOPHY TEXT WRAPPER */}
