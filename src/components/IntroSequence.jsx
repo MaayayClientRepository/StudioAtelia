@@ -37,15 +37,21 @@ const IntroSequence = ({ progress }) => {
                     className="px-6 text-center max-w-[95vw] flex flex-col items-center overflow-visible"
                 >
                     {/* The Art of Living - Pre-title */}
-                    <div className="flex items-center justify-center gap-4 mb-3 md:mb-8 opacity-60">
-                        <motion.div style={{ backgroundColor: textColor }} className="h-[1px] w-6 md:w-10" />
+                    <div className="flex items-center justify-center gap-3 md:gap-5 mb-4 md:mb-10">
+                        <motion.div 
+                            style={{ backgroundColor: textColor }} 
+                            className="h-[1px] w-8 md:w-16 opacity-35" 
+                        />
                         <motion.span
                             style={{ color: textColor }}
-                            className="text-[8px] md:text-[10px] font-medium uppercase tracking-[0.8em] font-sans"
+                            className="text-[9px] md:text-[11px] font-semibold tracking-[0.6em] md:tracking-[0.8em] mr-[-0.6em] md:mr-[-0.8em] uppercase font-sans text-center"
                         >
                             The Art of Living
                         </motion.span>
-                        <motion.div style={{ backgroundColor: textColor }} className="h-[1px] w-6 md:w-10" />
+                        <motion.div 
+                            style={{ backgroundColor: textColor }} 
+                            className="h-[1px] w-8 md:w-16 opacity-35" 
+                        />
                     </div>
 
                     {/* Brand Title: Cinematic Scale & Dual Typography */}
@@ -70,7 +76,7 @@ const IntroSequence = ({ progress }) => {
                                 color: useTransform(progress, [0.7, 0.95], ["#FFFFFF", "#BFA88F"]),
                                 fontSize: "clamp(0.6rem, 2.5vw, 1.5rem)"
                             }}
-                            className="font-['Fira_Sans_Condensed',_sans-serif] font-light italic tracking-[0.15em] md:tracking-[0.4em] uppercase text-center"
+                            className="font-['Fira_Sans_Condensed',_sans-serif] font-light italic tracking-[0.15em] md:tracking-[0.4em] indent-[0.15em] md:indent-[0.4em] uppercase text-center"
                         >
                             Thoughtful design <br className="sm:hidden" /> Transforms living
                         </motion.p>
@@ -97,7 +103,7 @@ const IntroSequence = ({ progress }) => {
                         alt="Foundational Space"
                         loading="eager"
                         decoding="sync"
-                        className="w-full h-full object-cover object-center grayscale"
+                        className="w-full h-full object-cover object-[52.5%_center] grayscale"
                     />
                 </motion.div>
 
@@ -114,7 +120,7 @@ const IntroSequence = ({ progress }) => {
                         alt="Evolved Luxury Space"
                         loading="eager"
                         decoding="sync"
-                        className="w-full h-full object-cover object-center"
+                        className="w-full h-full object-cover object-[52.5%_center]"
                     />
                 </motion.div>
             </div>

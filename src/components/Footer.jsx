@@ -14,19 +14,26 @@ const Footer = () => {
         { title: "What We Do", target: 0.21 },
         { title: "The Process", target: 0.32 },
         { title: "Philosophy", target: 0.625 },
-        { title: "Contact", target: 0.86 },
     ];
 
     const handleScroll = (target) => {
         const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
-        window.scrollTo({
-            top: target * totalHeight,
-            behavior: "smooth"
-        });
+        const targetScroll = target * totalHeight;
+        if (window.lenis) {
+            window.lenis.scrollTo(targetScroll, {
+                duration: 1.5,
+                force: true
+            });
+        } else {
+            window.scrollTo({
+                top: targetScroll,
+                behavior: "smooth"
+            });
+        }
     };
 
     return (
-        <footer className="relative w-full bg-base text-secondary overflow-hidden flex flex-col px-5 sm:px-12 md:px-24 py-10 md:py-24 border-t border-white/5 shadow-[0_-40px_80px_rgba(0,0,0,0.6)] group/footer">
+        <footer className="relative w-full h-full bg-base text-secondary overflow-hidden flex flex-col px-5 sm:px-12 md:px-24 pt-10 pb-6 md:pt-28 md:pb-12 border-t border-white/5 shadow-[0_-40px_80px_rgba(0,0,0,0.6)] group/footer">
             
             {/* 1. BRAND MONOLITH: MASSIVE IMPACT FOR BRAND RECALL */}
             <div className="relative z-10 w-full">
@@ -51,13 +58,13 @@ const Footer = () => {
             </div>
 
             {/* Horizontal Line Divider */}
-            <div className="relative z-10 w-full h-[1px] bg-white/5 my-5 md:my-12" />
+            <div className="relative z-10 w-full h-[1px] bg-white/5 my-5 md:my-16" />
 
             {/* 2. REFINED DIRECT CONTACT & LINKS GRID */}
             <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-7 lg:gap-16 items-start">
                 
                 {/* COLUMN 1 — THE IMMERSIVE CONTACT HERO (5/12th Width) */}
-                <div className="lg:col-span-5 space-y-8">
+                <div className="lg:col-span-5 space-y-6 md:space-y-12">
                     {/* Email Contact Block */}
                     <div className="space-y-2 group/mail">
                         <div className="flex items-center gap-3">
@@ -88,12 +95,12 @@ const Footer = () => {
                 </div>
 
                 {/* COLUMN 2 — PHYSICAL STUDIO ADDRESS (4/12th Width) */}
-                <div className="lg:col-span-4 space-y-4 group/studio">
+                <div className="lg:col-span-4 space-y-4 md:space-y-8 group/studio">
                     <div className="flex items-center gap-3">
                         <MapPin className="w-3.5 h-3.5 text-white/30 group-hover/studio:text-white/70 transition-colors" />
                         <span className="text-[10px] font-black tracking-[0.4em] text-white/40 uppercase">The Studio Address</span>
                     </div>
-                    <div className="space-y-1 text-white/80 text-base md:text-xl font-serif italic leading-relaxed">
+                    <div className="space-y-1 md:space-y-2 text-white/80 text-base md:text-xl font-serif italic leading-relaxed">
                         <p className="group-hover/studio:text-white transition-colors duration-300">Suite 102, Design Quarter,</p>
                         <p className="group-hover/studio:text-white transition-colors duration-300">Karnataka, Bangalore 560001, India.</p>
                     </div>
@@ -113,15 +120,15 @@ const Footer = () => {
                 </div>
 
                 {/* COLUMN 3 — QUICK LINKS & CONNECT (3/12th Width) */}
-                <div className="lg:col-span-3 space-y-6">
-                    <div className="space-y-2">
-                        <h4 className="text-[9px] font-black tracking-[0.4em] text-white/20 uppercase">Navigation</h4>
-                        <nav className="flex flex-wrap gap-x-4 gap-y-2">
+                <div className="lg:col-span-3 space-y-6 md:space-y-12">
+                    <div className="space-y-2 md:space-y-4">
+                        <h4 className="text-[9px] font-black tracking-[0.4em] text-white/40 uppercase">Navigation</h4>
+                        <nav className="flex flex-wrap gap-x-4 gap-y-2 md:flex-col md:gap-3">
                             {navLinks.map((link, i) => (
                                 <button 
                                     key={i} 
                                     onClick={() => handleScroll(link.target)}
-                                    className="text-[10px] font-bold tracking-[0.2em] uppercase text-white/30 hover:text-white transition-colors duration-300"
+                                    className="text-[10px] font-bold tracking-[0.2em] uppercase text-white/50 hover:text-white transition-colors duration-300 cursor-pointer"
                                 >
                                     {link.title}
                                 </button>
@@ -129,8 +136,8 @@ const Footer = () => {
                         </nav>
                     </div>
 
-                    <div className="space-y-2">
-                        <h4 className="text-[9px] font-black tracking-[0.4em] text-white/20 uppercase">Connect</h4>
+                    <div className="space-y-2 md:space-y-4">
+                        <h4 className="text-[9px] font-black tracking-[0.4em] text-white/40 uppercase">Connect</h4>
                         <div className="flex gap-3">
                             {socialLinks.map((social, i) => (
                                 <motion.a
@@ -148,19 +155,25 @@ const Footer = () => {
             </div>
             
             {/* FINAL SIGNATURE BAR */}
-            <div className="relative z-10 w-full pt-5 mt-7 md:mt-12 md:pt-8 border-t border-white/5 flex flex-col sm:flex-row justify-between items-center gap-4 md:gap-6">
+            <div className="relative z-10 w-full pt-5 mt-8 md:mt-auto md:pt-8 border-t border-white/5 flex flex-col sm:flex-row justify-between items-center gap-4 md:gap-6">
                 <div className="flex flex-col sm:flex-row items-center gap-4 md:gap-12">
-                    <p className="text-[9px] text-white/20 font-sans tracking-[0.3em] uppercase">
+                    <p className="text-[9px] text-white/50 font-sans tracking-[0.3em] uppercase">
                         © 2026 NICHE & FORM DESIGN STUDIO.
                     </p>
-                    <div className="flex items-center gap-6 text-[9px] font-bold tracking-[0.2em] text-white/10 uppercase">
+                    <div className="flex items-center gap-6 text-[9px] font-bold tracking-[0.2em] text-white/40 uppercase">
                         <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
                         <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
                     </div>
                 </div>
 
                 <motion.button
-                    onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                    onClick={() => {
+                        if (window.lenis) {
+                            window.lenis.scrollTo(0, { duration: 1.5, force: true });
+                        } else {
+                            window.scrollTo({ top: 0, behavior: 'smooth' });
+                        }
+                    }}
                     whileHover={{ y: -5 }}
                     className="flex flex-col items-center gap-2 group cursor-pointer"
                 >

@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import { motion, AnimatePresence, useMotionValue, useTransform } from "framer-motion";
+import { motion, AnimatePresence, useMotionValue, useTransform, useMotionValueEvent } from "framer-motion";
 import { cn } from "../lib/utils";
 import onlineConsultionImg from "../assets/howwedo/online-consulting.jpg";
 import explorationDesignImg from "../assets/howwedo/exploration-design.jpg";
@@ -50,10 +50,28 @@ const items = [
 const HowWeDoIt = ({ progress }) => {
     const [cards, setCards] = useState(items);
     const lockRef = useRef(false);
+    const [isMobile, setIsMobile] = useState(false);
+    const [isInteractive, setIsInteractive] = useState(false);
+
+    useMotionValueEvent(progress, "change", (latest) => {
+        setIsInteractive(latest >= 0.45);
+    });
+
+    React.useEffect(() => {
+        setIsInteractive(progress.get() >= 0.45);
+    }, [progress]);
+
+    React.useEffect(() => {
+        const checkMobile = () => setIsMobile(window.innerWidth < 768);
+        checkMobile();
+        window.addEventListener("resize", checkMobile);
+        return () => window.removeEventListener("resize", checkMobile);
+    }, []);
 
     // Cinematic entrance transforms driven by scroll progress
     const headerY = useTransform(progress, [0, 0.2], [50, 0]);
     const headerOpacity = useTransform(progress, [0, 0.2], [0, 1]);
+    const titleX = useTransform(progress, [0, 0.25], ["0vw", isMobile ? "55vw" : "0vw"]);
 
     const contentY = useTransform(progress, [0.1, 0.4], [100, 0]);
     const contentOpacity = useTransform(progress, [0.1, 0.3], [0, 1]);
@@ -81,7 +99,7 @@ const HowWeDoIt = ({ progress }) => {
         >
             {/* Header Section: Adjusted to clear fixed menu button on mobile */}
             <motion.div
-                style={{ y: headerY, opacity: headerOpacity }}
+                style={{ y: headerY, opacity: headerOpacity, x: titleX }}
                 className="absolute top-10 left-5 md:top-12 md:left-24 z-50 pointer-events-none"
             >
                 <span className="text-[8px] md:text-[10px] font-black tracking-[0.5em] md:tracking-[0.6em] text-[#BFA88F] uppercase italic mb-0.5 md:mb-2 block opacity-40">The Methodology</span>
@@ -128,7 +146,7 @@ const HowWeDoIt = ({ progress }) => {
                 </div>
 
                 {/* RIGHT SIDE: Minimized Card Stack */}
-                <div className="w-full md:w-2/5 flex flex-col items-center justify-center relative mt-0 md:mt-20 pb-2 md:pb-32 order-1 md:order-2">
+                <div className="w-full md:w-2/5 flex flex-col items-center justify-center relative -mt-6 md:mt-20 pb-2 md:pb-32 order-1 md:order-2">
                     {/* Progress Dots: Hidden on mobile to save space */}
                     <div className="absolute top-0 right-0 md:-right-12 flex flex-col gap-2 z-50 hidden md:flex">
                         {items.map((_, i) => {
@@ -172,6 +190,7 @@ const HowWeDoIt = ({ progress }) => {
                                     topCardTitle={cards[0].title}
                                     handleCardReveal={handleCardReveal}
                                     isFirstCard={card.title === items[0].title}
+                                    isInteractive={isInteractive}
                                 />
                             ))}
                         </AnimatePresence>
@@ -186,7 +205,7 @@ const HowWeDoIt = ({ progress }) => {
     );
 };
 
-const Card = ({ card, index, total, items, topCardTitle, handleCardReveal, isFirstCard }) => {
+const Card = ({ card, index, total, items, topCardTitle, handleCardReveal, isFirstCard, isInteractive }) => {
     const isTop = index === 0;
     const x = useMotionValue(0);
     const y = useMotionValue(0);
@@ -209,7 +228,7 @@ const Card = ({ card, index, total, items, topCardTitle, handleCardReveal, isFir
                 zIndex: total - index,
                 willChange: "transform, opacity, rotate"
             }}
-            drag={isTop}
+            drag={isTop && isInteractive}
             dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }}
             dragElastic={0.9}
             onDragEnd={(event, info) => {
@@ -230,13 +249,13 @@ const Card = ({ card, index, total, items, topCardTitle, handleCardReveal, isFir
                 }
             }}
             onTap={() => {
-                if (isTop) handleCardReveal();
+                if (isTop && isInteractive) handleCardReveal();
             }}
-            whileHover={isTop ? {
+            whileHover={isTop && isInteractive ? {
                 scale: 1.02,
                 transition: { type: "spring", stiffness: 400, damping: 25 }
             } : {}}
-            whileTap={isTop ? {
+            whileTap={isTop && isInteractive ? {
                 scale: 0.94,
                 y: 5,
                 transition: { type: "spring", stiffness: 600, damping: 20 }
@@ -258,7 +277,7 @@ const Card = ({ card, index, total, items, topCardTitle, handleCardReveal, isFir
             }}
             className={cn(
                 "absolute inset-0 bg-[#161616] p-2.5 md:p-3 rounded-[1.5rem] shadow-[0_30px_60px_rgba(0,0,0,0.6)] border border-white/5 cursor-grab active:cursor-grabbing transform-gpu overflow-hidden touch-none",
-                isTop ? "pointer-events-auto border-[#BFA88F]/30" : "pointer-events-none"
+                (isTop && isInteractive) ? "pointer-events-auto border-[#BFA88F]/30" : "pointer-events-none"
             )}
         >
             <div className="relative h-[80%] w-full overflow-hidden rounded-[1rem]">

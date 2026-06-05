@@ -61,12 +61,18 @@ function App() {
             infinite: false,
         });
 
+        // Store lenis globally for component scrollTo sync
+        window.lenis = lenis;
+
         function raf(time) {
             lenis.raf(time);
             requestAnimationFrame(raf);
         }
         requestAnimationFrame(raf);
-        return () => lenis.destroy();
+        return () => {
+            lenis.destroy();
+            window.lenis = null;
+        };
     }, []);
 
     // Receding effect

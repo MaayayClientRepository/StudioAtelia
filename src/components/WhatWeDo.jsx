@@ -1,12 +1,12 @@
-import React, { useRef, useState } from "react";
+    import React, { useRef, useState } from "react";
 import { motion, useTransform, useSpring, useMotionValue, useMotionValueEvent } from "framer-motion";
 import { ArrowUpRight, ChevronLeft, ChevronRight } from "lucide-react";
-import mkImg from "../assets/whatwedo/mk.jpg";
-import resImg from "../assets/whatwedo/res.jpg";
+import mkImg from "../assets/whatwedo/mk.png";
+import resImg from "../assets/whatwedo/res.png";
 import spaceImg from "../assets/whatwedo/space.png";
-import turkeyImg from "../assets/whatwedo/turkey.jpg";
-import projectManagementImg from "../assets/whatwedo/project-management.jpg";
-import materialImg from "../assets/whatwedo/material.jpg";
+import turkeyImg from "../assets/whatwedo/turkey.png";
+import projectManagementImg from "../assets/whatwedo/project-management.png";
+import materialImg from "../assets/whatwedo/material.png";
 
 const services = [
     { title: "MODULAR KITCHENS", code: "MK-01", image: mkImg },
@@ -17,81 +17,12 @@ const services = [
     { title: "MATERIAL SOURCING", code: "MS-06", image: materialImg },
 ];
 
-const FloatingSketches = ({ progress }) => {
-    return (
-        <div className="absolute inset-0 pointer-events-none overflow-hidden">
-            {/* Chair Sketch */}
-            <motion.svg
-                style={{
-                    y: useTransform(progress, [0, 1], [150, -150]),
-                    rotate: useTransform(progress, [0, 1], [-10, 20]),
-                    opacity: 0.08,
-                    willChange: "transform, opacity"
-                }}
-                className="absolute top-[12%] left-[4%] w-24 h-24 md:w-40 md:h-40 text-black"
-                viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="0.5" strokeLinecap="round" strokeLinejoin="round"
-            >
-                <path d="M7 20v-5h10v5M7 15V4h10v11M5 15h14" />
-                <path d="M9 10h6M9 7h6" />
-            </motion.svg>
-
-            {/* Wardrobe/Cupboard Sketch */}
-            <motion.svg
-                style={{
-                    y: useTransform(progress, [0, 1], [100, -200]),
-                    rotate: useTransform(progress, [0, 1], [30, -10]),
-                    opacity: 0.06,
-                    willChange: "transform, opacity"
-                }}
-                className="absolute top-[35%] right-[4%] w-32 h-32 md:w-56 md:h-56 text-black"
-                viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="0.3"
-            >
-                <path d="M4 18h16M4 14h16M4 10h16M4 6h16" />
-                <path d="M6 18V6M10 18V10M14 18V6M18 18V10" />
-                <rect x="2" y="4" width="20" height="16" rx="2" />
-            </motion.svg>
-
-            {/* Sofa Sketch */}
-            <motion.svg
-                style={{
-                    y: useTransform(progress, [0, 1], [400, -200]),
-                    rotate: useTransform(progress, [0, 1], [-5, 10]),
-                    opacity: 0.07,
-                    willChange: "transform, opacity"
-                }}
-                className="absolute top-[75%] left-[20%] w-40 h-20 md:w-64 md:h-32 text-black"
-                viewBox="0 0 100 50" fill="none" stroke="currentColor" strokeWidth="0.5"
-            >
-                <path d="M10,20 L10,40 M90,20 L90,40 M10,35 L90,35 M20,20 L20,35 M80,20 L80,35 M20,25 L80,25" />
-                <path d="M10,20 Q50,15 90,20" />
-            </motion.svg>
-
-            {/* Scribble Element */}
-            <motion.svg
-                style={{
-                    y: useTransform(progress, [0, 1], [300, -100]),
-                    rotate: useTransform(progress, [0, 1], [-20, 30]),
-                    opacity: 0.08,
-                    willChange: "transform, opacity"
-                }}
-                className="absolute bottom-[10%] left-[25%] w-32 h-32 text-black"
-                viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="0.8"
-            >
-                <path d="M12 2v20M2 12h20" strokeDasharray="2 2" />
-                <circle cx="12" cy="12" r="4" />
-                <path d="M12 8l-2 2 4 4 2-2" />
-            </motion.svg>
-        </div>
-    );
-};
-
 const WhatWeDo = ({ progress }) => {
+    const titleX = useTransform(progress, [0, 0.25], ["0vw", "55vw"]);
     const scrollRef = useRef(null);
     const [constraints, setConstraints] = useState({ start: 0, end: 0 });
-    const [currentIndex, setCurrentIndex] = useState(0);
-    const highWaterMark = useRef(0);
+        const [currentIndex, setCurrentIndex] = useState(0);
     const isMobile = useRef(false);
-    const isNavigating = useRef(false);
 
     // Detect mobile once
     React.useEffect(() => {
@@ -127,10 +58,10 @@ const WhatWeDo = ({ progress }) => {
                     
                     setConstraints({ start: titlePos, end: lastCardPos });
                     
-                    // CRITICAL: Initialize xTarget once we have the constraints
-                    if (progress.get() < 0.01) {
-                        xTarget.set(titlePos);
-                    }
+                    // Initialize xTarget based on current progress
+                    const currentProgress = progress.get();
+                    const targetPx = titlePos + currentProgress * (lastCardPos - titlePos);
+                    xTarget.set(targetPx);
                 }
             }
         };
@@ -146,46 +77,19 @@ const WhatWeDo = ({ progress }) => {
         };
     }, [xTarget, progress]);
 
-    // ─── ONE-WAY FORWARD SCROLL ───
-    // Scroll DOWN advances cards one-by-one (step-based).
-    // Scroll UP does NOT move cards backward — only buttons can go back.
+    // ─── TWO-WAY CONTINUOUS SCROLL ───
+    // Map vertical scroll progress directly to the horizontal position (from start to end constraints).
+    // This allows smooth scroll-linked sliding in both directions and prevents lags/jumps.
     useMotionValueEvent(progress, "change", (v) => {
-        // Calculate which step index we'd be at
+        // Calculate current index for active dots and navigation state
         const rawIndex = Math.round(v * services.length);
-        const clampedIndex = Math.min(rawIndex, services.length);
+        const clampedIndex = Math.min(Math.max(rawIndex, 0), services.length);
+        setCurrentIndex(clampedIndex);
 
-        // Auto-advance only if NOT currently navigating via dots/buttons
-        if (!isNavigating.current && clampedIndex > highWaterMark.current) {
-            // Moving forward — update high-water-mark and card position
-            highWaterMark.current = clampedIndex;
-            setCurrentIndex(clampedIndex);
-
-            // Calculate target pixel position
-            const fraction = clampedIndex / services.length;
-            const targetPx = constraints.start + fraction * (constraints.end - constraints.start);
-            xTarget.set(targetPx);
-        }
-
-        // RESET LOGIC: 
-        // 1. Reset when completely exiting the section from ABOVE (scrolling back up to hero)
-        if (v <= 0) {
-            highWaterMark.current = 0;
-            setCurrentIndex(0);
-            xTarget.set(constraints.start);
-        }
+        // Update the horizontal position target continuously
+        const targetPx = constraints.start + v * (constraints.end - constraints.start);
+        xTarget.set(targetPx);
     });
-
-    // Handle resets when completely outside the section
-    React.useEffect(() => {
-        const unsubscribe = progress.on("change", (v) => {
-            if (v < -0.1 || v > 1.1) {
-               highWaterMark.current = 0;
-               setCurrentIndex(0);
-               xTarget.set(constraints.start);
-            }
-        });
-        return () => unsubscribe();
-    }, [progress, constraints, xTarget]);
 
     // Smooth spring animation — tuned for each screen size
     const springX = useSpring(xTarget, {
@@ -195,56 +99,55 @@ const WhatWeDo = ({ progress }) => {
         restDelta: 0.5,
     });
 
-    // Button navigation — buttons CAN go backward (they update high-water-mark too)
+    // Button navigation — scrolls vertically and lets progress listener translate carousel
     const handleNav = (dir) => {
         const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
-        // Corrected section ranges for Niche & Form App.jsx
+        // Section ranges in App.jsx: What We Do starts at 0.19 and ends at 0.23
         const sectionStart = 0.19; 
         const sectionEnd = 0.23;
         const step = 1 / services.length;
-
-        // Block auto-scroll updates during manual navigation
-        isNavigating.current = true;
         
         let nextIndex;
         if (dir === "next") {
             if (currentIndex >= services.length) {
                 // Jump to next section (How We Do It)
-                window.scrollTo({ top: 0.25 * totalHeight, behavior: "smooth" });
-                isNavigating.current = false;
+                const targetScroll = 0.25 * totalHeight;
+                if (window.lenis) {
+                    window.lenis.scrollTo(targetScroll, { duration: 1.2, force: true });
+                } else {
+                    window.scrollTo({ top: targetScroll, behavior: "smooth" });
+                }
                 return;
             }
             nextIndex = Math.min(services.length, currentIndex + 1);
         } else {
             if (currentIndex <= 0) {
                 // Jump to previous section (Home Hero)
-                window.scrollTo({ top: 0.10 * totalHeight, behavior: "smooth" });
-                isNavigating.current = false;
+                const targetScroll = 0.10 * totalHeight;
+                if (window.lenis) {
+                    window.lenis.scrollTo(targetScroll, { duration: 1.2, force: true });
+                } else {
+                    window.scrollTo({ top: targetScroll, behavior: "smooth" });
+                }
                 return;
             }
             nextIndex = Math.max(0, currentIndex - 1);
         }
 
-        // Update state + high-water-mark (so backward button works correctly)
-        highWaterMark.current = nextIndex;
+        // Optimistically set current index for instant dots state
         setCurrentIndex(nextIndex);
-
-        // Move the carousel
-        const fraction = nextIndex / services.length;
-        const targetPx = constraints.start + fraction * (constraints.end - constraints.start);
-        xTarget.set(targetPx);
 
         // Sync vertical scroll position
         const targetGlobal = sectionStart + (nextIndex * step * (sectionEnd - sectionStart));
-        window.scrollTo({
-            top: targetGlobal * totalHeight,
-            behavior: "smooth",
-        });
-
-        // Release the lock after animation roughly completes
-        setTimeout(() => {
-            isNavigating.current = false;
-        }, 800);
+        const targetScroll = targetGlobal * totalHeight;
+        if (window.lenis) {
+            window.lenis.scrollTo(targetScroll, { duration: 1.0, force: true });
+        } else {
+            window.scrollTo({
+                top: targetScroll,
+                behavior: "smooth",
+            });
+        }
     };
 
     return (
@@ -255,14 +158,15 @@ const WhatWeDo = ({ progress }) => {
             </div>
 
             {/* MOBILE PERSISTENT HEADER */}
-            <div className="absolute top-12 left-5 z-30 pointer-events-none md:hidden">
+            <motion.div 
+                style={{ x: titleX }}
+                className="absolute top-6 left-5 z-30 pointer-events-none md:hidden text-left"
+            >
                 <span className="text-[8px] font-black tracking-[0.5em] text-[#BFA88F] uppercase italic mb-0.5 block opacity-60">Services Matrix</span>
                 <h2 className="text-lg font-black text-black tracking-tighter uppercase leading-[0.85]">
                     WHAT <span className="text-transparent" style={{ WebkitTextStroke: "1px #000000" }}>WE DO.</span>
                 </h2>
-            </div>
-
-            <FloatingSketches progress={progress} />
+            </motion.div>
 
             {/* Horizontal Carousel — driven by springX */}
             <motion.div
@@ -313,11 +217,7 @@ const WhatWeDo = ({ progress }) => {
                                     {service.title}
                                 </h3>
 
-                                <div className="flex items-center gap-3 group/btn cursor-pointer">
-                                    <div className="w-7 h-7 sm:w-8 sm:h-8 md:w-12 md:h-12 rounded-full bg-white/10 backdrop-blur-sm hover:bg-accent transition-all duration-500 flex items-center justify-center group-hover:border-accent border border-white/20">
-                                        <ArrowUpRight className="w-3 h-3 md:w-5 md:h-5 text-white group-hover/btn:text-black transition-transform duration-500 group-hover/btn:rotate-45" />
-                                    </div>
-                                </div>
+                              
                             </div>
                         </div>
                     </motion.div>

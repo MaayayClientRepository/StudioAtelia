@@ -1,77 +1,13 @@
 import React, { useRef, useState } from "react";
 import { motion, useTransform } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
+import FurnitureSketches from "./FurnitureSketches";
 
 /**
  * WhyUs Component: The Brand Philosophy
  * Theme: "Moodboard Cream" - inspired by the current beige design injection.
  * Typography: Playfair Display + Reactive Word Reveal
  */
-const FloatingSketches = ({ progress, isMobile }) => {
-    return (
-        <div className="absolute inset-0 pointer-events-none overflow-hidden">
-            {/* Chair Sketch */}
-            <motion.svg
-                style={{
-                    y: useTransform(progress, [0, 1], [150, -150]),
-                    rotate: useTransform(progress, [0, 1], [-5, 15]),
-                    opacity: isMobile ? 0.18 : 0.1,
-                    willChange: "transform, opacity"
-                }}
-                className="absolute top-[10%] left-[8%] w-48 h-48 text-black"
-                viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="0.5" strokeLinecap="round" strokeLinejoin="round"
-            >
-                <path d="M7 20v-5h10v5M7 15V4h10v11M5 15h14" />
-                <path d="M9 10h6M9 7h6" />
-            </motion.svg>
-
-            {/* Wardrobe Sketch */}
-            <motion.svg
-                style={{
-                    y: useTransform(progress, [0, 1], [100, -100]),
-                    rotate: useTransform(progress, [0, 1], [20, -20]),
-                    opacity: isMobile ? 0.15 : 0.08,
-                    willChange: "transform, opacity"
-                }}
-                className="absolute top-[60%] right-[12%] w-32 h-32 text-black"
-                viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="1"
-            >
-                <circle cx="50" cy="50" r="10" />
-                <path d="M50,15 L50,40 M85,50 L60,50 M50,85 L50,60 M15,50 L40,50" />
-            </motion.svg>
-
-            {/* Sofa Sketch */}
-            <motion.svg
-                style={{
-                    y: useTransform(progress, [0, 1], [400, -200]),
-                    rotate: useTransform(progress, [0, 1], [-5, 10]),
-                    opacity: isMobile ? 0.15 : 0.08,
-                    willChange: "transform, opacity"
-                }}
-                className="absolute top-[75%] left-[25%] w-64 h-32 text-black"
-                viewBox="0 0 100 50" fill="none" stroke="currentColor" strokeWidth="0.5"
-            >
-                <path d="M10,20 L10,40 M90,20 L90,40 M10,35 L90,35 M20,20 L20,35 M80,20 L80,35 M20,25 L80,25" />
-                <path d="M10,20 Q50,15 90,20" />
-            </motion.svg>
-
-            {/* Scribble Element */}
-            <motion.svg
-                style={{
-                    y: useTransform(progress, [0, 1], [250, -250]),
-                    rotate: useTransform(progress, [0, 1], [0, 45]),
-                    opacity: isMobile ? 0.22 : 0.12,
-                    willChange: "transform, opacity"
-                }}
-                className="absolute bottom-[15%] left-[15%] w-40 h-40 text-black"
-                viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="0.5"
-            >
-                <path d="M12 22V12M12 12L8 8M12 12L16 8M8 8C6 8 4 10 4 12M16 8C18 8 20 10 20 12" />
-            </motion.svg>
-        </div>
-    );
-};
-
 const IndividualWord = ({ word, progress, wordStart, wordEnd }) => {
     const opacity = useTransform(progress, [wordStart, wordEnd], [0, 1], { clamp: true });
     const y = useTransform(progress, [wordStart, wordEnd], [10, 0], { clamp: true });
@@ -145,8 +81,8 @@ const WhyUs = ({ progress }) => {
     const formY = useTransform(progress, [1.2, 1.5], [100, -60]); 
     const formScale = useTransform(progress, [1.2, 1.5], [1.1, 1]); 
 
-    const sketchOpacityMobile = useTransform(progress, [1.1, 1.25], [0.85, 0]);
-    const sketchOpacityDesktop = useTransform(progress, [1.1, 1.25], [0.1, 0]);
+    const sketchOpacityMobile = useTransform(progress, [1.1, 1.25], [1, 0]);
+    const sketchOpacityDesktop = useTransform(progress, [1.1, 1.25], [1, 0]);
     const sketchOpacity = isMobile ? sketchOpacityMobile : sketchOpacityDesktop;
 
     const phrase1 = "At Niche & Form Design Studio, we believe good design starts long before colours and finishes come into play. We take the time to understand how you live, move, and use your space—because a home should work beautifully.";
@@ -160,7 +96,7 @@ const WhyUs = ({ progress }) => {
             <div className="absolute inset-0 opacity-10 pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/handmade-paper.png')]" />
 
             <motion.div style={{ opacity: sketchOpacity }}>
-                <FloatingSketches progress={progress} isMobile={isMobile} />
+                <FurnitureSketches progress={progress} theme="light" mobileOnly={true} />
             </motion.div>
 
             {/* PHILOSOPHY TEXT WRAPPER */}
@@ -238,7 +174,6 @@ const WhyUs = ({ progress }) => {
                     </div>
                 </div>
             </motion.div>
-
             {/* CONTACT FORM — Redesigned for High-End Impact */}
             <motion.div
                 style={{
@@ -246,82 +181,82 @@ const WhyUs = ({ progress }) => {
                     pointerEvents: useTransform(progress, (v) => v > 1.1 ? "auto" : "none"),
                     willChange: "opacity"
                 }}
-                className="absolute inset-0 z-20 flex items-start md:items-center justify-center font-sans overflow-y-auto"
+                className="absolute inset-0 z-20 flex items-center justify-center font-sans overflow-hidden p-4 sm:p-6"
             >
                 <motion.div 
                     style={{ y: formY, scale: formScale }}
-                    className="w-full md:max-w-4xl min-h-screen md:min-h-0 md:h-[560px] flex flex-col md:flex-row bg-[#FBF2C0] md:rounded-[2.5rem] overflow-hidden md:border md:border-black/5 md:shadow-[0_60px_100px_-20px_rgba(0,0,0,0.15)] md:mx-6 overflow-y-auto"
+                    className="w-[92vw] max-w-[420px] md:max-w-4xl h-[80vh] max-h-[640px] md:h-[560px] flex flex-col md:flex-row bg-[#FBF2C0] rounded-[1.5rem] md:rounded-[2.5rem] overflow-hidden border border-black/10 md:border-black/5 shadow-[0_30px_60px_rgba(0,0,0,0.1)] md:shadow-[0_60px_100px_-20px_rgba(0,0,0,0.15)] md:mx-6 overflow-y-auto"
                 >
                     
                     {/* LEFT PANEL — Architectural Branding */}
-                    <div className="md:w-2/5 pt-14 pb-8 px-7 md:px-12 md:py-16 bg-black flex flex-col justify-between text-secondary relative overflow-hidden group/panel">
+                    <div className="md:w-2/5 pt-8 pb-6 px-6 md:px-12 md:py-16 bg-black flex flex-col justify-between text-secondary relative overflow-hidden group/panel">
                         {/* Huge Watermark */}
-                        <div className="absolute -top-6 -left-6 text-[40vw] md:text-[25vw] font-black opacity-[0.04] select-none pointer-events-none tracking-tighter leading-none font-serif">N</div>
-                        <div className="absolute -bottom-6 -right-6 text-[40vw] md:text-[25vw] font-black opacity-[0.04] select-none pointer-events-none tracking-tighter leading-none font-serif italic">F</div>
+                        <div className="absolute -top-6 -left-6 text-[30vw] md:text-[25vw] font-black opacity-[0.04] select-none pointer-events-none tracking-tighter leading-none font-serif">N</div>
+                        <div className="absolute -bottom-6 -right-6 text-[30vw] md:text-[25vw] font-black opacity-[0.04] select-none pointer-events-none tracking-tighter leading-none font-serif italic">F</div>
                         
-                        <div className="relative z-10 space-y-3 md:space-y-8">
-                            <div className="flex items-center gap-4">
-                                <div className="h-[1px] w-8 bg-accent" />
-                                <span className="text-[9px] font-black tracking-[0.5em] text-accent uppercase">Let's Connect</span>
-                            </div>
-                            <h3 className="text-2xl md:text-7xl font-serif font-black leading-[0.85] tracking-tighter italic">
-                                Ready to <br />
-                                <span className="text-accent not-italic">Build?</span>
-                            </h3>
-                            <p className="text-secondary/40 text-[10px] md:text-xs font-medium uppercase tracking-widest leading-relaxed max-w-[180px] md:max-w-none">
-                                Transforming your vision into architectural reality.
-                            </p>
+                        <div className="relative z-10 space-y-2 md:space-y-8">
+                             <div className="flex items-center gap-4">
+                                 <div className="h-[1px] w-8 bg-accent" />
+                                 <span className="text-[9px] font-black tracking-[0.5em] text-accent uppercase">Let's Connect</span>
+                             </div>
+                             <h3 className="text-xl md:text-7xl font-serif font-black leading-[0.85] tracking-tighter italic">
+                                 Ready to <br className="hidden md:block" />
+                                 <span className="text-accent not-italic">Build?</span>
+                             </h3>
+                             <p className="text-secondary/40 text-[10px] md:text-xs font-medium uppercase tracking-widest leading-relaxed max-w-[180px] md:max-w-none hidden sm:block">
+                                 Transforming your vision into architectural reality.
+                             </p>
                         </div>
-
-                        <div className="relative z-10 pt-5 md:pt-0">
-                            <div className="space-y-4 md:space-y-8 border-t border-white/10 pt-5 md:pt-10">
-                                <div className="grid grid-cols-2 md:grid-cols-1 gap-8 md:gap-8">
-                                    <div className="space-y-2 group/info cursor-pointer">
-                                        <p className="text-[9px] font-black tracking-[0.3em] text-accent uppercase group-hover/info:translate-x-1 transition-transform">Location</p>
-                                        <p className="text-xs md:text-sm font-sans text-secondary/80">Bangalore HQ — Karnataka, India.</p>
-                                    </div>
-                                    <div className="space-y-2 group/info cursor-pointer">
-                                        <p className="text-[9px] font-black tracking-[0.3em] text-accent uppercase group-hover/info:translate-x-1 transition-transform">Digital</p>
-                                        <p className="text-xs md:text-sm font-sans text-secondary/80 underline underline-offset-4 decoration-accent/30">hello@nicheandform.com</p>
-                                    </div>
-                                </div>
-                            </div>
+ 
+                        <div className="relative z-10 pt-4 md:pt-0">
+                             <div className="space-y-3 md:space-y-8 border-t border-white/10 pt-3 md:pt-10">
+                                 <div className="flex md:flex-col justify-between md:justify-start gap-4">
+                                     <div className="space-y-1">
+                                         <p className="text-[8px] font-black tracking-[0.2em] text-accent uppercase">Location</p>
+                                         <p className="text-[10px] md:text-sm font-sans text-secondary/80">Bangalore HQ</p>
+                                     </div>
+                                     <div className="space-y-1">
+                                         <p className="text-[8px] font-black tracking-[0.2em] text-accent uppercase">Digital</p>
+                                         <p className="text-[10px] md:text-sm font-sans text-secondary/80 underline underline-offset-4 decoration-accent/30">hello@nicheandform.com</p>
+                                     </div>
+                                 </div>
+                             </div>
                         </div>
                     </div>
-
+ 
                     {/* RIGHT PANEL — Refined Form Grid */}
-                    <div className="md:w-3/5 flex-1 px-7 pt-8 pb-8 md:px-12 md:pt-16 md:pb-12 flex flex-col justify-start relative bg-white/[0.02]">
-                        <form className="space-y-6 md:space-y-12">
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-6 md:gap-y-12">
+                    <div className="md:w-3/5 flex-1 px-6 py-6 md:px-12 md:pt-16 md:pb-12 flex flex-col justify-start relative bg-white/[0.02]">
+                        <form className="space-y-4 md:space-y-12">
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4 md:gap-y-12">
                                 {/* Name Input */}
                                 <div className="group relative">
-                                    <label className="text-[10px] font-black tracking-[0.4em] text-black/65 uppercase group-focus-within:text-accent transition-all block mb-2 md:mb-4">Your Name</label>
+                                    <label className="text-[9px] font-black tracking-[0.3em] text-black/60 uppercase group-focus-within:text-accent transition-all block mb-1 md:mb-4">Your Name</label>
                                     <input
                                         type="text"
                                         placeholder="Name / Organization"
-                                        className="w-full bg-transparent border-b border-black/20 py-2 md:py-3 text-base md:text-xl font-sans text-black/85 focus:text-black focus:outline-none focus:border-accent transition-all placeholder:text-black/25 placeholder:italic"
+                                        className="w-full bg-transparent border-b border-black/20 py-1 md:py-3 text-sm md:text-xl font-sans text-black/85 focus:text-black focus:outline-none focus:border-accent transition-all placeholder:text-black/25 placeholder:italic"
                                     />
                                     <div className="absolute bottom-0 left-0 h-[2px] w-0 bg-accent transition-all duration-700 group-focus-within:w-full" />
                                 </div>
-
+ 
                                 {/* Contact Input */}
                                 <div className="group relative">
-                                    <label className="text-[10px] font-black tracking-[0.4em] text-black/65 uppercase group-focus-within:text-accent transition-all block mb-2 md:mb-4">Communication</label>
+                                    <label className="text-[9px] font-black tracking-[0.3em] text-black/60 uppercase group-focus-within:text-accent transition-all block mb-1 md:mb-4">Communication</label>
                                     <input
                                         type="tel"
                                         placeholder="Email / WhatsApp"
-                                        className="w-full bg-transparent border-b border-black/20 py-2 md:py-3 text-base md:text-xl font-sans text-black/85 focus:text-black focus:outline-none focus:border-accent transition-all placeholder:text-black/25 placeholder:italic"
+                                        className="w-full bg-transparent border-b border-black/20 py-1 md:py-3 text-sm md:text-xl font-sans text-black/85 focus:text-black focus:outline-none focus:border-accent transition-all placeholder:text-black/25 placeholder:italic"
                                     />
                                     <div className="absolute bottom-0 left-0 h-[2px] w-0 bg-accent transition-all duration-700 group-focus-within:w-full" />
                                 </div>
-
-                                {/* Project Type */}
+ 
+                                {/* Space Type */}
                                 <div className="group relative">
-                                    <label className="text-[10px] font-black tracking-[0.4em] text-black/65 uppercase group-focus-within:text-accent transition-all block mb-2 md:mb-4">Space Type</label>
+                                    <label className="text-[9px] font-black tracking-[0.3em] text-black/60 uppercase group-focus-within:text-accent transition-all block mb-1 md:mb-4">Space Type</label>
                                     <select 
                                         value={spaceType}
                                         onChange={(e) => setSpaceType(e.target.value)}
-                                        className={`w-full bg-transparent border-b border-black/20 py-2 md:py-3 text-base md:text-xl font-sans focus:outline-none focus:border-accent transition-all appearance-none cursor-pointer ${spaceType ? "text-black/85" : "text-black/30 italic"}`}
+                                        className={`w-full bg-transparent border-b border-black/20 py-1 md:py-3 text-sm md:text-xl font-sans focus:outline-none focus:border-accent transition-all appearance-none cursor-pointer ${spaceType ? "text-black/85" : "text-black/30 italic"}`}
                                     >
                                         <option value="" className="bg-secondary" disabled>Nature of Inquiry</option>
                                         <option className="bg-secondary" value="residential">High-End Residential</option>
@@ -331,40 +266,46 @@ const WhyUs = ({ progress }) => {
                                     </select>
                                     <div className="absolute bottom-0 left-0 h-[2px] w-0 bg-accent transition-all duration-700 group-focus-within:w-full" />
                                 </div>
-
-                                {/* Timeline */}
+ 
+                                {/* Timeframe */}
                                 <div className="group relative">
-                                    <label className="text-[10px] font-black tracking-[0.4em] text-black/65 uppercase group-focus-within:text-accent transition-all block mb-2 md:mb-4">Timeframe</label>
+                                    <label className="text-[9px] font-black tracking-[0.3em] text-black/60 uppercase group-focus-within:text-accent transition-all block mb-1 md:mb-4">Timeframe</label>
                                     <input
                                         type="text"
                                         placeholder="Estimated Start Date"
-                                        className="w-full bg-transparent border-b border-black/20 py-2 md:py-3 text-base md:text-xl font-sans text-black/85 focus:text-black focus:outline-none focus:border-accent transition-all placeholder:text-black/25 placeholder:italic"
+                                        className="w-full bg-transparent border-b border-black/20 py-1 md:py-3 text-sm md:text-xl font-sans text-black/85 focus:text-black focus:outline-none focus:border-accent transition-all placeholder:text-black/25 placeholder:italic"
                                     />
                                     <div className="absolute bottom-0 left-0 h-[2px] w-0 bg-accent transition-all duration-700 group-focus-within:w-full" />
                                 </div>
                             </div>
-
+ 
                             {/* Brief Textarea */}
                             <div className="group relative">
-                                <label className="text-[10px] font-black tracking-[0.4em] text-black/65 uppercase group-focus-within:text-accent transition-all block mb-2 md:mb-4">Initial Thoughts</label>
+                                <label className="text-[9px] font-black tracking-[0.3em] text-black/60 uppercase group-focus-within:text-accent transition-all block mb-1 md:mb-4">Initial Thoughts</label>
                                 <textarea
                                     rows="1"
                                     placeholder="Briefly describe your dream space..."
-                                    className="w-full bg-transparent border-b border-black/20 py-2 md:py-3 text-base md:text-xl font-sans text-black/85 focus:text-black focus:outline-none focus:border-accent transition-all resize-none placeholder:text-black/25 placeholder:italic min-h-[44px] md:min-h-[60px]"
+                                    className="w-full bg-transparent border-b border-black/20 py-1 md:py-3 text-sm md:text-xl font-sans text-black/85 focus:text-black focus:outline-none focus:border-accent transition-all resize-none placeholder:text-black/25 placeholder:italic min-h-[36px] md:min-h-[60px]"
                                 ></textarea>
                                 <div className="absolute bottom-0 left-0 h-[2px] w-0 bg-accent transition-all duration-700 group-focus-within:w-full" />
                             </div>
-
+ 
                             <div className="flex justify-end pt-2 md:pt-4">
                                 <motion.button
-                                    whileHover={{ gap: "2rem" }}
-                                    whileTap={{ scale: 0.98 }}
-                                    className="flex items-center gap-6 group/btn"
+                                    whileHover={{
+                                        x: -2,
+                                        y: -2,
+                                        boxShadow: "4px 4px 0px rgba(0,0,0,0.3)"
+                                    }}
+                                    whileTap={{
+                                        x: 2,
+                                        y: 2,
+                                        boxShadow: "0px 0px 0px #000"
+                                    }}
+                                    className="flex items-center gap-3 bg-[#F8D149] text-black px-5 py-2.5 md:px-7 md:py-3.5 rounded-xl border-2 border-black/60 shadow-[3px_3px_0px_rgba(0,0,0,0.4)] transition-all cursor-pointer font-sans group"
                                 >
-                                    <span className="text-xs font-black uppercase tracking-[0.8em] text-black group-hover/btn:text-accent transition-all">Submit Brief</span>
-                                    <div className="w-16 h-16 rounded-full bg-black flex items-center justify-center text-accent group-hover/btn:scale-110 transition-all shadow-2xl border border-white/5">
-                                        <ArrowUpRight className="w-6 h-6" />
-                                    </div>
+                                    <span className="text-[10px] md:text-xs font-black uppercase tracking-[0.4em] text-black transition-all">Submit Brief</span>
+                                    <ArrowUpRight className="w-3.5 h-3.5 md:w-4 md:h-4 text-black group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                                 </motion.button>
                             </div>
                         </form>
@@ -372,13 +313,7 @@ const WhyUs = ({ progress }) => {
                 </motion.div>
             </motion.div>
 
-            {/* Aesthetic Detail (Built to Last) */}
-            <motion.div
-                style={{ opacity: useTransform(progress, [1.3, 1.5], [0, 0.3]) }}
-                className="absolute bottom-12 md:bottom-16 w-full text-center text-[10px] font-sans font-bold uppercase tracking-[0.6em] text-black/40 z-30"
-            >
-                Built to last • Niche & Form Design Studio
-            </motion.div>
+
 
         </div>
     );

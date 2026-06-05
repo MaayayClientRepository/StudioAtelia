@@ -27,10 +27,18 @@ const Navigate = ({ progress }) => {
         // Small delay so sidebar animation finishes before scroll
         setTimeout(() => {
             const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
-            window.scrollTo({
-                top: target * totalHeight,
-                behavior: "smooth"
-            });
+            const targetScroll = target * totalHeight;
+            if (window.lenis) {
+                window.lenis.scrollTo(targetScroll, {
+                    duration: 1.5,
+                    force: true
+                });
+            } else {
+                window.scrollTo({
+                    top: targetScroll,
+                    behavior: "smooth"
+                });
+            }
         }, 350);
     };
 
