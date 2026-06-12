@@ -176,7 +176,8 @@ const WhatWeDo = ({ progress }) => {
                 {/* Intro Block */}
                 <div className="flex-shrink-0 w-[160px] sm:w-[220px] md:w-[400px] flex flex-col justify-center">
                     <h2 className="text-2xl sm:text-3xl md:text-8xl font-black text-black leading-[0.85] tracking-tighter uppercase mb-3 sm:mb-5 md:mb-12">
-                        What <br /> We <br /> Do?
+                        <span className="block md:hidden">Our <br /> Craft</span>
+                        <span className="hidden md:block">What <br /> We <br /> Do?</span>
                     </h2>
                     <p className="text-black/60 font-medium text-[8px] md:text-sm uppercase tracking-widest border-l-2 md:border-l-4 border-black pl-3 md:pl-8 max-w-[140px] sm:max-w-[180px] md:max-w-xs font-sans leading-snug" style={{ textWrap: "pretty" }}>
                         Luxury spatial design companions. We don't just build, we curate{"\u00A0"}experiences.

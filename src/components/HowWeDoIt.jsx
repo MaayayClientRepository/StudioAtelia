@@ -131,12 +131,6 @@ const HowWeDoIt = ({ progress }) => {
                             transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
                             className="space-y-3 md:space-y-8"
                         >
-                            <div className="flex items-center gap-3">
-                                <span className="text-[9px] md:text-xs font-black tracking-[0.2em] md:tracking-[0.4em] text-[#BFA88F] uppercase italic bg-black/20 px-3 md:px-4 py-1 md:py-1.5 rounded-full border border-white/5">
-                                    {cards[0].tag}
-                                </span>
-                            </div>
-
                             <h2 className="text-xl sm:text-2xl md:text-7xl font-bold text-white tracking-tighter leading-[0.95] max-w-2xl">
                                 {cards[0].title.split(' & ').map((part, i) => (
                                     <React.Fragment key={i}>
@@ -210,9 +204,6 @@ const HowWeDoIt = ({ progress }) => {
                         animate={{ opacity: isInteractive ? 0.6 : 0 }}
                         className="mt-8 flex flex-col items-center gap-1.5 pointer-events-none select-none"
                     >
-                        <span className="text-[9px] text-[#BFA88F] font-black uppercase tracking-[0.3em] animate-pulse">
-                            Interactive Phase Stack
-                        </span>
                         <p className="text-[10px] text-white/50 font-medium tracking-[0.15em] uppercase text-center leading-tight">
                             Swipe or click top card to reveal next phase
                         </p>
@@ -317,17 +308,10 @@ const Card = ({ card, index, total, items, topCardTitle, handleCardReveal, isFir
                     <span className="text-[9px] md:text-[10px] font-sans font-bold tracking-[0.2em] text-[#BFA88F] uppercase">
                         {card.tag.split(' // ')[0]}
                     </span>
-                    <span className="text-[9px] md:text-[10px] font-serif italic text-white/50">
-                        {card.tag.split(' // ')[1]}
-                    </span>
                 </div>
-                <h3 className="text-[13px] md:text-[16px] font-bold text-white tracking-tight leading-tight">
-                    {card.title}
+                <h3 className="text-[18px] sm:text-[22px] md:text-[26px] font-bold text-white tracking-tight leading-tight">
+                    {card.tag.split(' // ')[1]}
                 </h3>
-                {/* A tiny descriptive summary on the card itself for extra clarity */}
-                <p className="text-[9px] md:text-[11px] text-white/60 font-sans leading-normal line-clamp-2 mt-0.5 md:mt-1 hidden md:block">
-                    {card.description}
-                </p>
             </div>
         </motion.div>
     );

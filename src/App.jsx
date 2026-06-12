@@ -90,7 +90,6 @@ function App() {
                     opacity: introOpacity,
                     scale: scaleRecede,
                     zIndex: 5,
-                    display: useTransform(scrollYProgress, [0, 0.18], ["block", "none"]),
                     willChange: "opacity, transform"
                 }}
                 className="sticky top-0 h-screen w-full overflow-hidden bg-transparent pointer-events-none"
@@ -104,7 +103,6 @@ function App() {
                     opacity: useTransform(scrollYProgress, [0.07, 0.13, 0.20, 0.26], [0, 1, 1, 0]),
                     scale: homeScaleOut,
                     zIndex: 1,
-                    display: useTransform(scrollYProgress, [0.05, 0.26], ["block", "none"]),
                     willChange: "opacity, transform"
                 }}
                 className="sticky top-0 h-screen w-full overflow-hidden bg-base"
@@ -121,7 +119,6 @@ function App() {
                     scale: serviceScaleOut,
                     opacity: serviceOpacity,
                     zIndex: 20,
-                    display: useTransform(scrollYProgress, [0.15, 0.28], ["block", "none"]),
                     willChange: "transform, opacity"
                 }}
                 className="sticky top-0 h-screen w-full shadow-[0_-20px_40px_rgba(0,0,0,0.2)] overflow-hidden rounded-t-[1.5rem] sm:rounded-t-[2.5rem] md:rounded-t-[4rem] bg-secondary"
@@ -139,7 +136,6 @@ function App() {
                     scale: howScaleOut,
                     opacity: howOpacity,
                     zIndex: 30,
-                    display: useTransform(scrollYProgress, [0.22, 0.47], ["block", "none"]),
                     willChange: "transform, opacity"
                 }}
                 className="sticky top-0 h-screen w-full shadow-[0_-20px_40px_rgba(0,0,0,0.2)] overflow-hidden rounded-t-[1.5rem] sm:rounded-t-[2.5rem] md:rounded-t-[4rem] bg-[#121212]"
@@ -156,7 +152,6 @@ function App() {
                     y: useTransform(scrollYProgress, [0.44, 0.52, 1], ["100vh", "0vh", "0vh"]),
                     scale: whyScaleIn,
                     zIndex: 40,
-                    display: useTransform(scrollYProgress, [0.44, 1], ["block", "block"]),
                     willChange: "transform"
                 }}
                 className="fixed inset-0 w-full h-screen shadow-[0_-40px_60px_rgba(0,0,0,0.1)] rounded-t-[1.5rem] sm:rounded-t-[2.5rem] md:rounded-t-[5rem] overflow-hidden bg-[#FBF2C0]"
@@ -169,7 +164,7 @@ function App() {
                 style={{
                     y: useTransform(scrollYProgress, [0.96, 1], ["100vh", "0vh"]),
                     zIndex: 100,
-                    display: useTransform(scrollYProgress, [0.95, 1], ["none", "block"]),
+                    pointerEvents: useTransform(scrollYProgress, [0.95, 0.96], ["none", "auto"]),
                     willChange: "transform"
                 }}
                 className="fixed inset-0 w-full h-screen rounded-t-[2rem] sm:rounded-t-[3rem] md:rounded-t-[5rem] overflow-hidden bg-base"

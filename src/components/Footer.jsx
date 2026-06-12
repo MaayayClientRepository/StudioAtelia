@@ -1,35 +1,24 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { Instagram, Linkedin, Facebook, Mail, MapPin, Phone, ArrowUpRight, ArrowUp } from "lucide-react";
+import { Instagram, Facebook, Mail, MapPin, Phone, ArrowUpRight, ArrowUp, MessageCircle } from "lucide-react";
+import { scrollToProgress } from "../lib/scrollTo";
 
 const Footer = () => {
     const socialLinks = [
         { name: "Instagram", icon: <Instagram className="w-5 h-5" />, href: "#" },
-        { name: "LinkedIn", icon: <Linkedin className="w-5 h-5" />, href: "#" },
+        { name: "WhatsApp", icon: <MessageCircle className="w-5 h-5" />, href: "https://wa.me/919876543210" },
         { name: "Facebook", icon: <Facebook className="w-5 h-5" />, href: "#" },
     ];
 
     const navLinks = [
-        { title: "Home", target: 0.10 },
-        { title: "What We Do", target: 0.21 },
+        { title: "Home", target: 0.07 },
+        { title: "What We Do", target: 0.19 },
         { title: "The Process", target: 0.32 },
-        { title: "Philosophy", target: 0.625 },
+        { title: "Why Us", target: 0.565 },
     ];
 
     const handleScroll = (target) => {
-        const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
-        const targetScroll = target * totalHeight;
-        if (window.lenis) {
-            window.lenis.scrollTo(targetScroll, {
-                duration: 1.5,
-                force: true
-            });
-        } else {
-            window.scrollTo({
-                top: targetScroll,
-                behavior: "smooth"
-            });
-        }
+        scrollToProgress(target);
     };
 
     return (
@@ -167,13 +156,7 @@ const Footer = () => {
                 </div>
 
                 <motion.button
-                    onClick={() => {
-                        if (window.lenis) {
-                            window.lenis.scrollTo(0, { duration: 1.5, force: true });
-                        } else {
-                            window.scrollTo({ top: 0, behavior: 'smooth' });
-                        }
-                    }}
+                    onClick={() => scrollToProgress(0)}
                     whileHover={{ y: -5 }}
                     className="flex flex-col items-center gap-2 group cursor-pointer"
                 >

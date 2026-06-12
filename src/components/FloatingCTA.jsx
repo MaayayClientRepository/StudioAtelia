@@ -1,6 +1,7 @@
 import React from "react";
 import { motion, useTransform, useMotionTemplate } from "framer-motion";
 import { Calendar } from "lucide-react";
+import { scrollToProgress } from "../lib/scrollTo";
 
 const FloatingCTA = ({ progress }) => {
     const [isMobile, setIsMobile] = React.useState(false);
@@ -32,6 +33,10 @@ const FloatingCTA = ({ progress }) => {
         ? useTransform(progress, [0, 0.13, 0.18, 0.80, 0.83], [0, 0, 1, 1, 0])
         : 1;
 
+    const handleCTAClick = () => {
+        scrollToProgress(0.81); // Contact form start
+    };
+
     return (
         <motion.div
             style={{
@@ -47,6 +52,7 @@ const FloatingCTA = ({ progress }) => {
             className="fixed z-[100]"
         >
             <motion.button
+                onClick={handleCTAClick}
                 whileHover={{
                     x: -2,
                     y: -2,
@@ -57,7 +63,7 @@ const FloatingCTA = ({ progress }) => {
                     y: 4,
                     boxShadow: "0px 0px 0px #000"
                 }}
-                className="flex items-center gap-2 sm:gap-3 bg-[#F8D149] text-black px-6 sm:px-8 py-3.5 sm:py-4 rounded-xl border-2 border-black/60 shadow-[3px_3px_0px_rgba(0,0,0,0.4)] transition-shadow duration-200 group"
+                className="flex items-center gap-2 sm:gap-3 bg-[#F8D149] text-black px-6 sm:px-8 py-3.5 sm:py-4 rounded-xl border-2 border-black/60 shadow-[3px_3px_0px_rgba(0,0,0,0.4)] transition-shadow duration-200 group cursor-pointer"
             >
                 <Calendar className="w-4 h-4 sm:w-5 sm:h-5 stroke-[2.5px]" />
                 <span className="text-[10px] sm:text-sm font-black uppercase tracking-wider whitespace-nowrap">Book an Appointment</span>

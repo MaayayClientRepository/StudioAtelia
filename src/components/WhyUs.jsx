@@ -102,7 +102,7 @@ const WhyUs = ({ progress }) => {
             {/* BACKGROUND: Drawing Texture & Elements */}
             <div className="absolute inset-0 opacity-10 pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/handmade-paper.png')]" />
 
-            <motion.div style={{ opacity: sketchOpacity }}>
+            <motion.div style={{ opacity: sketchOpacity }} className="absolute inset-0 pointer-events-none">
                 <FurnitureSketches 
                     progress={progress} 
                     theme="light" 
@@ -270,7 +270,7 @@ const WhyUs = ({ progress }) => {
                                         onChange={(e) => setSpaceType(e.target.value)}
                                         className={`w-full bg-transparent border-b border-black/20 py-1 md:py-3 text-sm md:text-xl font-sans focus:outline-none focus:border-accent transition-all appearance-none cursor-pointer ${spaceType ? "text-black/85" : "text-black/30 italic"}`}
                                     >
-                                        <option value="" className="bg-secondary" disabled>Nature of Inquiry</option>
+                                        <option value="" className="bg-secondary" disabled>Nature of inquiry</option>
                                         <option className="bg-secondary" value="residential">High-End Residential</option>
                                         <option className="bg-secondary" value="commercial">Boutique Commercial</option>
                                         <option className="bg-secondary" value="hospitality">Hospitality & Leisure</option>
@@ -284,13 +284,13 @@ const WhyUs = ({ progress }) => {
                                     <label className="text-[9px] font-black tracking-[0.3em] text-black/60 uppercase group-focus-within:text-accent transition-all block mb-1 md:mb-4">Timeframe</label>
                                     <input
                                         type="text"
-                                        placeholder="Estimated Start Date"
+                                        placeholder="Estimated start date"
                                         className="w-full bg-transparent border-b border-black/20 py-1 md:py-3 text-sm md:text-xl font-sans text-black/85 focus:text-black focus:outline-none focus:border-accent transition-all placeholder:text-black/25 placeholder:italic"
                                     />
                                     <div className="absolute bottom-0 left-0 h-[2px] w-0 bg-accent transition-all duration-700 group-focus-within:w-full" />
                                 </div>
                             </div>
- 
+                             
                             {/* Brief Textarea */}
                             <div className="group relative">
                                 <label className="text-[9px] font-black tracking-[0.3em] text-black/60 uppercase group-focus-within:text-accent transition-all block mb-1 md:mb-4">Initial Thoughts</label>

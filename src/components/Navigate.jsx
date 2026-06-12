@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence, useTransform } from "framer-motion";
-import { Menu, X, Instagram, Linkedin, Facebook } from "lucide-react";
+import { Menu, X, Instagram, Facebook, MessageCircle } from "lucide-react";
+import { scrollToProgress } from "../lib/scrollTo";
 
 /**
  * Navigate Component: The Global Left-Dropdown Menu
@@ -15,31 +16,18 @@ const Navigate = ({ progress }) => {
     const navScale = useTransform(progress, [0.13, 0.18], [0.8, 1]);
 
     const menuItems = [
-        { title: "HOME", sub: "The Sanctuary", target: 0.10 },          // Home Hero entrance (0.07-0.13)
-        { title: "WHAT WE DO", sub: "Services Matrix", target: 0.21 },   // What We Do center (0.19-0.23)
-        { title: "THE PROCESS", sub: "Design Methodology", target: 0.32 }, // How We Do It center (0.25-0.40)
-        { title: "PHILOSOPHY", sub: "Built to Last", target: 0.625 },    // WhyUs typing center (0.50-0.75)
-        { title: "CONTACT", sub: "Get in Touch", target: 0.86 },         // WhyUs form center (0.78-0.94)
+        { title: "HOME", sub: "The Sanctuary", target: 0.07 },           // Home Hero content start
+        { title: "WHAT WE DO", sub: "Services Matrix", target: 0.19 },   // What We Do content start
+        { title: "THE PROCESS", sub: "Design Methodology", target: 0.32 }, // How We Do It content start
+        { title: "WHY US", sub: "Our Philosophy", target: 0.565 },        // WhyUs settled, first phrase fully readable
+        { title: "CONTACT", sub: "Get in Touch", target: 0.81 },         // WhyUs form reveal start
     ];
 
     const handleScroll = (target) => {
         setIsOpen(false);
-        // Small delay so sidebar animation finishes before scroll
         setTimeout(() => {
-            const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
-            const targetScroll = target * totalHeight;
-            if (window.lenis) {
-                window.lenis.scrollTo(targetScroll, {
-                    duration: 1.5,
-                    force: true
-                });
-            } else {
-                window.scrollTo({
-                    top: targetScroll,
-                    behavior: "smooth"
-                });
-            }
-        }, 350);
+            scrollToProgress(target);
+        }, 200);
     };
 
     return (
@@ -116,10 +104,10 @@ const Navigate = ({ progress }) => {
                                 </nav>
 
                                 <div className="mt-auto pt-8 md:pt-12 border-t border-white/5 flex justify-between items-end">
-                                    <div className="flex gap-8 md:gap-10">
-                                        <Instagram className="w-4 h-4 md:w-5 md:h-5 text-white/20 hover:text-accent transition-colors cursor-pointer" />
-                                        <Linkedin className="w-4 h-4 md:w-5 md:h-5 text-white/20 hover:text-accent transition-colors cursor-pointer" />
-                                        <Facebook className="w-4 h-4 md:w-5 md:h-5 text-white/20 hover:text-accent transition-colors cursor-pointer" />
+                                    <div className="flex gap-8 md:gap-10 items-center">
+                                        <a href="#" className="flex"><Instagram className="w-4 h-4 md:w-5 md:h-5 text-white/20 hover:text-accent transition-colors cursor-pointer" /></a>
+                                        <a href="https://wa.me/919876543210" target="_blank" rel="noopener noreferrer" className="flex"><MessageCircle className="w-4 h-4 md:w-5 md:h-5 text-white/20 hover:text-accent transition-colors cursor-pointer" /></a>
+                                        <a href="#" className="flex"><Facebook className="w-4 h-4 md:w-5 md:h-5 text-white/20 hover:text-accent transition-colors cursor-pointer" /></a>
                                     </div>
                                     <div className="text-right">
                                         <p className="text-[7px] md:text-[8px] tracking-[0.5em] text-white/10 font-black uppercase italic">Niche & Form</p>
