@@ -20,7 +20,7 @@ const Navigate = ({ progress }) => {
         { title: "WHAT WE DO", sub: "Services Matrix", target: 0.19 },   // What We Do content start
         { title: "THE PROCESS", sub: "Design Methodology", target: 0.32 }, // How We Do It content start
         { title: "WHY US", sub: "Our Philosophy", target: 0.565 },        // WhyUs settled, first phrase fully readable
-        { title: "CONTACT", sub: "Get in Touch", target: 0.81 },         // WhyUs form reveal start
+        { title: "CONTACT", sub: "Get in Touch", target: 0.88 },         // WhyUs form reveal start
     ];
 
     const handleScroll = (target) => {

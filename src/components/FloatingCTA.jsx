@@ -34,7 +34,7 @@ const FloatingCTA = ({ progress }) => {
         : 1;
 
     const handleCTAClick = () => {
-        scrollToProgress(0.81); // Contact form start
+        scrollToProgress(0.88); // Contact form start
     };
 
     return (

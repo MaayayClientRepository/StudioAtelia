@@ -52,10 +52,14 @@ function App() {
 
     useEffect(() => {
         const isMobile = window.innerWidth < 768;
+        if (isMobile) {
+            window.lenis = null;
+            return;
+        }
+
         const lenis = new Lenis({
-            duration: isMobile ? 1.2 : 1.5,
+            duration: 1.5,
             easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-            touchMultiplier: isMobile ? 2.0 : 1.2,
             wheelMultiplier: 1.0,
             smoothWheel: true,
             infinite: false,
@@ -89,8 +93,7 @@ function App() {
                 style={{
                     opacity: introOpacity,
                     scale: scaleRecede,
-                    zIndex: 5,
-                    willChange: "opacity, transform"
+                    zIndex: 5
                 }}
                 className="sticky top-0 h-screen w-full overflow-hidden bg-transparent pointer-events-none"
             >
@@ -102,8 +105,7 @@ function App() {
                 style={{
                     opacity: useTransform(scrollYProgress, [0.07, 0.13, 0.20, 0.26], [0, 1, 1, 0]),
                     scale: homeScaleOut,
-                    zIndex: 1,
-                    willChange: "opacity, transform"
+                    zIndex: 1
                 }}
                 className="sticky top-0 h-screen w-full overflow-hidden bg-base"
             >
@@ -118,8 +120,7 @@ function App() {
                     y: serviceY,
                     scale: serviceScaleOut,
                     opacity: serviceOpacity,
-                    zIndex: 20,
-                    willChange: "transform, opacity"
+                    zIndex: 20
                 }}
                 className="sticky top-0 h-screen w-full shadow-[0_-20px_40px_rgba(0,0,0,0.2)] overflow-hidden rounded-t-[1.5rem] sm:rounded-t-[2.5rem] md:rounded-t-[4rem] bg-secondary"
             >
@@ -135,8 +136,7 @@ function App() {
                     y: howY,
                     scale: howScaleOut,
                     opacity: howOpacity,
-                    zIndex: 30,
-                    willChange: "transform, opacity"
+                    zIndex: 30
                 }}
                 className="sticky top-0 h-screen w-full shadow-[0_-20px_40px_rgba(0,0,0,0.2)] overflow-hidden rounded-t-[1.5rem] sm:rounded-t-[2.5rem] md:rounded-t-[4rem] bg-[#121212]"
             >
@@ -151,8 +151,7 @@ function App() {
                 style={{
                     y: useTransform(scrollYProgress, [0.44, 0.52, 1], ["100vh", "0vh", "0vh"]),
                     scale: whyScaleIn,
-                    zIndex: 40,
-                    willChange: "transform"
+                    zIndex: 40
                 }}
                 className="fixed inset-0 w-full h-screen shadow-[0_-40px_60px_rgba(0,0,0,0.1)] rounded-t-[1.5rem] sm:rounded-t-[2.5rem] md:rounded-t-[5rem] overflow-hidden bg-[#FBF2C0]"
             >
@@ -164,8 +163,7 @@ function App() {
                 style={{
                     y: useTransform(scrollYProgress, [0.96, 1], ["100vh", "0vh"]),
                     zIndex: 100,
-                    pointerEvents: useTransform(scrollYProgress, [0.95, 0.96], ["none", "auto"]),
-                    willChange: "transform"
+                    pointerEvents: useTransform(scrollYProgress, [0.95, 0.96], ["none", "auto"])
                 }}
                 className="fixed inset-0 w-full h-screen rounded-t-[2rem] sm:rounded-t-[3rem] md:rounded-t-[5rem] overflow-hidden bg-base"
             >

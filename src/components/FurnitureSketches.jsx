@@ -2,8 +2,18 @@ import React from "react";
 import { motion, useTransform } from "framer-motion";
 
 const FurnitureSketches = ({ progress, theme = "dark", mobileOnly = false, fadeOutRange = [0.85, 0.98] }) => {
+    const [isMobile, setIsMobile] = React.useState(false);
+    React.useEffect(() => {
+        setIsMobile(window.innerWidth < 768);
+        const handleResize = () => setIsMobile(window.innerWidth < 768);
+        window.addEventListener("resize", handleResize);
+        return () => window.removeEventListener("resize", handleResize);
+    }, []);
+
     // Parallel, uniform scroll parallax: shift upward by same amount
-    const yOffset = useTransform(progress, [0, 1], [0, -50]);
+    // Disabled on mobile to prevent expensive SVG pattern re-rasterization during scroll
+    const yTransform = useTransform(progress, [0, 1], [0, -50]);
+    const yOffset = isMobile ? 0 : yTransform;
 
     // Fades out uniformly as the section is scrolled past
     const sketchesOpacity = useTransform(progress, fadeOutRange, [1, 0]);
