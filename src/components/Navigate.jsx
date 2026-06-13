@@ -25,9 +25,10 @@ const Navigate = ({ progress }) => {
 
     const handleScroll = (target) => {
         setIsOpen(false);
+        const isMobile = window.innerWidth < 768;
         setTimeout(() => {
             scrollToProgress(target);
-        }, 200);
+        }, isMobile ? 320 : 150);
     };
 
     return (

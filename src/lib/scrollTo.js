@@ -53,6 +53,12 @@ export function scrollToProgress(target, options = {}) {
             });
         });
     } else {
-        window.scrollTo({ top: targetPx, behavior: "smooth" });
+        // Fallback / Mobile: Instantly pre-jump close to the target, then smooth-scroll the remaining short distance.
+        // This prevents the mobile browser from thrashing and lagging as it scrolls through thousands of pixels.
+        window.scrollTo({ top: preJumpPx });
+        setTimeout(() => {
+            window.scrollTo({ top: targetPx, behavior: "smooth" });
+            if (onComplete) onComplete();
+        }, 50);
     }
 }
