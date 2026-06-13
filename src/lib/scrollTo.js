@@ -58,7 +58,12 @@ export function scrollToProgress(target, options = {}) {
         window.scrollTo({ top: preJumpPx });
         setTimeout(() => {
             window.scrollTo({ top: targetPx, behavior: "smooth" });
-            if (onComplete) onComplete();
-        }, 50);
+            
+            // Safety backup: ensure the exact pixel coordinate is reached after the short smooth scroll completes
+            setTimeout(() => {
+                window.scrollTo({ top: targetPx });
+                if (onComplete) onComplete();
+            }, 300);
+        }, 80);
     }
 }
