@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion, useTransform } from 'framer-motion';
-import bwIntImg from '../assets/b&w_int.png';
+import bwIntImg from '../assets/b_w_int.jpg';
 import colorIntImg from '../assets/color_int.jpg';
 
 const IntroSequence = ({ progress }) => {
