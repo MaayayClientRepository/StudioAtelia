@@ -82,7 +82,7 @@ const FlipCard = ({ service, index, isDragging }) => {
             <motion.div
                 animate={{ rotateY: isFlipped ? 180 : 0 }}
                 transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
-                style={{ transformStyle: "preserve-3d", position: "relative" }}
+                style={{ transformStyle: "preserve-3d", position: "relative", willChange: "transform" }}
                 className="relative h-[310px] sm:h-[360px] md:h-[420px] w-full cursor-pointer"
             >
                 {/* ── FRONT ── */}
@@ -94,10 +94,11 @@ const FlipCard = ({ service, index, isDragging }) => {
                         src={service.image}
                         loading="lazy"
                         decoding="async"
-                        className="absolute inset-0 w-full h-full object-cover brightness-90 md:brightness-[0.7] group-hover:brightness-100 group-hover:scale-105 transition-all duration-[1s] ease-out"
-                        style={{ willChange: "transform, filter" }}
+                        className="absolute inset-0 w-full h-full object-cover md:scale-100 md:group-hover:scale-105 transition-transform duration-[1s] ease-out"
+                        style={{ willChange: "transform" }}
                         alt={service.title}
                     />
+                    <div className="absolute inset-0 bg-black/20 md:bg-black/30 md:group-hover:bg-black/10 transition-colors duration-1000" />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
 
                     <div className="absolute inset-x-0 bottom-0 p-4 sm:p-5 md:p-8">
@@ -386,7 +387,7 @@ const WhatWeDo = ({ progress }) => {
             </div>
 
             {/* Grain Overlay */}
-            <div className="absolute inset-0 opacity-[0.03] pointer-events-none mix-blend-multiply bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
+            <div className="absolute inset-0 opacity-[0.03] pointer-events-none mix-blend-multiply bg-[url('https://grainy-gradients.vercel.app/noise.svg')] hidden md:block" />
         </div>
     );
 };

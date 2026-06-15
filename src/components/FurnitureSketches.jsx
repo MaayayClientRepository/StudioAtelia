@@ -24,7 +24,7 @@ const FurnitureSketches = ({ progress, theme = "dark", mobileOnly = false, fadeO
 
     return (
         <motion.div 
-            style={{ opacity: sketchesOpacity, y: yOffset }}
+            style={{ opacity: sketchesOpacity, y: yOffset, willChange: "transform, opacity" }}
             className={`absolute -top-0 -left-0 -right-0 bottom-[-100px] pointer-events-none overflow-hidden select-none ${mobileOnly ? "md:hidden" : ""}`}
         >
             <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
