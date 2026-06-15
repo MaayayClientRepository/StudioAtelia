@@ -17,8 +17,8 @@ const IntroSequence = ({ progress }) => {
     // Brand name and tagline now fade in simultaneously with the color transition
     const taglineOpacity = useTransform(progress, [0.1, 0.4], [0, 1]);
 
-    // Refined tonal progression: White -> Warm Stone (#F7F2EB) -> Champagne (#BFA88F)
-    const textColor = useTransform(progress, [0.7, 0.85, 1], ["#FFFFFF", "#F7F2EB", "#BFA88F"]);
+    // Refined tonal progression: White -> Warm Stone (#F7F2EB) -> Champagne (#EAD8C3)
+    const textColor = useTransform(progress, [0.7, 0.85, 1], ["#FFFFFF", "#F7F2EB", "#EAD8C3"]);
     const brandY = useTransform(progress, [0.7, 0.95], [-100, 0]); // Reduced travel for snappier feel
     const scale = 1;
 
@@ -43,7 +43,10 @@ const IntroSequence = ({ progress }) => {
                             className="h-[1px] w-8 md:w-16 opacity-35" 
                         />
                         <motion.span
-                            style={{ color: textColor }}
+                            style={{ 
+                                color: textColor,
+                                textShadow: "0 2px 4px rgba(0, 0, 0, 0.9), 0 4px 8px rgba(0, 0, 0, 0.8)"
+                            }}
                             className="text-[9px] md:text-[11px] font-semibold tracking-[0.6em] md:tracking-[0.8em] mr-[-0.6em] md:mr-[-0.8em] uppercase font-sans text-center"
                         >
                             The Art of Living
@@ -58,9 +61,10 @@ const IntroSequence = ({ progress }) => {
                     <motion.h1
                         style={{
                             color: textColor,
-                            fontSize: "clamp(2rem, 12vw, 15vw)"
+                            fontSize: "clamp(2rem, 12vw, 15vw)",
+                            textShadow: "0 2px 4px rgba(0, 0, 0, 0.9), 0 10px 25px rgba(0, 0, 0, 0.9), 0 0 30px rgba(234, 216, 195, 0.35)"
                         }}
-                        className="font-serif font-light italic leading-none tracking-[-0.02em] mb-4 sm:mb-6 text-center"
+                        className="font-serif font-light italic leading-none tracking-[-0.02em] mb-4 sm:mb-6 text-center select-none"
                     >
                         Niche & Form
                     </motion.h1>
@@ -68,20 +72,21 @@ const IntroSequence = ({ progress }) => {
                     {/* Unified Tagline in Single Line */}
                     <div className="flex items-center gap-4 md:gap-8 justify-center w-full">
                         <motion.div
-                            style={{ backgroundColor: useTransform(progress, [0.7, 0.95], ["#FFFFFF", "#BFA88F"]) }}
+                            style={{ backgroundColor: useTransform(progress, [0.7, 0.95], ["#FFFFFF", "#EAD8C3"]) }}
                             className="h-[1px] flex-1 max-w-[40px] md:max-w-[100px] opacity-40"
                         />
                         <motion.p
                             style={{
-                                color: useTransform(progress, [0.7, 0.95], ["#FFFFFF", "#BFA88F"]),
-                                fontSize: "clamp(0.6rem, 2.5vw, 1.5rem)"
+                                color: useTransform(progress, [0.7, 0.95], ["#FFFFFF", "#EAD8C3"]),
+                                fontSize: "clamp(0.6rem, 2.5vw, 1.5rem)",
+                                textShadow: "0 2px 4px rgba(0, 0, 0, 0.9), 0 6px 12px rgba(0, 0, 0, 0.9), 0 0 15px rgba(234, 216, 195, 0.2)"
                             }}
                             className="font-['Fira_Sans_Condensed',_sans-serif] font-light italic tracking-[0.15em] md:tracking-[0.4em] indent-[0.15em] md:indent-[0.4em] uppercase text-center"
                         >
                             Thoughtful design <br className="sm:hidden" /> Transforms living
                         </motion.p>
                         <motion.div
-                            style={{ backgroundColor: useTransform(progress, [0.7, 0.95], ["#FFFFFF", "#BFA88F"]) }}
+                            style={{ backgroundColor: useTransform(progress, [0.7, 0.95], ["#FFFFFF", "#EAD8C3"]) }}
                             className="h-[1px] flex-1 max-w-[40px] md:max-w-[100px] opacity-40"
                         />
                     </div>

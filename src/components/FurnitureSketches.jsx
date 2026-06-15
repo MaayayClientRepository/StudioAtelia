@@ -2,9 +2,8 @@ import React from "react";
 import { motion, useTransform } from "framer-motion";
 
 const FurnitureSketches = ({ progress, theme = "dark", mobileOnly = false, fadeOutRange = [0.85, 0.98] }) => {
-    const [isMobile, setIsMobile] = React.useState(false);
+    const [isMobile, setIsMobile] = React.useState(() => typeof window !== "undefined" ? window.innerWidth < 768 : false);
     React.useEffect(() => {
-        setIsMobile(window.innerWidth < 768);
         const handleResize = () => setIsMobile(window.innerWidth < 768);
         window.addEventListener("resize", handleResize);
         return () => window.removeEventListener("resize", handleResize);
@@ -18,10 +17,10 @@ const FurnitureSketches = ({ progress, theme = "dark", mobileOnly = false, fadeO
     // Fades out uniformly as the section is scrolled past
     const sketchesOpacity = useTransform(progress, fadeOutRange, [1, 0]);
 
-    // Stroke color opacity configuration (increased to 28% for dark theme and 26% for light theme)
+    // Stroke color opacity configuration (reduced significantly on mobile to prevent text readability issues)
     const strokeColor = theme === "dark" 
-        ? "rgba(191, 168, 143, 0.28)" 
-        : "rgba(18, 18, 18, 0.26)";
+        ? (isMobile ? "rgba(191, 168, 143, 0.08)" : "rgba(191, 168, 143, 0.28)")
+        : (isMobile ? "rgba(18, 18, 18, 0.06)" : "rgba(18, 18, 18, 0.26)");
 
     return (
         <motion.div 
