@@ -168,11 +168,12 @@ const WhatWeDo = ({ progress }) => {
     const scrollRef = useRef(null);
     const [constraints, setConstraints] = useState({ start: 0, end: 0 });
     const [currentIndex, setCurrentIndex] = useState(0);
-    const [isMobile, setIsMobile] = useState(() => typeof window !== "undefined" ? window.innerWidth < 768 : false);
+    const isMobile = useRef(false);
     const isDragging = useRef(false);
 
     React.useEffect(() => {
-        const onResize = () => setIsMobile(window.innerWidth < 768);
+        isMobile.current = window.innerWidth < 768;
+        const onResize = () => { isMobile.current = window.innerWidth < 768; };
         window.addEventListener("resize", onResize);
         return () => window.removeEventListener("resize", onResize);
     }, []);
@@ -226,13 +227,11 @@ const WhatWeDo = ({ progress }) => {
     });
 
     const springX = useSpring(xTarget, {
-        damping: 28,
-        stiffness: 140,
-        mass: 0.8,
+        damping: isMobile.current ? 35 : 28,
+        stiffness: isMobile.current ? 200 : 140,
+        mass: isMobile.current ? 0.5 : 0.8,
         restDelta: 0.5,
     });
-
-    const motionX = isMobile ? xTarget : springX;
 
     const handleNav = (dir) => {
         const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
@@ -296,7 +295,7 @@ const WhatWeDo = ({ progress }) => {
             {/* Horizontal Carousel */}
             <motion.div
                 ref={scrollRef}
-                style={{ x: motionX, willChange: "transform" }}
+                style={{ x: springX, willChange: "transform" }}
                 className="flex gap-4 sm:gap-6 md:gap-20 px-4 sm:px-6 md:px-[10vw] relative z-10 w-max"
                 onDragStart={() => { isDragging.current = true; }}
                 onDragEnd={() => { setTimeout(() => { isDragging.current = false; }, 50); }}

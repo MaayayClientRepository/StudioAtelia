@@ -27,10 +27,7 @@ const IndividualWord = ({ word, progress, wordStart, wordEnd }) => {
     );
 };
 
-const WordReveal = ({ text, progress, range, className, isMobile }) => {
-    if (isMobile) {
-        return <div className={className} style={{ textWrap: "pretty" }}>{text}</div>;
-    }
+const WordReveal = ({ text, progress, range, className }) => {
     const rawWords = text.split(" ");
     const words = [...rawWords];
     if (words.length > 1) {
@@ -63,12 +60,13 @@ const WordReveal = ({ text, progress, range, className, isMobile }) => {
 
 const WhyUs = ({ progress }) => {
     const [spaceType, setSpaceType] = useState("");
-    const [isMobile, setIsMobile] = useState(() => typeof window !== "undefined" ? window.innerWidth < 768 : false);
+    const [isMobile, setIsMobile] = useState(false);
 
     React.useEffect(() => {
         const checkMobile = () => {
             setIsMobile(window.innerWidth < 768);
         };
+        checkMobile();
         window.addEventListener("resize", checkMobile);
         return () => window.removeEventListener("resize", checkMobile);
     }, []);
@@ -149,7 +147,6 @@ const WhyUs = ({ progress }) => {
                                 text={phrase1}
                                 progress={progress}
                                 range={[0.15, 0.38]}
-                                isMobile={isMobile}
                                 className="text-[16px] sm:text-xl md:text-[2rem] lg:text-[2.25rem] leading-[1.6] text-black font-sans font-medium text-center tracking-tight max-w-4xl px-4"
                             />
                         </motion.div>
@@ -166,7 +163,6 @@ const WhyUs = ({ progress }) => {
                                 text={phrase2}
                                 progress={progress}
                                 range={[0.46, 0.68]}
-                                isMobile={isMobile}
                                 className="text-[16px] sm:text-xl md:text-[2rem] lg:text-[2.25rem] leading-[1.6] text-black font-sans font-medium text-center tracking-tight max-w-4xl px-4"
                             />
                         </motion.div>
@@ -183,7 +179,6 @@ const WhyUs = ({ progress }) => {
                                 text={phrase3}
                                 progress={progress}
                                 range={[0.76, 0.98]}
-                                isMobile={isMobile}
                                 className="text-[16px] sm:text-xl md:text-[2rem] lg:text-[2.25rem] leading-[1.6] text-black font-sans font-medium text-center tracking-tight max-w-4xl px-4"
                             />
                         </motion.div>
