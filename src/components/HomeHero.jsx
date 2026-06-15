@@ -53,7 +53,7 @@ const HomeHero = ({ progress }) => {
             </motion.div>
 
             {/* Grain Overlay for Texture */}
-            <div className="absolute inset-0 opacity-[0.03] pointer-events-none mix-blend-screen bg-[url('https://grainy-gradients.vercel.app/noise.svg')] hidden md:block" />
+            <div className="absolute inset-0 opacity-[0.03] pointer-events-none mix-blend-screen bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
 
             <style>{`
                 ::selection {

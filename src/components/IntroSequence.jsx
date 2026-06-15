@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion, useTransform } from 'framer-motion';
-import bwIntImg from '../assets/b&w_int.png';
+import bwIntImg from '../assets/b_w_int.jpg';
 import colorIntImg from '../assets/color_int.jpg';
 
 const IntroSequence = ({ progress }) => {
@@ -108,7 +108,7 @@ const IntroSequence = ({ progress }) => {
                         alt="Foundational Space"
                         loading="eager"
                         decoding="sync"
-                        className="w-full h-full object-cover md:object-center object-[50.8%_center] md:grayscale"
+                        className="w-full h-full object-cover md:object-center object-[50.8%_center] grayscale"
                     />
                 </motion.div>
 
@@ -146,7 +146,7 @@ const IntroSequence = ({ progress }) => {
             </motion.div>
 
             {/* Grain Overlay */}
-            <div className="absolute inset-0 opacity-[0.03] pointer-events-none mix-blend-overlay bg-[url('https://grainy-gradients.vercel.app/noise.svg')] hidden md:block" />
+            <div className="absolute inset-0 opacity-[0.03] pointer-events-none mix-blend-overlay bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
         </div>
     );
 };

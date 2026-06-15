@@ -208,7 +208,7 @@ const Footer = () => {
             </div>
 
             {/* Grain Overlay */}
-            <div className="absolute inset-0 opacity-[0.02] pointer-events-none mix-blend-screen bg-[url('https://grainy-gradients.vercel.app/noise.svg')] hidden md:block" />
+            <div className="absolute inset-0 opacity-[0.02] pointer-events-none mix-blend-screen bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
         </footer>
     );
 };

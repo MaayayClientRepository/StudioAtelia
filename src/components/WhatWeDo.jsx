@@ -82,7 +82,7 @@ const FlipCard = ({ service, index, isDragging }) => {
             <motion.div
                 animate={{ rotateY: isFlipped ? 180 : 0 }}
                 transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
-                style={{ transformStyle: "preserve-3d", position: "relative", willChange: "transform" }}
+                style={{ transformStyle: "preserve-3d", position: "relative" }}
                 className="relative h-[310px] sm:h-[360px] md:h-[420px] w-full cursor-pointer"
             >
                 {/* ── FRONT ── */}
@@ -94,11 +94,10 @@ const FlipCard = ({ service, index, isDragging }) => {
                         src={service.image}
                         loading="lazy"
                         decoding="async"
-                        className="absolute inset-0 w-full h-full object-cover md:scale-100 md:group-hover:scale-105 transition-transform duration-[1s] ease-out"
-                        style={{ willChange: "transform" }}
+                        className="absolute inset-0 w-full h-full object-cover brightness-90 md:brightness-[0.7] group-hover:brightness-100 group-hover:scale-105 transition-all duration-[1s] ease-out"
+                        style={{ willChange: "transform, filter" }}
                         alt={service.title}
                     />
-                    <div className="absolute inset-0 bg-black/20 md:bg-black/30 md:group-hover:bg-black/10 transition-colors duration-1000" />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
 
                     <div className="absolute inset-x-0 bottom-0 p-4 sm:p-5 md:p-8">
@@ -169,12 +168,11 @@ const WhatWeDo = ({ progress }) => {
     const scrollRef = useRef(null);
     const [constraints, setConstraints] = useState({ start: 0, end: 0 });
     const [currentIndex, setCurrentIndex] = useState(0);
-    const isMobile = useRef(false);
+    const [isMobile, setIsMobile] = useState(() => typeof window !== "undefined" ? window.innerWidth < 768 : false);
     const isDragging = useRef(false);
 
     React.useEffect(() => {
-        isMobile.current = window.innerWidth < 768;
-        const onResize = () => { isMobile.current = window.innerWidth < 768; };
+        const onResize = () => setIsMobile(window.innerWidth < 768);
         window.addEventListener("resize", onResize);
         return () => window.removeEventListener("resize", onResize);
     }, []);
@@ -228,11 +226,13 @@ const WhatWeDo = ({ progress }) => {
     });
 
     const springX = useSpring(xTarget, {
-        damping: isMobile.current ? 35 : 28,
-        stiffness: isMobile.current ? 200 : 140,
-        mass: isMobile.current ? 0.5 : 0.8,
+        damping: 28,
+        stiffness: 140,
+        mass: 0.8,
         restDelta: 0.5,
     });
+
+    const motionX = isMobile ? xTarget : springX;
 
     const handleNav = (dir) => {
         const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
@@ -296,7 +296,7 @@ const WhatWeDo = ({ progress }) => {
             {/* Horizontal Carousel */}
             <motion.div
                 ref={scrollRef}
-                style={{ x: springX, willChange: "transform" }}
+                style={{ x: motionX, willChange: "transform" }}
                 className="flex gap-4 sm:gap-6 md:gap-20 px-4 sm:px-6 md:px-[10vw] relative z-10 w-max"
                 onDragStart={() => { isDragging.current = true; }}
                 onDragEnd={() => { setTimeout(() => { isDragging.current = false; }, 50); }}
@@ -387,7 +387,7 @@ const WhatWeDo = ({ progress }) => {
             </div>
 
             {/* Grain Overlay */}
-            <div className="absolute inset-0 opacity-[0.03] pointer-events-none mix-blend-multiply bg-[url('https://grainy-gradients.vercel.app/noise.svg')] hidden md:block" />
+            <div className="absolute inset-0 opacity-[0.03] pointer-events-none mix-blend-multiply bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
         </div>
     );
 };
