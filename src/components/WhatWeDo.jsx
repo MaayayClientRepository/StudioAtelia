@@ -83,7 +83,7 @@ const FlipCard = ({ service, index, isDragging }) => {
                 animate={{ rotateY: isFlipped ? 180 : 0 }}
                 transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
                 style={{ transformStyle: "preserve-3d", position: "relative" }}
-                className="relative h-[310px] sm:h-[360px] md:h-[420px] w-full cursor-pointer"
+                className="relative h-[310px] sm:h-[340px] md:h-[420px] w-full cursor-pointer"
             >
                 {/* ── FRONT ── */}
                 <div
@@ -100,20 +100,13 @@ const FlipCard = ({ service, index, isDragging }) => {
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
 
-                    <div className="absolute inset-x-0 bottom-0 p-4 sm:p-5 md:p-8">
-                        <span className="text-[9px] sm:text-[10px] md:text-xs text-accent font-black tracking-[0.2em] mb-1.5 sm:mb-2 block">
+                    <div className="absolute inset-x-0 bottom-0 p-4 sm:p-5 md:p-8 flex flex-col items-center text-center">
+                        <span className="text-[9px] sm:text-[10px] md:text-xs text-accent font-black tracking-[0.2em] mb-1 sm:mb-1.5 md:mb-2 block">
                             {service.code}
                         </span>
-                        <h3 className="text-lg sm:text-xl md:text-3xl font-serif font-medium text-white leading-[1.05] mb-3 sm:mb-4 md:mb-5 group-hover:text-accent transition-colors duration-500">
+                        <h3 className="text-lg sm:text-xl md:text-3xl font-serif font-medium text-white leading-[1.05] group-hover:text-accent transition-colors duration-500 text-center max-w-full">
                             {service.title}
                         </h3>
-                        {/* Tap hint */}
-                        <div className="flex items-center gap-1.5 opacity-50 group-hover:opacity-80 transition-opacity duration-500">
-                            <RotateCcw className="w-3 h-3 text-white/70" />
-                            <span className="text-[8px] md:text-[9px] text-white/70 font-sans tracking-[0.18em] uppercase">
-                                Tap to learn more
-                            </span>
-                        </div>
                     </div>
                 </div>
 
@@ -133,28 +126,20 @@ const FlipCard = ({ service, index, isDragging }) => {
                         style={{ background: "radial-gradient(circle at top right, #BFA88F, transparent 70%)" }}
                     />
 
-                    <div className="p-5 sm:p-6 md:p-8 flex flex-col h-full justify-between relative z-10">
+                    <div className="p-4 sm:p-5 md:p-8 flex flex-col h-full justify-center items-center text-center relative z-10">
                         {/* Header */}
-                        <div>
+                        <div className="flex flex-col items-center w-full">
                             <span className="text-[9px] sm:text-[10px] font-black tracking-[0.3em] text-[#BFA88F] uppercase block mb-3 md:mb-4">
                                 {service.code}
                             </span>
-                            <h3 className="text-xl sm:text-2xl md:text-3xl font-serif font-medium text-white leading-[1.1] tracking-tight mb-4 md:mb-6">
+                            <h3 className="text-xl sm:text-2xl md:text-3xl font-serif font-medium text-white leading-[1.1] tracking-tight mb-4 md:mb-6 text-center">
                                 {service.backTitle}
                             </h3>
                             {/* Divider */}
-                            <div className="w-8 h-px bg-[#BFA88F]/40 mb-4 md:mb-6" />
-                            <p className="text-white/65 font-sans text-[12px] sm:text-[13px] md:text-[14px] leading-relaxed" style={{ textWrap: "pretty" }}>
+                            <div className="w-8 h-px bg-[#BFA88F]/40 mb-4 md:mb-6 mx-auto" />
+                            <p className="text-white/65 font-sans text-[11px] sm:text-[12px] md:text-[14px] leading-relaxed text-center" style={{ textWrap: "pretty" }}>
                                 {service.description}
                             </p>
-                        </div>
-
-                        {/* Back flip hint */}
-                        <div className="flex items-center gap-1.5 opacity-40 mt-4">
-                            <RotateCcw className="w-3 h-3 text-[#BFA88F]" />
-                            <span className="text-[8px] md:text-[9px] text-[#BFA88F] font-sans tracking-[0.18em] uppercase">
-                                Tap to flip back
-                            </span>
                         </div>
                     </div>
                 </div>
@@ -286,8 +271,8 @@ const WhatWeDo = ({ progress }) => {
             <motion.div
                 className="absolute top-20 left-4 z-30 pointer-events-none md:hidden text-left"
             >
-                <span className="text-[8px] font-black tracking-[0.5em] text-[#BFA88F] uppercase italic mb-0.5 block opacity-60">Services Matrix</span>
-                <h2 className="text-lg font-black text-black tracking-tighter uppercase leading-[0.85]">
+                <span className="text-[8px] sm:text-[9px] font-black tracking-[0.5em] text-[#BFA88F] uppercase italic mb-0.5 block opacity-60">Services Matrix</span>
+                <h2 className="text-lg sm:text-xl font-black text-black tracking-tighter uppercase leading-[0.85]">
                     WHAT <span className="text-transparent" style={{ WebkitTextStroke: "1px #000000" }}>WE DO.</span>
                 </h2>
             </motion.div>
@@ -301,14 +286,20 @@ const WhatWeDo = ({ progress }) => {
                 onDragEnd={() => { setTimeout(() => { isDragging.current = false; }, 50); }}
             >
                 {/* Intro Block */}
-                <div className="flex-shrink-0 w-[160px] sm:w-[220px] md:w-[400px] flex flex-col justify-center">
+                <div className="flex-shrink-0 w-[160px] sm:w-[200px] md:w-[400px] flex flex-col justify-center">
                     <h2 className="text-2xl sm:text-3xl md:text-8xl font-black text-black leading-[0.85] tracking-tighter uppercase mb-3 sm:mb-5 md:mb-12">
                         <span className="block md:hidden">Our <br /> Craft</span>
                         <span className="hidden md:block">What <br /> We <br /> Do?</span>
                     </h2>
-                    <p className="text-black/60 font-medium text-[8px] md:text-sm uppercase tracking-widest border-l-2 md:border-l-4 border-black pl-3 md:pl-8 max-w-[140px] sm:max-w-[180px] md:max-w-xs font-sans leading-snug" style={{ textWrap: "pretty" }}>
+                    <p className="text-black/60 font-medium text-[8px] sm:text-[9px] md:text-sm uppercase tracking-widest border-l-2 md:border-l-4 border-black pl-3 md:pl-8 max-w-[140px] sm:max-w-[170px] md:max-w-xs font-sans leading-snug" style={{ textWrap: "pretty" }}>
                         Luxury spatial design companions. We don't just build, we curate{"\u00A0"}experiences.
                     </p>
+                    <div className="flex items-center gap-1.5 md:gap-2 mt-4 md:mt-8 pl-3 md:pl-8 opacity-45 select-none pointer-events-none">
+                        <RotateCcw className="w-3 h-3 md:w-3.5 md:h-3.5 text-black" />
+                        <span className="text-[7px] md:text-[10px] text-black font-sans font-bold tracking-[0.18em] uppercase">
+                            Click any card to flip
+                        </span>
+                    </div>
                 </div>
 
                 {/* Service Cards */}

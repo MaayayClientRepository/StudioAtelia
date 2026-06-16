@@ -42,7 +42,7 @@ const Footer = () => {
     };
 
     return (
-        <footer className="relative w-full h-full bg-base text-secondary overflow-hidden flex flex-col px-5 sm:px-12 md:px-24 pt-10 pb-6 md:pt-28 md:pb-12 border-t border-white/5 shadow-[0_-40px_80px_rgba(0,0,0,0.6)] group/footer">
+        <footer className="relative w-full h-full bg-base text-secondary overflow-hidden flex flex-col px-5 sm:px-8 md:px-24 pt-8 sm:pt-10 pb-5 sm:pb-6 md:pt-28 md:pb-12 border-t border-white/5 shadow-[0_-40px_80px_rgba(0,0,0,0.6)] group/footer">
             
             {/* 1. BRAND MONOLITH: MASSIVE IMPACT FOR BRAND RECALL */}
             <div className="relative z-10 w-full">
@@ -52,7 +52,7 @@ const Footer = () => {
                     transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
                     className="flex flex-col md:flex-row md:items-end justify-between gap-6"
                 >
-                    <h2 className="text-5xl sm:text-7xl md:text-[8vw] font-serif font-black leading-[0.75] tracking-[-0.04em] text-white flex flex-col sm:flex-row sm:items-baseline">
+                    <h2 className="text-4xl sm:text-6xl md:text-[8vw] font-serif font-black leading-[0.75] tracking-[-0.04em] text-white flex flex-col sm:flex-row sm:items-baseline">
                         <span className="italic">Niche</span>
                         <span className="text-white/30 italic font-light mx-2">&</span>
                         <span>Form</span>
@@ -67,13 +67,13 @@ const Footer = () => {
             </div>
 
             {/* Horizontal Line Divider */}
-            <div className="relative z-10 w-full h-[1px] bg-white/5 my-5 md:my-16" />
+            <div className="relative z-10 w-full h-[1px] bg-white/5 my-4 sm:my-5 md:my-16" />
 
             {/* 2. REFINED DIRECT CONTACT & LINKS GRID */}
-            <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-7 lg:gap-16 items-start">
+            <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-7 lg:gap-16 items-start">
                 
                 {/* COLUMN 1 — THE IMMERSIVE CONTACT HERO (5/12th Width) */}
-                <div className="lg:col-span-5 space-y-6 md:space-y-12">
+                <div className="lg:col-span-5 space-y-4 sm:space-y-6 md:space-y-12">
                     {/* Email Contact Block */}
                     <div className="space-y-2 group/mail">
                         <div className="flex items-center gap-3">
@@ -82,7 +82,7 @@ const Footer = () => {
                         </div>
                         <a 
                             href="mailto:hello@nicheandform.com" 
-                            className="block text-2xl sm:text-3xl md:text-[2.8vw] font-serif font-light italic leading-none text-white hover:text-white/70 transition-all duration-300 hover:translate-x-2 tracking-tight"
+                            className="block text-xl sm:text-2xl md:text-[2.8vw] font-serif font-light italic leading-none text-white hover:text-white/70 transition-all duration-300 hover:translate-x-2 tracking-tight break-all sm:break-normal"
                         >
                             hello@nicheandform.com
                         </a>
@@ -176,8 +176,8 @@ const Footer = () => {
             </div>
             
             {/* FINAL SIGNATURE BAR */}
-            <div className="relative z-10 w-full pt-5 mt-8 md:mt-auto md:pt-8 border-t border-white/5 flex flex-col sm:flex-row justify-between items-center gap-4 md:gap-6">
-                <div className="flex flex-col sm:flex-row items-center gap-4 md:gap-12">
+            <div className="relative z-10 w-full pt-4 sm:pt-5 mt-6 sm:mt-8 md:mt-auto md:pt-8 border-t border-white/5 flex flex-col sm:flex-row justify-between items-center gap-3 sm:gap-4 md:gap-6">
+                <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-4 md:gap-12">
                     <p className="text-[9px] text-white/50 font-sans tracking-[0.3em] uppercase">
                         © 2026 NICHE & FORM DESIGN STUDIO.
                     </p>

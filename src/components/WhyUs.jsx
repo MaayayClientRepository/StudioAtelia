@@ -106,7 +106,6 @@ const WhyUs = ({ progress }) => {
                 <FurnitureSketches 
                     progress={progress} 
                     theme="light" 
-                    mobileOnly={true} 
                     fadeOutRange={[1.0, 1.25]}
                 />
             </motion.div>
@@ -114,7 +113,7 @@ const WhyUs = ({ progress }) => {
             {/* PHILOSOPHY TEXT WRAPPER */}
             <motion.div
                 style={{ opacity: philosophyOpacity }}
-                className="absolute inset-0 z-10 flex flex-col items-center justify-center pointer-events-none px-5 py-4 sm:py-8 md:pt-[5vh] md:pb-10 md:justify-start"
+                className="absolute inset-0 z-10 flex flex-col items-center justify-center pointer-events-none px-5 sm:px-6 py-4 sm:py-6 md:pt-[5vh] md:pb-10 md:justify-start"
             >
                 <div className="max-w-6xl w-full flex flex-col items-center">
                     
@@ -124,16 +123,16 @@ const WhyUs = ({ progress }) => {
                             opacity: useTransform(progress, [0, 0.1, 1.0, 1.15], [0, 1, 1, 0]),
                             y: titleY 
                         }} 
-                        className="text-center space-y-0.5 sm:space-y-3 mb-[3vh] md:mb-[6vh]"
+                        className="text-center space-y-0.5 sm:space-y-2 md:space-y-3 mb-[2vh] sm:mb-[3vh] md:mb-[6vh]"
                     >
                         <span className="text-[9px] sm:text-[14px] font-sans font-extrabold tracking-[0.4em] sm:tracking-[0.8em] text-black/40 uppercase block">Our Philosophy</span>
-                        <h2 className="text-3xl sm:text-7xl md:text-[9.5rem] font-serif text-black leading-[0.85] font-black tracking-tighter">
+                        <h2 className="text-3xl sm:text-5xl md:text-[9.5rem] font-serif text-black leading-[0.85] font-black tracking-tighter">
                             Why <span className="italic font-light text-black">Us?</span>
                         </h2>
                     </motion.div>
 
                     {/* Sequential Content Blocks */}
-                    <div className="relative w-full h-[32vh] sm:h-60 md:h-[45vh] flex items-center justify-center">
+                    <div className="relative w-full h-[30vh] sm:h-[34vh] md:h-[45vh] flex items-center justify-center">
                         
                         {/* Phrase 1 */}
                         <motion.div 
@@ -197,21 +196,21 @@ const WhyUs = ({ progress }) => {
             >
                 <motion.div 
                     style={{ y: formY, scale: formScale }}
-                    className="w-[92vw] max-w-[420px] md:max-w-4xl h-[80vh] max-h-[640px] md:h-[560px] flex flex-col md:flex-row bg-[#FBF2C0] rounded-[1.5rem] md:rounded-[2.5rem] overflow-hidden border border-black/10 md:border-black/5 shadow-[0_30px_60px_rgba(0,0,0,0.1)] md:shadow-[0_60px_100px_-20px_rgba(0,0,0,0.15)] md:mx-6 overflow-y-auto"
+                    className="w-[92vw] max-w-[420px] md:max-w-4xl h-[78vh] max-h-[600px] sm:max-h-[640px] md:h-[560px] flex flex-col md:flex-row bg-[#FBF2C0] rounded-[1.5rem] md:rounded-[2.5rem] overflow-hidden border border-black/10 md:border-black/5 shadow-[0_30px_60px_rgba(0,0,0,0.1)] md:shadow-[0_60px_100px_-20px_rgba(0,0,0,0.15)] md:mx-6 overflow-y-auto"
                 >
                     
                     {/* LEFT PANEL — Architectural Branding */}
-                    <div className="md:w-2/5 pt-8 pb-6 px-6 md:px-12 md:py-16 bg-black flex flex-col justify-between text-secondary relative overflow-hidden group/panel">
+                    <div className="md:w-2/5 pt-6 pb-4 px-5 sm:pt-8 sm:pb-6 sm:px-6 md:px-12 md:py-16 bg-black flex flex-col justify-between text-secondary relative overflow-hidden group/panel">
                         {/* Huge Watermark */}
                         <div className="absolute -top-6 -left-6 text-[30vw] md:text-[25vw] font-black opacity-[0.04] select-none pointer-events-none tracking-tighter leading-none font-serif">N</div>
                         <div className="absolute -bottom-6 -right-6 text-[30vw] md:text-[25vw] font-black opacity-[0.04] select-none pointer-events-none tracking-tighter leading-none font-serif italic">F</div>
                         
-                        <div className="relative z-10 space-y-2 md:space-y-8">
+                        <div className="relative z-10 space-y-1.5 sm:space-y-2 md:space-y-8">
                              <div className="flex items-center gap-4">
                                  <div className="h-[1px] w-8 bg-accent" />
                                  <span className="text-[9px] font-black tracking-[0.5em] text-accent uppercase">Let's Connect</span>
                              </div>
-                             <h3 className="text-xl md:text-7xl font-serif font-black leading-[0.85] tracking-tighter italic">
+                             <h3 className="text-lg sm:text-xl md:text-7xl font-serif font-black leading-[0.85] tracking-tighter italic">
                                  Ready to <br className="hidden md:block" />
                                  <span className="text-accent not-italic">Build?</span>
                              </h3>
@@ -220,8 +219,8 @@ const WhyUs = ({ progress }) => {
                              </p>
                         </div>
  
-                        <div className="relative z-10 pt-4 md:pt-0">
-                             <div className="space-y-3 md:space-y-8 border-t border-white/10 pt-3 md:pt-10">
+                        <div className="relative z-10 pt-3 sm:pt-4 md:pt-0">
+                             <div className="space-y-2 sm:space-y-3 md:space-y-8 border-t border-white/10 pt-2 sm:pt-3 md:pt-10">
                                  <div className="flex md:flex-col justify-between md:justify-start gap-4">
                                      <div className="space-y-1">
                                          <p className="text-[8px] font-black tracking-[0.2em] text-accent uppercase">Location</p>
@@ -237,7 +236,7 @@ const WhyUs = ({ progress }) => {
                     </div>
  
                     {/* RIGHT PANEL — Refined Form Grid */}
-                    <div className="md:w-3/5 flex-1 px-6 py-6 md:px-12 md:pt-16 md:pb-12 flex flex-col justify-start relative bg-white/[0.02]">
+                    <div className="md:w-3/5 flex-1 px-5 py-4 sm:px-6 sm:py-5 md:px-12 md:pt-16 md:pb-12 flex flex-col justify-start relative bg-white/[0.02]">
                         <form className="space-y-4 md:space-y-12">
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4 md:gap-y-12">
                                 {/* Name Input */}

@@ -44,7 +44,7 @@ const Navigate = ({ progress }) => {
                 onClick={() => setIsOpen(true)}
                 whileHover={{ x: 2, y: 2, boxShadow: "2px 2px 0px rgba(0,0,0,0.2)" }}
                 whileTap={{ x: 6, y: 6, boxShadow: "0px 0px 0px #000" }}
-                className="fixed top-4 left-4 sm:top-8 sm:left-8 z-[100] p-3 sm:p-4 bg-[#F8D149] border-2 border-black/60 shadow-[3px_3px_0px_rgba(0,0,0,0.4)] rounded-lg sm:rounded-xl transition-all group overflow-hidden"
+                className="fixed top-4 left-4 sm:top-6 sm:left-6 md:top-8 md:left-8 z-[100] p-3 sm:p-4 bg-[#F8D149] border-2 border-black/60 shadow-[3px_3px_0px_rgba(0,0,0,0.4)] rounded-lg sm:rounded-xl transition-all group overflow-hidden"
             >
                 <div className="absolute inset-0 bg-black translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-500 ease-out" />
                 <Menu className="w-4 h-4 sm:w-5 sm:h-5 text-black group-hover:text-accent relative z-10 transition-colors" />
@@ -72,12 +72,12 @@ const Navigate = ({ progress }) => {
                             <div className="p-6 sm:p-8 md:p-12 h-full flex flex-col relative z-20">
                                 <button
                                     onClick={() => setIsOpen(false)}
-                                    className="self-start p-3 sm:p-4 bg-white/5 hover:bg-white/10 rounded-full transition-all mb-8 sm:mb-12 md:mb-20 group"
+                                    className="self-start p-3 sm:p-4 bg-white/5 hover:bg-white/10 rounded-full transition-all mb-6 sm:mb-10 md:mb-20 group"
                                 >
                                     <X className="w-5 h-5 md:w-6 md:h-6 text-accent group-hover:rotate-90 transition-transform" />
                                 </button>
 
-                                <nav className="space-y-6 sm:space-y-8 md:space-y-10">
+                                <nav className="space-y-5 sm:space-y-7 md:space-y-10">
                                     {menuItems.map((item, i) => (
                                         <motion.div
                                             key={item.title}

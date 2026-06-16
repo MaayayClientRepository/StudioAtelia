@@ -22,7 +22,7 @@ function App() {
 
     // 1. INTRO (0.0 -> 0.07)
     const introProgress = useTransform(scrollYProgress, [0.01, 0.07], [0, 1]);
-    const introOpacity = useTransform(scrollYProgress, [0.10, 0.15], [1, 0]);
+    const introOpacity = useTransform(scrollYProgress, [0.16, 0.20], [1, 0]);
 
     // 2. HOME HERO (Entrance: 0.07, Content: 0.07 -> 0.13, Exit: 0.13 -> 0.18)
     const homeInternalProgress = useTransform(scrollYProgress, [0.07, 0.13], [0, 1]);

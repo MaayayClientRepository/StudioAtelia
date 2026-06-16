@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion, useTransform } from 'framer-motion';
-import bwIntImg from '../assets/b_w_int.jpg';
+import bwIntImg from '../assets/b&w_int.png';
 import colorIntImg from '../assets/color_int.jpg';
 
 const IntroSequence = ({ progress }) => {
@@ -8,18 +8,18 @@ const IntroSequence = ({ progress }) => {
     // Black and White remains the base (constant opacity 1 until global fade out)
     const ruinOpacity = 1;
     // Color fades in MUCH earlier and more gradually for a "growing" effect
-    const modernOpacity = useTransform(progress, [0.05, 0.7], [0, 1]);
+    const modernOpacity = useTransform(progress, [0.05, 0.45], [0, 1]);
 
     // Global image fade out (happens after text completes its first phase)
     const imageOpacity = useTransform(progress, [0.75, 0.95], [1, 0]);
 
     // 2. TEXT EVOLUTION & CENTERING
-    // Brand name and tagline now fade in simultaneously with the color transition
-    const taglineOpacity = useTransform(progress, [0.1, 0.4], [0, 1]);
+    // Brand name and tagline now fade in AFTER the color transition has completed
+    const taglineOpacity = useTransform(progress, [0.48, 0.70], [0, 1]);
 
     // Refined tonal progression: White -> Warm Stone (#F7F2EB) -> Champagne (#EAD8C3)
-    const textColor = useTransform(progress, [0.7, 0.85, 1], ["#FFFFFF", "#F7F2EB", "#EAD8C3"]);
-    const brandY = useTransform(progress, [0.7, 0.95], [-100, 0]); // Reduced travel for snappier feel
+    const textColor = useTransform(progress, [0.75, 0.88, 0.95], ["#FFFFFF", "#F7F2EB", "#EAD8C3"]);
+    const brandY = useTransform(progress, [0.75, 0.95], [-100, 0]); // Reduced travel for snappier feel
     const scale = 1;
 
     return (
@@ -37,23 +37,23 @@ const IntroSequence = ({ progress }) => {
                     className="px-6 text-center max-w-[95vw] flex flex-col items-center overflow-visible"
                 >
                     {/* The Art of Living - Pre-title */}
-                    <div className="flex items-center justify-center gap-3 md:gap-5 mb-4 md:mb-10">
+                    <div className="flex items-center justify-center gap-3 sm:gap-4 md:gap-5 mb-4 sm:mb-6 md:mb-10">
                         <motion.div 
                             style={{ backgroundColor: textColor }} 
-                            className="h-[1px] w-8 md:w-16 opacity-35" 
+                            className="h-[1px] w-8 sm:w-12 md:w-16 opacity-35" 
                         />
                         <motion.span
                             style={{ 
                                 color: textColor,
                                 textShadow: "0 2px 4px rgba(0, 0, 0, 0.9), 0 4px 8px rgba(0, 0, 0, 0.8)"
                             }}
-                            className="text-[9px] md:text-[11px] font-semibold tracking-[0.6em] md:tracking-[0.8em] mr-[-0.6em] md:mr-[-0.8em] uppercase font-sans text-center"
+                            className="text-[9px] sm:text-[10px] md:text-[11px] font-semibold tracking-[0.6em] md:tracking-[0.8em] mr-[-0.6em] md:mr-[-0.8em] uppercase font-sans text-center"
                         >
                             The Art of Living
                         </motion.span>
                         <motion.div 
                             style={{ backgroundColor: textColor }} 
-                            className="h-[1px] w-8 md:w-16 opacity-35" 
+                            className="h-[1px] w-8 sm:w-12 md:w-16 opacity-35" 
                         />
                     </div>
 
@@ -64,30 +64,30 @@ const IntroSequence = ({ progress }) => {
                             fontSize: "clamp(2rem, 12vw, 15vw)",
                             textShadow: "0 2px 4px rgba(0, 0, 0, 0.9), 0 10px 25px rgba(0, 0, 0, 0.9), 0 0 30px rgba(234, 216, 195, 0.35)"
                         }}
-                        className="font-serif font-light italic leading-none tracking-[-0.02em] mb-4 sm:mb-6 text-center select-none"
+                        className="font-serif font-light italic leading-none tracking-[-0.02em] mb-3 sm:mb-4 md:mb-6 text-center select-none"
                     >
                         Niche & Form
                     </motion.h1>
 
                     {/* Unified Tagline in Single Line */}
-                    <div className="flex items-center gap-4 md:gap-8 justify-center w-full">
+                    <div className="flex items-center gap-3 sm:gap-5 md:gap-8 justify-center w-full">
                         <motion.div
-                            style={{ backgroundColor: useTransform(progress, [0.7, 0.95], ["#FFFFFF", "#EAD8C3"]) }}
-                            className="h-[1px] flex-1 max-w-[40px] md:max-w-[100px] opacity-40"
+                            style={{ backgroundColor: useTransform(progress, [0.75, 0.95], ["#FFFFFF", "#EAD8C3"]) }}
+                            className="h-[1px] flex-1 max-w-[30px] sm:max-w-[60px] md:max-w-[100px] opacity-40"
                         />
                         <motion.p
                             style={{
-                                color: useTransform(progress, [0.7, 0.95], ["#FFFFFF", "#EAD8C3"]),
+                                color: useTransform(progress, [0.75, 0.95], ["#FFFFFF", "#EAD8C3"]),
                                 fontSize: "clamp(0.6rem, 2.5vw, 1.5rem)",
                                 textShadow: "0 2px 4px rgba(0, 0, 0, 0.9), 0 6px 12px rgba(0, 0, 0, 0.9), 0 0 15px rgba(234, 216, 195, 0.2)"
                             }}
-                            className="font-['Fira_Sans_Condensed',_sans-serif] font-light italic tracking-[0.15em] md:tracking-[0.4em] indent-[0.15em] md:indent-[0.4em] uppercase text-center"
+                            className="font-['Fira_Sans_Condensed',_sans-serif] font-light italic tracking-[0.15em] sm:tracking-[0.25em] md:tracking-[0.4em] indent-[0.15em] sm:indent-[0.25em] md:indent-[0.4em] uppercase text-center"
                         >
                             Thoughtful design <br className="sm:hidden" /> Transforms living
                         </motion.p>
                         <motion.div
-                            style={{ backgroundColor: useTransform(progress, [0.7, 0.95], ["#FFFFFF", "#EAD8C3"]) }}
-                            className="h-[1px] flex-1 max-w-[40px] md:max-w-[100px] opacity-40"
+                            style={{ backgroundColor: useTransform(progress, [0.75, 0.95], ["#FFFFFF", "#EAD8C3"]) }}
+                            className="h-[1px] flex-1 max-w-[30px] sm:max-w-[60px] md:max-w-[100px] opacity-40"
                         />
                     </div>
                 </motion.div>
@@ -133,7 +133,7 @@ const IntroSequence = ({ progress }) => {
             {/* SCROLL INDICATOR */}
             <motion.div
                 style={{ opacity: useTransform(progress, [0, 0.15], [1, 0]) }}
-                className="absolute bottom-10 left-1/2 -translate-x-1/2 z-50 flex flex-col items-center gap-4 pointer-events-none mix-blend-difference"
+                className="absolute bottom-8 sm:bottom-10 left-1/2 -translate-x-1/2 z-50 flex flex-col items-center gap-3 sm:gap-4 pointer-events-none mix-blend-difference"
             >
                 <div className="w-[1px] h-12 bg-white/20 relative overflow-hidden">
                     <motion.div

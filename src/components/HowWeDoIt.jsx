@@ -108,17 +108,17 @@ const HowWeDoIt = ({ progress }) => {
             {/* Header Section: Adjusted to clear fixed menu button on mobile */}
             <motion.div
                 style={{ y: headerY, opacity: headerOpacity }}
-                className="absolute top-20 left-4 md:top-12 md:left-24 z-50 pointer-events-none text-left"
+                className="absolute top-20 left-4 sm:top-16 sm:left-6 md:top-12 md:left-24 z-50 pointer-events-none text-left"
             >
-                <span className="text-[8px] md:text-[10px] font-black tracking-[0.5em] md:tracking-[0.6em] text-[#BFA88F] uppercase italic mb-0.5 md:mb-2 block opacity-40">The Methodology</span>
-                <h2 className="text-lg md:text-5xl font-black text-white tracking-tighter uppercase leading-[0.85]">
+                <span className="text-[8px] sm:text-[9px] md:text-[10px] font-black tracking-[0.5em] md:tracking-[0.6em] text-[#BFA88F] uppercase italic mb-0.5 md:mb-2 block opacity-40">The Methodology</span>
+                <h2 className="text-lg sm:text-xl md:text-5xl font-black text-white tracking-tighter uppercase leading-[0.85]">
                     THE <span className="text-transparent outline-text">PATH.</span>
                 </h2>
             </motion.div>
 
             <motion.div
                 style={{ y: contentY, opacity: contentOpacity, scale: contentScale }}
-                className="flex flex-col md:flex-row items-center justify-center md:justify-between w-full h-full px-5 md:px-24 2xl:px-36 gap-3 md:gap-12 2xl:gap-20 pt-[4.5rem] pb-4 md:pt-0 md:pb-0"
+                className="flex flex-col md:flex-row items-center justify-center md:justify-between w-full h-full px-5 sm:px-8 md:px-24 2xl:px-36 gap-3 sm:gap-4 md:gap-12 2xl:gap-20 pt-[4.5rem] pb-4 sm:pb-5 md:pt-0 md:pb-0"
             >
                 {/* Information Content */}
                 <div className="w-full md:w-3/5 flex flex-col justify-center min-h-0 md:h-auto order-2 md:order-1 mb-1 md:mb-0">
@@ -131,7 +131,7 @@ const HowWeDoIt = ({ progress }) => {
                             transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
                             className="space-y-3 md:space-y-8"
                         >
-                            <h2 className="text-xl sm:text-2xl md:text-7xl 2xl:text-8xl font-bold text-white tracking-tighter leading-[0.95] max-w-2xl 2xl:max-w-3xl">
+                            <h2 className="text-[22px] sm:text-2xl md:text-7xl 2xl:text-8xl font-bold text-white tracking-tighter leading-[0.95] max-w-2xl 2xl:max-w-3xl">
                                 {cards[0].title.split(' & ').map((part, i) => (
                                     <React.Fragment key={i}>
                                         {i > 0 && <span className="text-white/20 italic font-light mx-2">&</span>}
@@ -140,7 +140,7 @@ const HowWeDoIt = ({ progress }) => {
                                 ))}
                             </h2>
 
-                             <p className="text-[14px] sm:text-[15px] md:text-2xl 2xl:text-3xl text-white/60 font-sans leading-relaxed max-w-xl 2xl:max-w-2xl border-l-2 border-[#BFA88F]/30 pl-3 sm:pl-4 md:pl-10 2xl:pl-12" style={{ textWrap: "pretty" }}>
+                             <p className="text-[13px] sm:text-[15px] md:text-2xl 2xl:text-3xl text-white/60 font-sans leading-relaxed max-w-xl 2xl:max-w-2xl border-l-2 border-[#BFA88F]/30 pl-3 sm:pl-4 md:pl-10 2xl:pl-12" style={{ textWrap: "pretty" }}>
                                 {preventOrphan(cards[0].description)}
                             </p>
                         </motion.div>
@@ -148,7 +148,7 @@ const HowWeDoIt = ({ progress }) => {
                 </div>
 
                 {/* RIGHT SIDE: Minimized Card Stack */}
-                <div className="w-full md:w-2/5 flex flex-col items-center justify-center relative -mt-6 md:mt-20 2xl:mt-10 pb-2 md:pb-32 2xl:pb-16 order-1 md:order-2">
+                <div className="w-full md:w-2/5 flex flex-col items-center justify-center relative -mt-6 sm:-mt-4 md:mt-20 2xl:mt-10 pb-2 sm:pb-3 md:pb-32 2xl:pb-16 order-1 md:order-2">
                     {/* Progress Dots: Hidden on mobile to save space */}
                     <div className="absolute top-0 right-0 md:-right-12 flex flex-col gap-2 z-50 hidden md:flex">
                         {items.map((_, i) => {
@@ -202,7 +202,7 @@ const HowWeDoIt = ({ progress }) => {
                     <motion.div
                         initial={{ opacity: 0 }}
                         animate={{ opacity: isInteractive ? 1 : 0 }}
-                        className="mt-6 flex flex-col items-center gap-2 pointer-events-none select-none"
+                        className="mt-3 sm:mt-4 md:mt-6 flex flex-col items-center gap-1.5 sm:gap-2 pointer-events-none select-none"
                     >
                         {/* Bouncing arrow pointing down to the hint text */}
                         <motion.div
@@ -300,11 +300,11 @@ const Card = ({ card, index, total, items, topCardTitle, handleCardReveal, isFir
                 transition: { duration: 0.4 }
             }}
             className={cn(
-                "absolute inset-0 bg-[#161616] p-2.5 md:p-3 2xl:p-5 rounded-[1.5rem] 2xl:rounded-[2.2rem] shadow-[0_30px_60px_rgba(0,0,0,0.6)] border border-white/5 cursor-grab active:cursor-grabbing transform-gpu overflow-hidden touch-none",
+                "absolute inset-0 flex flex-col bg-[#161616] p-2.5 md:p-3 2xl:p-5 rounded-[1.5rem] 2xl:rounded-[2.2rem] shadow-[0_30px_60px_rgba(0,0,0,0.6)] border border-white/5 cursor-grab active:cursor-grabbing transform-gpu overflow-hidden touch-none",
                 (isTop && isInteractive) ? "pointer-events-auto border-[#BFA88F]/30" : "pointer-events-none"
             )}
         >
-            <div className="relative h-[68%] w-full overflow-hidden rounded-[1rem] 2xl:rounded-[1.5rem]">
+            <div className="relative h-[70%] w-full overflow-hidden rounded-[1rem] 2xl:rounded-[1.5rem] flex-shrink-0">
                 <img
                     src={card.image}
                     alt={card.title}
@@ -314,13 +314,13 @@ const Card = ({ card, index, total, items, topCardTitle, handleCardReveal, isFir
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-40" />
             </div>
 
-            <div className="mt-2 md:mt-3 2xl:mt-5 flex flex-col gap-0.5 md:gap-1 2xl:gap-2 text-center">
-                <div className="flex justify-center items-center border-b border-white/5 pb-1 mb-0.5 md:pb-1 md:mb-1 2xl:pb-1.5 2xl:mb-1.5">
-                    <span className="text-[9px] md:text-[10px] 2xl:text-[12px] font-sans font-bold tracking-[0.2em] text-[#BFA88F] uppercase">
+            <div className="flex-1 flex flex-col justify-center mt-1 sm:mt-1.5 md:mt-2 2xl:mt-3 text-center min-h-0">
+                <div className="flex justify-center items-center border-b border-white/5 pb-1 mb-1 sm:pb-1.5 sm:mb-1.5 md:pb-2 md:mb-2 2xl:pb-3 2xl:mb-3">
+                    <span className="text-[11px] md:text-[13px] 2xl:text-[16px] font-sans font-bold tracking-[0.2em] text-[#BFA88F] uppercase">
                         {card.tag.split(' // ')[0]}
                     </span>
                 </div>
-                <h3 className="text-[18px] sm:text-[22px] md:text-[26px] 2xl:text-[34px] font-bold text-white tracking-tight leading-tight text-center">
+                <h3 className="text-[16px] sm:text-[20px] md:text-[26px] 2xl:text-[34px] font-bold text-white tracking-tight leading-tight text-center">
                     {card.tag.split(' // ')[1]}
                 </h3>
             </div>
