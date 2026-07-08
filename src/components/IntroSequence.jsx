@@ -2,6 +2,7 @@ import React from 'react';
 import { motion, useTransform } from 'framer-motion';
 import bwIntImg from '../assets/b&w_int.png';
 import colorIntImg from '../assets/color_int.jpg';
+import logoImg from '../assets/logo(3).png';
 
 const IntroSequence = ({ progress }) => {
     // 1. THE TRANSFORMATION ENGINE (Sequential Background Reveal)
@@ -57,17 +58,12 @@ const IntroSequence = ({ progress }) => {
                         />
                     </div>
 
-                    {/* Brand Title: Cinematic Scale & Dual Typography */}
-                    <motion.h1
-                        style={{
-                            color: textColor,
-                            fontSize: "clamp(2rem, 12vw, 15vw)",
-                            textShadow: "0 2px 4px rgba(0, 0, 0, 0.9), 0 10px 25px rgba(0, 0, 0, 0.9), 0 0 30px rgba(234, 216, 195, 0.35)"
-                        }}
-                        className="font-serif font-light italic leading-none tracking-[-0.02em] mb-3 sm:mb-4 md:mb-6 text-center select-none"
-                    >
-                        Niche & Form
-                    </motion.h1>
+                    {/* Brand Title: Brand Logo in Cinematic Scale */}
+                    <motion.img
+                        src={logoImg}
+                        alt="Niche & Form Logo"
+                        className="h-16 sm:h-28 md:h-[12vw] w-auto object-contain mb-3 sm:mb-4 md:mb-6 select-none"
+                    />
 
                     {/* Unified Tagline in Single Line */}
                     <div className="flex items-center gap-3 sm:gap-5 md:gap-8 justify-center w-full">
