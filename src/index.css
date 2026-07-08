@@ -48,3 +48,23 @@ body {
 h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-serif);
 }
+
+/* Custom Scrollbars matching the theme */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--color-base);
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(191, 168, 143, 0.3); /* Subtle gold accent */
+    border-radius: 9999px;
+    transition: background 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--color-accent); /* Solid gold on hover */
+}

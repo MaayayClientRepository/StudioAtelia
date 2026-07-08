@@ -82,10 +82,10 @@ const Navigate = ({ progress }) => {
                             animate={{ x: 0, skewX: 0 }}
                             exit={{ x: "-100%", skewX: -5 }}
                             transition={{ type: "spring", damping: 30, stiffness: 200 }}
-                            className="absolute top-0 left-0 h-full w-full md:max-w-[500px] bg-base shadow-[50px_0_100px_rgba(0,0,0,0.9)] flex flex-col border-r border-white/5"
+                            className="absolute top-0 left-0 h-full w-full md:max-w-[500px] bg-base shadow-[50px_0_100px_rgba(0,0,0,0.9)] flex flex-col border-r border-white/5 overflow-y-auto overflow-x-hidden"
                         >
-                            <div className="p-6 sm:p-8 md:p-12 h-full flex flex-col relative z-20">
-                                <div className="flex justify-between items-center w-full mb-6 sm:mb-10 md:mb-20">
+                            <div className="p-6 sm:p-8 md:p-12 flex-1 flex flex-col relative z-20">
+                                <div className="flex justify-between items-center w-full mb-4 sm:mb-8 md:mb-16">
                                     <button
                                         onClick={() => setIsOpen(false)}
                                         className="p-3 sm:p-4 bg-white/5 hover:bg-white/10 rounded-full transition-all group"
@@ -99,7 +99,7 @@ const Navigate = ({ progress }) => {
                                     />
                                 </div>
 
-                                <nav className="space-y-5 sm:space-y-7 md:space-y-10">
+                                <nav className="space-y-4 sm:space-y-6 md:space-y-10">
                                     {menuItems.map((item, i) => (
                                         <motion.div
                                             key={item.title}
@@ -114,10 +114,10 @@ const Navigate = ({ progress }) => {
                                                     {i + 1 < 10 ? `0${i + 1}` : i + 1}
                                                 </span>
                                                 <div className="flex flex-col">
-                                                    <p className="text-[8px] md:text-[9px] uppercase tracking-[0.6em] text-white/30 mb-1 md:mb-2 font-black transition-all group-hover:text-accent">
+                                                    <p className="text-[8px] md:text-[9px] uppercase tracking-[0.6em] text-white/30 mb-0.5 md:mb-2 font-black transition-all group-hover:text-accent">
                                                         {item.sub}
                                                     </p>
-                                                    <h2 className="text-2xl sm:text-3xl md:text-5xl font-serif font-light tracking-tighter text-white/60 group-hover:text-white transition-colors">
+                                                    <h2 className="text-xl sm:text-2xl md:text-5xl font-serif font-light tracking-tighter text-white/60 group-hover:text-white transition-colors">
                                                         {item.title}
                                                     </h2>
                                                 </div>
@@ -126,14 +126,11 @@ const Navigate = ({ progress }) => {
                                     ))}
                                 </nav>
 
-                                <div className="mt-auto pt-8 md:pt-12 border-t border-white/5 flex justify-between items-end">
+                                <div className="mt-auto pt-4 sm:pt-6 md:pt-10 border-t border-white/5 flex justify-between items-center">
                                     <div className="flex gap-8 md:gap-10 items-center">
                                         <a href="#" className="flex"><Instagram className="w-4 h-4 md:w-5 md:h-5 text-white/20 hover:text-accent transition-colors cursor-pointer" /></a>
                                         <a href="https://wa.me/919876543210" target="_blank" rel="noopener noreferrer" className="flex"><MessageCircle className="w-4 h-4 md:w-5 md:h-5 text-white/20 hover:text-accent transition-colors cursor-pointer" /></a>
                                         <a href="#" className="flex"><Facebook className="w-4 h-4 md:w-5 md:h-5 text-white/20 hover:text-accent transition-colors cursor-pointer" /></a>
-                                    </div>
-                                    <div className="text-right flex flex-col items-end">
-                                        <img src={logoImg} alt="Niche & Form Logo" className="h-10 md:h-12 w-auto object-contain opacity-50 hover:opacity-100 transition-opacity" />
                                     </div>
                                 </div>
                             </div>
