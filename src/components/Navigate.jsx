@@ -60,10 +60,7 @@ const Navigate = ({ progress }) => {
                     scale: navScale,
                     willChange: "opacity, transform"
                 }}
-                onClick={() => handleScroll(0)}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="fixed top-4 right-4 sm:top-6 sm:right-6 md:top-8 md:right-8 z-[100] h-[46px] sm:h-[54px] flex items-center justify-center transition-all cursor-pointer pointer-events-auto"
+                className="fixed top-4 right-4 sm:top-6 sm:right-6 md:top-8 md:right-8 z-[100] h-[46px] sm:h-[54px] flex items-center justify-center pointer-events-none select-none"
             >
                 <img src={logoImg} alt="Niche & Form Logo" className="h-8 sm:h-10 w-auto object-contain" />
             </motion.div>
@@ -98,8 +95,7 @@ const Navigate = ({ progress }) => {
                                     <img 
                                         src={logoImg} 
                                         alt="Niche & Form Logo" 
-                                        className="h-8 sm:h-10 w-auto object-contain opacity-80 hover:opacity-100 transition-opacity cursor-pointer"
-                                        onClick={() => handleScroll(0)}
+                                        className="h-8 sm:h-10 w-auto object-contain opacity-80 select-none pointer-events-none"
                                     />
                                 </div>
 
