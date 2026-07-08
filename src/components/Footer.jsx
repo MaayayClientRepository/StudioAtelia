@@ -2,6 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import { Instagram, Facebook, Mail, MapPin, Phone, ArrowUpRight, ArrowUp } from "lucide-react";
 import { scrollToProgress } from "../lib/scrollTo";
+import logoImg from "../assets/logo(3).png";
 
 const Footer = () => {
     const socialLinks = [
@@ -52,11 +53,13 @@ const Footer = () => {
                     transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
                     className="flex flex-col md:flex-row md:items-end justify-between gap-6"
                 >
-                    <h2 className="text-4xl sm:text-6xl md:text-[8vw] font-serif font-black leading-[0.75] tracking-[-0.04em] text-white flex flex-col sm:flex-row sm:items-baseline">
-                        <span className="italic">Niche</span>
-                        <span className="text-white/30 italic font-light mx-2">&</span>
-                        <span>Form</span>
-                    </h2>
+                    <div className="flex flex-col gap-4">
+                        <img 
+                            src={logoImg} 
+                            alt="Niche & Form Logo" 
+                            className="h-20 sm:h-32 md:h-[11vw] w-auto object-contain self-start" 
+                        />
+                    </div>
                     
                     <div className="max-w-sm">
                         <p className="text-white/40 text-[10px] md:text-xs font-medium uppercase tracking-[0.4em] leading-relaxed mb-4">

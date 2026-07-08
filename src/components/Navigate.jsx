@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { motion, AnimatePresence, useTransform } from "framer-motion";
 import { Menu, X, Instagram, Facebook, MessageCircle } from "lucide-react";
 import { scrollToProgress } from "../lib/scrollTo";
+import logoImg from "../assets/logo(3).png";
 
 /**
  * Navigate Component: The Global Left-Dropdown Menu
@@ -13,6 +14,7 @@ const Navigate = ({ progress }) => {
     // Synchronized reveal with HomeHero entrance
     const navOpacity = useTransform(progress, [0.13, 0.18], [0, 1]);
     const navX = useTransform(progress, [0.13, 0.18], [-40, 0]);
+    const logoX = useTransform(progress, [0.13, 0.18], [40, 0]);
     const navScale = useTransform(progress, [0.13, 0.18], [0.8, 1]);
 
     const menuItems = [
@@ -50,6 +52,22 @@ const Navigate = ({ progress }) => {
                 <Menu className="w-4 h-4 sm:w-5 sm:h-5 text-black group-hover:text-accent relative z-10 transition-colors" />
             </motion.button>
 
+            {/* Floating Brand Logo Badge */}
+            <motion.div
+                style={{
+                    opacity: navOpacity,
+                    x: logoX,
+                    scale: navScale,
+                    willChange: "opacity, transform"
+                }}
+                onClick={() => handleScroll(0)}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="fixed top-4 right-4 sm:top-6 sm:right-6 md:top-8 md:right-8 z-[100] h-[46px] sm:h-[54px] flex items-center justify-center transition-all cursor-pointer pointer-events-auto"
+            >
+                <img src={logoImg} alt="Niche & Form Logo" className="h-8 sm:h-10 w-auto object-contain" />
+            </motion.div>
+
             {/* Nav Overlay */}
             <AnimatePresence>
                 {isOpen && (
@@ -70,12 +88,20 @@ const Navigate = ({ progress }) => {
                             className="absolute top-0 left-0 h-full w-full md:max-w-[500px] bg-base shadow-[50px_0_100px_rgba(0,0,0,0.9)] flex flex-col border-r border-white/5"
                         >
                             <div className="p-6 sm:p-8 md:p-12 h-full flex flex-col relative z-20">
-                                <button
-                                    onClick={() => setIsOpen(false)}
-                                    className="self-start p-3 sm:p-4 bg-white/5 hover:bg-white/10 rounded-full transition-all mb-6 sm:mb-10 md:mb-20 group"
-                                >
-                                    <X className="w-5 h-5 md:w-6 md:h-6 text-accent group-hover:rotate-90 transition-transform" />
-                                </button>
+                                <div className="flex justify-between items-center w-full mb-6 sm:mb-10 md:mb-20">
+                                    <button
+                                        onClick={() => setIsOpen(false)}
+                                        className="p-3 sm:p-4 bg-white/5 hover:bg-white/10 rounded-full transition-all group"
+                                    >
+                                        <X className="w-5 h-5 md:w-6 md:h-6 text-accent group-hover:rotate-90 transition-transform" />
+                                    </button>
+                                    <img 
+                                        src={logoImg} 
+                                        alt="Niche & Form Logo" 
+                                        className="h-8 sm:h-10 w-auto object-contain opacity-80 hover:opacity-100 transition-opacity cursor-pointer"
+                                        onClick={() => handleScroll(0)}
+                                    />
+                                </div>
 
                                 <nav className="space-y-5 sm:space-y-7 md:space-y-10">
                                     {menuItems.map((item, i) => (
@@ -110,8 +136,8 @@ const Navigate = ({ progress }) => {
                                         <a href="https://wa.me/919876543210" target="_blank" rel="noopener noreferrer" className="flex"><MessageCircle className="w-4 h-4 md:w-5 md:h-5 text-white/20 hover:text-accent transition-colors cursor-pointer" /></a>
                                         <a href="#" className="flex"><Facebook className="w-4 h-4 md:w-5 md:h-5 text-white/20 hover:text-accent transition-colors cursor-pointer" /></a>
                                     </div>
-                                    <div className="text-right">
-                                        <p className="text-[7px] md:text-[8px] tracking-[0.5em] text-white/10 font-black uppercase italic">Niche & Form</p>
+                                    <div className="text-right flex flex-col items-end">
+                                        <img src={logoImg} alt="Niche & Form Logo" className="h-10 md:h-12 w-auto object-contain opacity-50 hover:opacity-100 transition-opacity" />
                                     </div>
                                 </div>
                             </div>
